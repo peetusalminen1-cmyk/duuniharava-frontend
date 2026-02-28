@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duuniharava | Työnhaku 2.0</title>
+    <title>Duuniharava | Älykkäämpi Työnhaku</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
@@ -13,108 +13,145 @@
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
         .card-active { border: 2px solid #00BFA6 !important; background: rgba(0, 191, 166, 0.1); }
         .gradient-text { background: linear-gradient(90deg, #00BFA6, #FF6F3C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-glow { absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-[#00BFA6] opacity-10 blur-[100px]; }
+        details summary::-webkit-details-marker { display:none; }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden pb-32">
 
     <nav class="sticky top-0 z-50 glass px-6 py-4 flex justify-between items-center">
         <div class="text-2xl font-bold tracking-tighter">
             <span class="turkoosi-text">DUUNI</span><span class="text-[#FF6F3C]">HARAVA</span>
         </div>
-        <a href="#hinnasto" class="oranssi-bg text-white px-6 py-2 rounded-full font-bold text-sm uppercase tracking-widest hover:scale-105 transition">Aloita</a>
+        <a href="#hinnasto" class="oranssi-bg text-white px-6 py-2 rounded-full font-bold text-sm uppercase tracking-widest hover:scale-105 transition">Aloita haku</a>
     </nav>
 
     <header class="relative pt-24 pb-20 px-6 text-center">
         <div class="absolute top-10 left-1/2 -translate-x-1/2 w-80 h-80 bg-[#00BFA6] opacity-20 blur-[120px]"></div>
-        <h1 class="text-5xl md:text-8xl font-bold mb-6 leading-none tracking-tighter">
-            HAKEMUKSET<br><span class="gradient-text">AUTOPILOTILLA.</span>
+        <h1 class="text-4xl md:text-7xl font-bold mb-6 leading-tight tracking-tighter">
+            Lopeta työpaikkojen etsiminen.<br><span class="gradient-text">Aloita urasi seuraava luku.</span>
         </h1>
-        <p class="text-gray-400 text-lg md:text-2xl max-w-2xl mx-auto mb-10">
-            Maailman tylsin työ on hakea töitä. Me rakensimme tekoälyn, joka tekee sen puolestasi – profiilista postitukseen.
+        <p class="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed">
+            Duuniharava on Suomen älykkäin työnhakujärjestelmä, joka automatisoi raskaan hakuprosessin. Me etsimme paikat, optimoimme profiilisi ja luomme räätälöidyt hakemukset puolestasi – <b>sinä keskityt vain haastatteluihin.</b>
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
-            <div class="glass px-6 py-3 rounded-2xl text-sm font-bold border-[#00BFA6]/30 italic">"Säästää 20h kuukaudessa"</div>
-            <div class="glass px-6 py-3 rounded-2xl text-sm font-bold border-[#FF6F3C]/30 italic">"Palkka nousi 1200€"</div>
-        </div>
+        <a href="#hinnasto" class="inline-block glass border-[#00BFA6] border-2 px-10 py-4 rounded-2xl font-bold text-lg hover:bg-[#00BFA6] hover:text-black transition">Rakenna pakettisi ➔</a>
     </header>
 
-    <section class="px-6 py-20 max-w-4xl mx-auto border-y border-white/5">
-        <div class="grid md:grid-cols-2 gap-12">
-            <div>
-                <h2 class="text-[#FF6F3C] font-bold uppercase tracking-widest text-sm mb-4 text-center md:text-left">Ongelma</h2>
-                <h3 class="text-3xl font-bold mb-6 text-center md:text-left">Työnhaku on rikki.</h3>
-                <p class="text-gray-400 leading-relaxed mb-4">
-                    Käytät tuntikausia CV:n hienosäätöön, kirjoitat kymmeniä hakemuksia ja saat vastaukseksi "Kiitos, mutta...". Se on uuvuttavaa, hidasta ja turhauttavaa.
-                </p>
-                <p class="text-gray-400 leading-relaxed">
-                    Samaan aikaan yritykset käyttävät tekoälyä hakemusten hylkäämiseen. <b>On aika, että sinä käytät tekoälyä niiden voittamiseen.</b>
-                </p>
+    <section class="px-6 py-20 max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-[#FF6F3C] font-bold uppercase tracking-widest text-sm mb-2">Miksi työnhaku on rikki?</h2>
+            <h3 class="text-4xl font-bold">Työnhaku ei pitäisi olla kokopäivätyötä.</h3>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div class="glass p-8 rounded-3xl">
+                <div class="text-3xl mb-4">⏳</div>
+                <h4 class="font-bold mb-2 text-xl text-white">Ajanpuute</h4>
+                <p class="text-gray-400 text-sm leading-relaxed text-left">Työn ohessa haku on mahdotonta tehdä laadukkaasti. Me palautamme sinulle kymmeniä tunteja vapaa-aikaa kuukaudessa.</p>
             </div>
-            <div class="glass p-8 rounded-[2rem] border-l-4 border-l-[#00BFA6]">
-                <h2 class="text-[#00BFA6] font-bold uppercase tracking-widest text-sm mb-4">Ratkaisu</h2>
-                <h3 class="text-3xl font-bold mb-6">Duuniharava 2.0</h3>
-                <ul class="space-y-4 text-gray-300">
-                    <li class="flex items-start gap-3">
-                        <span class="text-[#00BFA6]">✔</span> <b>Skannaus:</b> Etsimme piilotyöpaikat, joita muut eivät näe.
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="text-[#00BFA6]">✔</span> <b>Match:</b> Optimoimme profiilisi algoritmeille.
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="text-[#00BFA6]">✔</span> <b>Automaatio:</b> Generoimme täydelliset hakemukset sekunneissa.
-                    </li>
-                </ul>
+            <div class="glass p-8 rounded-3xl">
+                <div class="text-3xl mb-4">🌑</div>
+                <h4 class="font-bold mb-2 text-xl text-white">Sokeat pisteet</h4>
+                <p class="text-gray-400 text-sm leading-relaxed text-left">LinkedIn-algoritmit ja CV-standardit (ATS) muuttuvat jatkuvasti. Me pidämme profiilisi aina kärjessä.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl">
+                <div class="text-3xl mb-4">📉</div>
+                <h4 class="font-bold mb-2 text-xl text-white">Massahaku-uupumus</h4>
+                <p class="text-gray-400 text-sm leading-relaxed text-left">Geneeriset hakemukset eivät toimi, mutta räätälöinti vie mehut. Me automatisoimme personoinnin.</p>
             </div>
         </div>
     </section>
 
-    <section id="hinnasto" class="px-6 py-20 max-w-5xl mx-auto">
-        <h2 class="text-2xl font-bold mb-12 text-center uppercase tracking-[0.4em]">🧩 Rakenna menestyksesi</h2>
-        
-        <div class="max-w-md mx-auto mb-8 glass p-6 rounded-[2rem] border-2 border-[#00BFA6] relative">
-            <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#00BFA6] text-black px-4 py-1 rounded-full text-[10px] font-black uppercase">Core-jäsenyys</span>
-            <div class="flex justify-between items-center">
-                <div>
-                    <h3 class="font-bold text-xl">DUUNIHARAVA CORE</h3>
-                    <p class="text-xs text-gray-500">Profiili-analyysi + 1 hakemus/kk</p>
-                </div>
-                <div class="text-2xl font-black">12,49€</div>
-            </div>
+    <section id="hinnasto" class="px-6 py-20 max-w-6xl mx-auto bg-white/5 rounded-[4rem] border border-white/10">
+        <div class="text-center mb-12">
+            <h2 class="text-[#00BFA6] font-bold uppercase tracking-widest text-sm mb-2">Modulaarinen apu</h2>
+            <h3 class="text-4xl font-bold mb-4">Rakenna tarpeisiisi sopiva paketti.</h3>
+            <p class="text-gray-400 max-w-xl mx-auto italic">Duuniharava ei ole pelkkä generaattori, vaan älykäs kumppani, joka skaalautuu tavoitteidesi mukaan.</p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-4">
-            <div id="m1" onclick="toggleModuuli('m1', 17.50)" class="glass p-6 rounded-3xl cursor-pointer transition hover:border-white/20 border-2 border-transparent">
-                <div class="text-3xl mb-3">🚀</div>
-                <h3 class="font-bold text-lg mb-1">+4 Hakemusta/kk</h3>
-                <p class="text-gray-500 text-sm mb-4">Määrä korvaa laadun – me teemme molemmat.</p>
-                <span class="font-bold text-[#00BFA6]">+17,50 €</span>
+        <div class="max-w-md mx-auto mb-10 glass p-8 rounded-[2.5rem] border-2 border-[#00BFA6] relative">
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#00BFA6] text-black px-4 py-1 rounded-full text-[10px] font-black uppercase">Core-pohja (Pakollinen)</span>
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-2xl">DUUNIHARAVA CORE</h3>
+                <div class="text-2xl font-black">12,49 €<span class="text-xs opacity-50">/kk</span></div>
+            </div>
+            <ul class="text-sm text-gray-400 space-y-2">
+                <li>✨ AI-profiilianalyysi (LinkedIn & CV)</li>
+                <li>✨ Personoitu dashboard ja 1 hakemus/kk</li>
+                <li>✨ Suomalainen rekry-konteksti & tuki</li>
+            </ul>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div id="m1" onclick="toggleModuuli('m1', 17.50)" class="glass p-8 rounded-3xl cursor-pointer transition hover:border-white/20 border-2 border-transparent">
+                <div class="text-4xl mb-4">✍️</div>
+                <h3 class="font-bold text-xl mb-2">Räätälöidyt hakemukset</h3>
+                <p class="text-gray-400 text-sm mb-4 leading-relaxed">Analysoimme ilmoituksen vaatimukset ja sovitamme osaamisesi niihin täydellisesti (+4 kpl/kk).</p>
+                <span class="font-bold text-[#00BFA6] text-lg">+17,50 €</span>
             </div>
 
-            <div id="m2" onclick="toggleModuuli('m2', 15.50)" class="glass p-6 rounded-3xl cursor-pointer transition hover:border-white/20 border-2 border-transparent">
-                <div class="text-3xl mb-3">🛰️</div>
-                <h3 class="font-bold text-lg mb-1">LinkedIn SEO</h3>
-                <p class="text-gray-500 text-sm mb-4">Nouse hakutulosten kärkeen automaattisesti.</p>
-                <span class="font-bold text-[#00BFA6]">+15,50 €</span>
+            <div id="m2" onclick="toggleModuuli('m2', 15.50)" class="glass p-8 rounded-3xl cursor-pointer transition hover:border-white/20 border-2 border-transparent">
+                <div class="text-4xl mb-4">📄</div>
+                <h3 class="font-bold text-xl mb-2">AI-optimoitu LinkedIn</h3>
+                <h4 class="text-xs font-bold text-[#00BFA6] uppercase mb-2">LinkedIn SEO</h4>
+                <p class="text-gray-400 text-sm mb-4 leading-relaxed">Luomme rakenteellisesti täydelliset profiilit, jotka vakuuttavat sekä rekrytoijan että algoritmin.</p>
+                <span class="font-bold text-[#00BFA6] text-lg">+15,50 €</span>
             </div>
 
-            <div id="m3" onclick="toggleModuuli('m3', 12.50)" class="glass p-6 rounded-3xl cursor-pointer transition hover:border-white/20 border-2 border-transparent">
-                <div class="text-3xl mb-3">🔍</div>
-                <h3 class="font-bold text-lg mb-1">Työpaikkavahti</h3>
-                <p class="text-gray-500 text-sm mb-4">24/7 skannaus kaikista kanavista.</p>
-                <span class="font-bold text-[#00BFA6]">+12,50 €</span>
+            <div id="m3" onclick="toggleModuuli('m3', 12.50)" class="glass p-8 rounded-3xl cursor-pointer transition hover:border-white/20 border-2 border-transparent">
+                <div class="text-4xl mb-4">🔍</div>
+                <h3 class="font-bold text-xl mb-2">Työpaikkavahti 2.0</h3>
+                <p class="text-gray-400 text-sm mb-4 leading-relaxed">Emme selaa vain julkisia ilmoituksia. Haravoimme piilotyöpaikat ja tärpit puolestasi.</p>
+                <span class="font-bold text-[#00BFA6] text-lg">+12,50 €</span>
             </div>
+        </div>
+    </section>
+
+    <section class="px-6 py-20 max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold mb-10 text-center uppercase tracking-widest">Kysymyksiä?</h2>
+        <div class="space-y-4">
+            <details class="glass p-6 rounded-2xl group cursor-pointer">
+                <summary class="font-bold text-lg flex justify-between items-center">
+                    Voiko työnantaja huomata automaation? <span class="group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="mt-4 text-gray-400 leading-relaxed text-sm">
+                    Ei. Duuniharava luo uniikkia sisältöä perustuen sinun todelliseen osaamiseesi. Lopputulos on laadukkaampi ja persoonallisempi kuin kiireessä itse kirjoitettu teksti.
+                </p>
+            </details>
+            <details class="glass p-6 rounded-2xl group cursor-pointer">
+                <summary class="font-bold text-lg flex justify-between items-center">
+                    Miten hinnoittelu toimii? <span class="group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="mt-4 text-gray-400 leading-relaxed text-sm">
+                    Maksat vain siitä, mitä käytät. Core-jäsenyys on pohja, ja voit lisätä moduuleja tarpeesi mukaan. Ei sitoutumista, peruuta milloin vain.
+                </p>
+            </details>
+            <details class="glass p-6 rounded-2xl group cursor-pointer">
+                <summary class="font-bold text-lg flex justify-between items-center">
+                    Onko tietoni turvassa? <span class="group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="mt-4 text-gray-400 leading-relaxed text-sm">
+                    Kyllä. Käytämme modernia salausta ja turvallisia pilvipalveluita. Ammatillinen profiilisi pysyy vain sinun ja meidän välisenämme.
+                </p>
+            </details>
+        </div>
+    </section>
+
+    <section class="px-6 py-20 text-center">
+        <div class="max-w-4xl mx-auto glass p-12 rounded-[3rem] border-2 border-[#FF6F3C]/30 relative overflow-hidden">
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#FF6F3C] opacity-10 blur-[50px]"></div>
+            <h2 class="text-3xl md:text-5xl font-bold mb-6 italic">Löydä unelmatyösi ilman uupumusta.</h2>
+            <p class="text-gray-400 mb-10 text-lg">Liity satojen suomalaisten osaajien joukkoon, jotka haravoivat markkinat älykkäämmin.</p>
+            <button class="oranssi-bg text-white px-12 py-5 rounded-2xl font-black text-xl hover:scale-105 transition shadow-2xl">ALOITA MAKSUTON KAROITUS</button>
         </div>
     </section>
 
     <div class="fixed bottom-0 left-0 right-0 glass border-t border-white/10 p-6 z-50">
         <div class="max-w-md mx-auto flex justify-between items-center">
             <div>
-                <p class="text-[10px] text-gray-500 uppercase font-black tracking-widest">Tilaus yhteensä</p>
+                <p class="text-[10px] text-gray-500 uppercase font-black tracking-widest">Yhteensä</p>
                 <div id="kokonaishinta" class="text-4xl font-black text-white">12,49 €</div>
             </div>
             <button class="oranssi-bg px-10 py-4 rounded-2xl font-bold text-lg shadow-[0_0_30px_rgba(255,111,60,0.4)] hover:scale-105 transition active:scale-95">
-                ALOITA ➔
+                JATKA ➔
             </button>
         </div>
     </div>
@@ -135,7 +172,6 @@
                 lisaSumma += hinta;
                 el.classList.add('card-active');
             }
-            
             let kokonaissumma = (pohjahinta + lisaSumma).toFixed(2);
             document.getElementById('kokonaishinta').innerText = kokonaissumma.replace('.', ',') + " €";
         }
