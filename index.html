@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <title>Duuniharava - AI Hissipuhe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="max-w-2xl mx-auto py-12 px-4">
+        <h1 class="text-4xl font-bold text-blue-600 mb-4">Duuniharava</h1>
+        <p class="text-gray-600 mb-8">Luo ammattimainen hissipuhe sekunneissa tekoälyn avulla.</p>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <label class="block mb-2 font-bold">Syötä taitosi tai CV-otteesi:</label>
+            <textarea id="skills" class="w-full p-3 border rounded mb-4" rows="5" placeholder="Esim. Projektinhallinta, Python, asiakaspalvelu..."></textarea>
+            <button onclick="generoi()" id="btn" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 w-full font-bold">Luo hissipuhe</button>
+        </div>
+
+        <div id="tulos-box" class="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-200 hidden">
+            <h2 class="font-bold text-blue-800 mb-2">Sinun AI-hissipuheesi:</h2>
+            <p id="tulos" class="text-gray-800 italic"></p>
+        </div>
+    </div>
+
+    <script>
+        async function generoi() {
+            const btn = document.getElementById('btn');
+            const skills = document.getElementById('skills').value;
+            btn.innerText = "Käsitellään...";
+            btn.disabled = true;
+
+            // TÄHÄN TULEE SINUN N8N WEBHOOK-OSOITTEESI
+            const response = await fetch('https://n8nscalera.eu/workflow/WIEg68mb7WNeuFe6/756aae', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ skills: skills, customer_id: "test-user-1" })
+            });
+
+            const data = await response.json();
+            document.getElementById('tulos').innerText = data.cv_profiili;
+            document.getElementById('tulos-box').classList.remove('hidden');
+            btn.innerText = "Luo hissipuhe";
+            btn.disabled = false;
+        }
+    </script>
+</body>
+</html>
