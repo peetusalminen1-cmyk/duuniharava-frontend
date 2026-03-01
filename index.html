@@ -25,7 +25,6 @@
         .gradient-bg { background: linear-gradient(90deg, #00BFA6, #FF6F3C); }
         input::placeholder { color: rgba(255, 255, 255, 0.3); }
         
-        /* Interaktiiviset tehosteet */
         .hover-lift { transition: transform 0.3s ease, border-color 0.3s ease; }
         .hover-lift:hover { 
             transform: translateY(-8px);
@@ -55,19 +54,19 @@
                 <span class="turkoosi-text">DUUNI</span><span class="oranssi-text">HARAVA</span>
             </div>
             <div class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
-                <a href="#hero" class="hover:text-white transition">Etusivu</a>
-                <a href="#features" class="hover:text-white transition">Palvelut</a>
-                <a href="#pricing" class="hover:text-white transition">Hinnasto</a>
-                <a href="#faq" class="hover:text-white transition">FAQ</a>
+                <a href="#hero" class="hover:text-white transition" data-i18n="nav-home">Etusivu</a>
+                <a href="#features" class="hover:text-white transition" data-i18n="nav-services">Palvelut</a>
+                <a href="#pricing" class="hover:text-white transition" data-i18n="nav-pricing">Hinnasto</a>
+                <a href="#faq" class="hover:text-white transition" data-i18n="nav-faq">FAQ</a>
             </div>
             <div class="flex items-center gap-4">
                 <div class="flex gap-2 text-xs font-bold border-r border-white/10 pr-4">
-                    <button class="turkoosi-text hover:text-white transition">FI</button>
+                    <button id="lang-fi" class="turkoosi-text hover:text-white transition">FI</button>
                     <span class="text-gray-600">|</span>
-                    <button class="text-gray-400 hover:text-white transition" onclick="alert('English version coming soon!')">EN</button>
+                    <button id="lang-en" class="text-gray-400 hover:text-white transition">EN</button>
                 </div>
                 <button onclick="document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" 
-                        class="text-xs font-bold py-2 px-4 rounded-lg border border-[#00BFA6] turkoosi-text hover:bg-[#00BFA6] hover:text-black transition">
+                        class="text-xs font-bold py-2 px-4 rounded-lg border border-[#00BFA6] turkoosi-text hover:bg-[#00BFA6] hover:text-black transition" data-i18n="nav-login">
                     KIRJAUDU
                 </button>
             </div>
@@ -81,94 +80,93 @@
             <div class="text-3xl font-bold tracking-tighter mb-8">
                 <span class="turkoosi-text">DUUNI</span><span class="oranssi-text">HARAVA</span>
             </div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">Tehokas työkalu työnhakuun ja urakehitykseen</h1>
-            <p class="text-gray-400 mb-6 text-lg">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight" data-i18n="hero-title">Tehokas työkalu työnhakuun ja urakehitykseen</h1>
+            <p class="text-gray-400 mb-6 text-lg" data-i18n="hero-desc">
                 Suomessa työttömyysaste on tammikuussa 2026 <strong>10,3 %</strong>. Hallitus leikkaa tukia ja vähentää työllistämistoimia. Duuniharava automatisoi työnhaun ja optimoi profiilisi, jotta tulet huomatuksi.
             </p>
 
             <div class="glass p-4 md:p-6 rounded-2xl mt-6">
-                <h4 class="text-xl font-bold mb-4 text-center turkoosi-text">Työttömyyden trendi ja ennuste</h4>
+                <h4 class="text-xl font-bold mb-4 text-center turkoosi-text" data-i18n="chart-title">Työttömyyden trendi ja ennuste</h4>
                 <div class="chart-container w-full h-64 md:h-80">
                     <canvas id="unemploymentChart"></canvas>
                 </div>
-                <p class="text-gray-400 text-xs mt-4 text-center">
+                <p class="text-gray-400 text-xs mt-4 text-center" data-i18n="chart-legend">
                     Vihreä: Historia | Oranssi: Ennuste ja nykytila (2026–2032)
                 </p>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-                <a href="#pricing" class="gradient-bg text-white font-black py-4 px-8 rounded-2xl hover:scale-[1.03] transition shadow-lg">KATSO HINNASTO</a>
-                <button onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})" class="glass py-4 px-8 rounded-2xl hover:border-[#00BFA6] transition text-white">LUE LISÄÄ</button>
+                <a href="#pricing" class="gradient-bg text-white font-black py-4 px-8 rounded-2xl hover:scale-[1.03] transition shadow-lg" data-i18n="btn-pricing">KATSO HINNASTO</a>
+                <button onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})" class="glass py-4 px-8 rounded-2xl hover:border-[#00BFA6] transition text-white" data-i18n="btn-more">LUE LISÄÄ</button>
             </div>
         </div>
     </section>
 
     <section id="features" class="py-24 max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-16">Kenelle ja mitä tarjoamme</h2>
-        
+        <h2 class="text-3xl font-bold text-center mb-16" data-i18n="features-title">Kenelle ja mitä tarjoamme</h2>
         <div class="grid md:grid-cols-3 gap-8">
             <div class="space-y-6">
-                <h3 class="text-2xl font-bold text-white text-center border-b border-white/10 pb-4">Kenelle se sopii?</h3>
+                <h3 class="text-2xl font-bold text-white text-center border-b border-white/10 pb-4" data-i18n="target-title">Kenelle se sopii?</h3>
                 <div class="glass p-6 rounded-2xl hover-lift transition animate-fadeIn">
-                    <h4 class="font-bold turkoosi-text mb-2">🌍 Maahanmuuttajat</h4>
-                    <p class="text-sm text-gray-400">Madalla kynnystä Suomen työmarkkinoille. Työkalu auttaa kääntämään osaamisesi paikalliseen standardiin sopivaksi.</p>
+                    <h4 class="font-bold turkoosi-text mb-2" data-i18n="target-1-name">🌍 Maahanmuuttajat</h4>
+                    <p class="text-sm text-gray-400" data-i18n="target-1-desc">Madalla kynnystä Suomen työmarkkinoille. Työkalu auttaa kääntämään osaamisesi paikalliseen standardiin sopivaksi.</p>
                 </div>
                 <div class="glass p-6 rounded-2xl hover-lift transition animate-fadeIn">
-                    <h4 class="font-bold oranssi-text mb-2">🎓 Opiskelijat & Alanvaihtajat</h4>
-                    <p class="text-sm text-gray-400">Löydä harjoittelupaikat tai ensiaskeleet uudella uralla optimoidun profiilin avulla.</p>
+                    <h4 class="font-bold oranssi-text mb-2" data-i18n="target-2-name">🎓 Opiskelijat & Alanvaihtajat</h4>
+                    <p class="text-sm text-gray-400" data-i18n="target-2-desc">Löydä harjoittelupaikat tai ensiaskeleet uudella uralla optimoidun profiilin avulla.</p>
                 </div>
                 <div class="glass p-6 rounded-2xl hover-lift transition animate-fadeIn">
-                    <h4 class="font-bold turkoosi-text mb-2">🔍 Aktiiviset hakijat</h4>
-                    <p class="text-sm text-gray-400">Automatisoi rutiinit ja keskity valmistautumaan haastatteluihin.</p>
+                    <h4 class="font-bold turkoosi-text mb-2" data-i18n="target-3-name">🔍 Aktiiviset hakijat</h4>
+                    <p class="text-sm text-gray-400" data-i18n="target-3-desc">Automatisoi rutiinit ja keskity valmistautumaan haastatteluihin.</p>
                 </div>
             </div>
 
             <div class="space-y-6">
-                <h3 class="text-2xl font-bold turkoosi-text text-center border-b border-[#00BFA6]/20 pb-4">Profiilin optimointi</h3>
+                <h3 class="text-2xl font-bold turkoosi-text text-center border-b border-[#00BFA6]/20 pb-4" data-i18n="opt-title">Profiilin optimointi</h3>
                 <div class="glass p-6 rounded-2xl hover-lift transition flex items-start gap-4 animate-fadeIn">
                     <span class="text-3xl">📄</span>
                     <div>
-                        <h4 class="text-xl font-bold mb-1 text-sm md:text-base">CV-analyysi & Palaute</h4>
-                        <p class="text-gray-400 text-sm">Saat suoraa palautetta ja parannusehdotuksia CV:si rakenteeseen ja sisältöön.</p>
+                        <h4 class="text-xl font-bold mb-1 text-sm md:text-base" data-i18n="opt-1-name">CV-analyysi & Palaute</h4>
+                        <p class="text-gray-400 text-sm" data-i18n="opt-1-desc">Saat suoraa palautetta ja parannusehdotuksia CV:si rakenteeseen ja sisältöön.</p>
                     </div>
                 </div>
                 <div class="glass p-6 rounded-2xl hover-lift transition flex items-start gap-4 animate-fadeIn">
                     <span class="text-3xl">✉️</span>
                     <div>
-                        <h4 class="text-xl font-bold mb-1 text-sm md:text-base">Hakemusoptimointi</h4>
-                        <p class="text-gray-400 text-sm">Optimoi hakemukset niin, että ne erottuvat ja läpäisevät ATS-suodattimet.</p>
+                        <h4 class="text-xl font-bold mb-1 text-sm md:text-base" data-i18n="opt-2-name">Hakemusoptimointi</h4>
+                        <p class="text-gray-400 text-sm" data-i18n="opt-2-desc">Optimoi hakemukset niin, että ne erottuvat ja läpäisevät ATS-suodattimet.</p>
                     </div>
                 </div>
                 <div class="glass p-6 rounded-2xl hover-lift transition flex items-start gap-4 animate-fadeIn">
                     <span class="text-3xl">🚀</span>
                     <div>
-                        <h4 class="text-xl font-bold mb-1 text-sm md:text-base">Automaattinen haku</h4>
-                        <p class="text-gray-400 text-sm">Etsi ja lähetä hakemuksia useisiin paikkoihin yhdellä kertaa automaation avulla.</p>
+                        <h4 class="text-xl font-bold mb-1 text-sm md:text-base" data-i18n="opt-3-name">Automaattinen haku</h4>
+                        <p class="text-gray-400 text-sm" data-i18n="opt-3-desc">Etsi ja lähetä hakemuksia useisiin paikkoihin yhdellä kertaa automaation avulla.</p>
                     </div>
                 </div>
             </div>
 
             <div class="space-y-6">
-                <h3 class="text-2xl font-bold oranssi-text text-center border-b border-[#FF6F3C]/20 pb-4">Verkostoituminen</h3>
+                <h3 class="text-2xl font-bold oranssi-text text-center border-b border-[#FF6F3C]/20 pb-4" data-i18n="net-title">Verkostoituminen</h3>
                 <div class="glass p-6 rounded-2xl hover-lift transition flex items-start gap-4 animate-fadeIn">
                     <span class="text-3xl">🔗</span>
                     <div>
-                        <h4 class="text-xl font-bold mb-1 text-sm md:text-base">LinkedIn-hionta</h4>
-                        <p class="text-gray-400 text-sm">Vinkit ja työkalut, joilla teet LinkedIn-profiilistasi rekrytoijien magneetin.</p>
+                        <h4 class="text-xl font-bold mb-1 text-sm md:text-base" data-i18n="net-1-name">LinkedIn-hionta</h4>
+                        <p class="text-gray-400 text-sm" data-i18n="net-1-desc">Vinkit ja työkalut, joilla teet LinkedIn-profiilistasi rekrytoijien magneetin.</p>
                     </div>
                 </div>
                 <div class="glass p-6 rounded-2xl hover-lift transition flex items-start gap-4 animate-fadeIn">
                     <span class="text-3xl">💬</span>
                     <div>
-                        <h4 class="text-xl font-bold mb-1 text-sm md:text-base">Asiantuntijapalaute</h4>
-                        <p class="text-gray-400 text-sm">Analysoimme hakuprosessisi ja kerromme, missä voit vielä kehittyä.</p>
+                        <h4 class="text-xl font-bold mb-1 text-sm md:text-base" data-i18n="net-2-name">Asiantuntijapalaute</h4>
+                        <p class="text-gray-400 text-sm" data-i18n="net-2-desc">Analysoimme hakuprosessisi ja kerromme, missä voit vielä kehittyä.</p>
                     </div>
                 </div>
                 <div class="glass p-6 rounded-2xl hover-lift transition flex items-start gap-4 animate-fadeIn">
                     <span class="text-3xl">📊</span>
                     <div>
-                        <h4 class="text-xl font-bold mb-1 text-sm md:text-base">Haun seuranta</h4>
-                        <p class="text-gray-400 text-sm">Pidä kirjaa kaikista lähetetyistä hakemuksista ja niiden tilasta yhdessä paikassa.</p>
+                        <h4 class="text-xl font-bold mb-1 text-sm md:text-base" data-i18n="net-3-name">Haun seuranta</h4>
+                        <p class="text-gray-400 text-sm" data-i18n="net-3-desc">Pidä kirjaa kaikista lähetetyistä hakemuksista ja niiden tilasta yhdessä paikassa.</p>
                     </div>
                 </div>
             </div>
@@ -176,165 +174,152 @@
     </section>
 
     <section id="pricing" class="py-24 max-w-6xl mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-16">Valitse pakettisi</h2>
+        <h2 class="text-3xl font-bold mb-16" data-i18n="pricing-title">Valitse pakettisi</h2>
         <div class="grid md:grid-cols-3 gap-8 px-4">
             <div class="glass p-10 rounded-3xl hover-lift">
                 <h3 class="text-xl font-bold mb-4 text-gray-300">Starter</h3>
                 <p class="text-4xl font-black mb-6">12,49€<span class="text-lg font-normal text-gray-500">/kk</span></p>
                 <ul class="text-gray-400 space-y-2 mb-8 text-left text-sm">
-                    <li>✔ CV-analyysi</li>
-                    <li>✔ 50 automaattihakua / kk</li>
+                    <li data-i18n="price-1-li1">✔ CV-analyysi</li>
+                    <li data-i18n="price-1-li2">✔ 50 automaattihakua / kk</li>
                 </ul>
-                <a href="#" class="block glass py-3 rounded-xl hover:border-[#00BFA6] transition">Valitse</a>
+                <a href="#" class="block glass py-3 rounded-xl hover:border-[#00BFA6] transition" data-i18n="btn-select">Valitse</a>
             </div>
             <div class="glass p-10 rounded-3xl border-2 border-[#00BFA6] scale-105 shadow-[0_0_30px_rgba(0,191,166,0.2)] relative overflow-hidden">
-                <div class="absolute top-0 right-0 bg-[#00BFA6] text-black text-[10px] font-bold px-4 py-1 rotate-45 translate-x-4 translate-y-2">SUOSITUIN</div>
+                <div class="absolute top-0 right-0 bg-[#00BFA6] text-black text-[10px] font-bold px-4 py-1 rotate-45 translate-x-4 translate-y-2" data-i18n="popular">SUOSITUIN</div>
                 <h3 class="text-xl font-bold mb-4 turkoosi-text">Pro</h3>
                 <p class="text-4xl font-black mb-6">29,99€<span class="text-lg font-normal text-gray-500">/kk</span></p>
                 <ul class="text-gray-400 space-y-2 mb-8 text-left text-sm">
-                    <li>✔ Rajattomat hakemukset</li>
-                    <li>✔ LinkedIn-optimointityökalut</li>
-                    <li>✔ Henkilökohtainen palaute</li>
+                    <li data-i18n="price-2-li1">✔ Rajattomat hakemukset</li>
+                    <li data-i18n="price-2-li2">✔ LinkedIn-optimointityökalut</li>
+                    <li data-i18n="price-2-li3">✔ Henkilökohtainen palaute</li>
                 </ul>
-                <a href="#" class="block gradient-bg py-3 rounded-xl font-bold hover:scale-[1.03] transition text-white">Valitse</a>
+                <a href="#" class="block gradient-bg py-3 rounded-xl font-bold hover:scale-[1.03] transition text-white" data-i18n="btn-select">Valitse</a>
             </div>
             <div class="glass p-10 rounded-3xl hover-lift">
-                <h3 class="text-xl font-bold mb-4 text-gray-300">Ura-tuki</h3>
+                <h3 class="text-xl font-bold mb-4 text-gray-300" data-i18n="price-3-name">Ura-tuki</h3>
                 <p class="text-4xl font-black mb-6">99€<span class="text-lg font-normal text-gray-500">/kk</span></p>
                 <ul class="text-gray-400 space-y-2 mb-8 text-left text-sm">
-                    <li>✔ Kaikki Pro-ominaisuudet</li>
-                    <li>✔ Syvällinen urasparraus</li>
-                    <li>✔ Portfolion tarkistus</li>
+                    <li data-i18n="price-3-li1">✔ Kaikki Pro-ominaisuudet</li>
+                    <li data-i18n="price-3-li2">✔ Syvällinen urasparraus</li>
+                    <li data-i18n="price-3-li3">✔ Portfolion tarkistus</li>
                 </ul>
-                <a href="#" class="block glass py-3 rounded-xl hover:border-[#00BFA6] transition">Valitse</a>
+                <a href="#" class="block glass py-3 rounded-xl hover:border-[#00BFA6] transition" data-i18n="btn-select">Valitse</a>
             </div>
         </div>
     </section>
 
     <section id="faq" class="py-24 max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold mb-16 text-center">Usein kysytyt kysymykset</h2>
+        <h2 class="text-3xl font-bold mb-16 text-center" data-i18n="faq-title">Usein kysytyt kysymykset</h2>
         <div class="space-y-4 px-4">
             <details class="glass p-6 rounded-2xl cursor-pointer group">
                 <summary class="font-bold turkoosi-text list-none flex justify-between items-center text-sm md:text-base">
-                    Saanko palautetta omasta CV:stäni?
+                    <span data-i18n="faq-1-q">Saanko palautetta omasta CV:stäni?</span>
                     <span class="group-open:rotate-180 transition-transform">↓</span>
                 </summary>
-                <p class="text-gray-400 mt-4 text-sm">Kyllä. Palvelu analysoi CV:si ja antaa konkreettisia parannusehdotuksia, jotta se vastaa paremmin työnantajien odotuksia.</p>
+                <p class="text-gray-400 mt-4 text-sm" data-i18n="faq-1-a">Kyllä. Palvelu analysoi CV:si ja antaa konkreettisia parannusehdotuksia, jotta se vastaa paremmin työnantajien odotuksia.</p>
             </details>
             <details class="glass p-6 rounded-2xl cursor-pointer group">
                 <summary class="font-bold turkoosi-text list-none flex justify-between items-center text-sm md:text-base">
-                    Auttaako palvelu LinkedIn-profiilin kanssa?
+                    <span data-i18n="faq-2-q">Auttaako palvelu LinkedIn-profiilin kanssa?</span>
                     <span class="group-open:rotate-180 transition-transform">↓</span>
                 </summary>
-                <p class="text-gray-400 mt-4 text-sm">Ehdottomasti. Pro-paketissamme on erilliset työkalut LinkedIn-sisältöjen ja profiilin hakukonenäkyvyyden parantamiseen.</p>
+                <p class="text-gray-400 mt-4 text-sm" data-i18n="faq-2-a">Ehdottomasti. Pro-paketissamme on erilliset työkalut LinkedIn-sisältöjen ja profiilin hakukonenäkyvyyden parantamiseen.</p>
             </details>
             <details class="glass p-6 rounded-2xl cursor-pointer group">
                 <summary class="font-bold oranssi-text list-none flex justify-between items-center text-sm md:text-base">
-                    Auttaako työkalu kieliesteiden kanssa?
+                    <span data-i18n="faq-3-q">Auttaako työkalu kieliesteiden kanssa?</span>
                     <span class="group-open:rotate-180 transition-transform">↓</span>
                 </summary>
-                <p class="text-gray-400 mt-4 text-sm">Kyllä! Duuniharava auttaa muotoilemaan hakemukset ja CV:n sujuvalla suomella tai englannilla, mikä parantaa merkittävästi työllistymismahdollisuuksia.</p>
-            </details>
-            <details class="glass p-6 rounded-2xl cursor-pointer group">
-                <summary class="font-bold oranssi-text list-none flex justify-between items-center text-sm md:text-base">
-                    Miten automatisoitu haku toimii?
-                    <span class="group-open:rotate-180 transition-transform">↓</span>
-                </summary>
-                <p class="text-gray-400 mt-4 text-sm">Voit määrittää kriteerit (ala, sijainti, palkka), ja järjestelmä etsii sopivat paikat ja auttaa luonnostelemaan hakemukset valmiiksi puolestasi.</p>
-            </details>
-            <details class="glass p-6 rounded-2xl cursor-pointer group">
-                <summary class="font-bold oranssi-text list-none flex justify-between items-center text-sm md:text-base">
-                    Voinko peruuttaa tilaukseni milloin vain?
-                    <span class="group-open:rotate-180 transition-transform">↓</span>
-                </summary>
-                <p class="text-gray-400 mt-4 text-sm">Kyllä. Tilauksemme ovat kuukausikohtaisia ilman sitoutumisaikoja. Voit päättää tilauksen yhdellä klikkauksella asetuksista.</p>
+                <p class="text-gray-400 mt-4 text-sm" data-i18n="faq-3-a">Kyllä! Duuniharava auttaa muotoilemaan hakemukset ja CV:n sujuvalla suomella tai englannilla, mikä parantaa merkittävästi työllistymismahdollisuuksia.</p>
             </details>
         </div>
     </section>
 
     <section id="auth-section" class="py-24 flex justify-center px-4">
         <div class="max-w-md w-full glass p-10 rounded-[2.5rem] border-t-2 border-[#00BFA6]">
-            <h2 class="text-2xl font-bold mb-6 text-center">Kirjaudu sisään</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center" data-i18n="login-title">Kirjaudu sisään</h2>
             <form id="auth-form" class="space-y-4">
                 <div>
-                    <label for="email" class="block text-xs font-bold mb-2 uppercase tracking-widest text-gray-500">Sähköposti</label>
-                    <input type="email" id="email" required placeholder="matti@esimerkki.fi" class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition text-white">
+                    <label class="block text-xs font-bold mb-2 uppercase tracking-widest text-gray-500" data-i18n="login-email">Sähköposti</label>
+                    <input type="email" required placeholder="matti@esimerkki.fi" class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition text-white">
                 </div>
                 <div>
-                    <label for="password" class="block text-xs font-bold mb-2 uppercase tracking-widest text-gray-500">Salasana</label>
-                    <input type="password" id="password" required placeholder="••••••••" class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition text-white">
+                    <label class="block text-xs font-bold mb-2 uppercase tracking-widest text-gray-500" data-i18n="login-pass">Salasana</label>
+                    <input type="password" required placeholder="••••••••" class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition text-white">
                 </div>
-                <button type="submit" class="w-full gradient-bg text-white font-black py-4 rounded-2xl hover:scale-[1.02] transition active:scale-95 shadow-lg">KIRJAUDU SISÄÄN ➔</button>
+                <button type="submit" class="w-full gradient-bg text-white font-black py-4 rounded-2xl hover:scale-[1.02] transition active:scale-95 shadow-lg" data-i18n="login-btn">KIRJAUDU SISÄÄN ➔</button>
             </form>
-            <div class="mt-6 text-center text-sm">
-                <p class="text-gray-400 mb-2">Eikö sinulla ole vielä pääsyä?</p>
-                <a href="#pricing" class="oranssi-text font-bold hover:underline">Osta käyttöoikeus tästä</a>
-            </div>
         </div>
     </section>
 
-    <footer class="py-12 text-center text-gray-600 border-t border-white/5">© 2026 Duuniharava. Kaikki oikeudet pidätetään.</footer>
+    <footer class="py-12 text-center text-gray-600 border-t border-white/5">© 2026 Duuniharava. All rights reserved.</footer>
 </main>
 
 <script>
+const translations = {
+    fi: {
+        "nav-home": "Etusivu", "nav-services": "Palvelut", "nav-pricing": "Hinnasto", "nav-faq": "FAQ", "nav-login": "KIRJAUDU",
+        "hero-title": "Tehokas työkalu työnhakuun ja urakehitykseen", "hero-desc": "Suomessa työttömyysaste on tammikuussa 2026 10,3%. Duuniharava automatisoi työnhaun ja optimoi profiilisi.",
+        "chart-title": "Työttömyyden trendi ja ennuste", "chart-legend": "Vihreä: Historia | Oranssi: Ennuste (2026-2032)",
+        "btn-pricing": "KATSO HINNASTO", "btn-more": "LUE LISÄÄ", "features-title": "Kenelle ja mitä tarjoamme",
+        "target-title": "Kenelle se sopii?", "target-1-name": "🌍 Maahanmuuttajat", "target-1-desc": "Madalla kynnystä Suomen työmarkkinoille kääntämällä osaamisesi paikalliseen muotoon.",
+        "target-2-name": "🎓 Opiskelijat", "target-2-desc": "Löydä harjoittelupaikat ja uran ensiaskeleet vaivatta.",
+        "target-3-name": "🔍 Aktiiviset hakijat", "target-3-desc": "Automatisoi rutiinit ja keskity haastatteluihin.",
+        "opt-title": "Profiilin optimointi", "opt-1-name": "CV-analyysi", "opt-1-desc": "Saat konkreettista palautetta CV:n parantamiseksi.",
+        "opt-2-name": "Hakemusoptimointi", "opt-2-desc": "Ohita ATS-suodattimet räätälöidyillä hakemuksilla.",
+        "opt-3-name": "Automaattinen haku", "opt-3-desc": "Etsi ja lähetä hakemuksia tehokkaasti automaation avulla.",
+        "net-title": "Verkostoituminen", "net-1-name": "LinkedIn-hionta", "net-1-desc": "Tee profiilistasi rekrytoijien magneetti.",
+        "pricing-title": "Valitse pakettisi", "btn-select": "Valitse", "popular": "SUOSITUIN",
+        "faq-title": "Usein kysytyt kysymykset", "faq-1-q": "Saanko palautetta CV:stä?", "login-title": "Kirjaudu sisään", "login-btn": "KIRJAUDU SISÄÄN ➔"
+    },
+    en: {
+        "nav-home": "Home", "nav-services": "Services", "nav-pricing": "Pricing", "nav-faq": "FAQ", "nav-login": "LOGIN",
+        "hero-title": "Powerful Tool for Job Search and Career Growth", "hero-desc": "Unemployment in Finland is 10.3% in Jan 2026. Duuniharava automates your search and optimizes your profile.",
+        "chart-title": "Unemployment Trends & Forecast", "chart-legend": "Green: History | Orange: Forecast (2026-2032)",
+        "btn-pricing": "SEE PRICING", "btn-more": "READ MORE", "features-title": "Who We Serve & What We Offer",
+        "target-title": "Who is it for?", "target-1-name": "🌍 Immigrants", "target-1-desc": "Lower the barrier to the Finnish job market by localizing your expertise.",
+        "target-2-name": "🎓 Students", "target-2-desc": "Find internships and first career steps with ease.",
+        "target-3-name": "🔍 Active Job Seekers", "target-3-desc": "Automate routines and focus on your interviews.",
+        "opt-title": "Profile Optimization", "opt-1-name": "CV Analysis", "opt-1-desc": "Get concrete feedback to improve your CV impact.",
+        "opt-2-name": "Application Optimization", "opt-2-desc": "Pass ATS filters with perfectly tailored applications.",
+        "opt-3-name": "Automated Search", "opt-3-desc": "Find and send applications efficiently via automation.",
+        "net-title": "Networking", "net-1-name": "LinkedIn Polish", "net-1-desc": "Turn your profile into a recruiter magnet.",
+        "pricing-title": "Choose Your Plan", "btn-select": "Select", "popular": "MOST POPULAR",
+        "faq-title": "Frequently Asked Questions", "faq-1-q": "Do I get feedback on my CV?", "login-title": "Sign In", "login-btn": "SIGN IN ➔"
+    }
+};
+
+function setLanguage(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) el.innerText = translations[lang][key];
+    });
+    document.getElementById('lang-fi').className = lang === 'fi' ? 'turkoosi-text font-bold' : 'text-gray-400';
+    document.getElementById('lang-en').className = lang === 'en' ? 'turkoosi-text font-bold' : 'text-gray-400';
+}
+
+document.getElementById('lang-fi').onclick = () => setLanguage('fi');
+document.getElementById('lang-en').onclick = () => setLanguage('en');
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Kaavion alustus
     const canvas = document.getElementById('unemploymentChart');
     if (canvas) {
         const ctx = canvas.getContext('2d');
-        const years = ['2022','2023','2024','2025','2026','2027','2028','2029','2030','2031','2032'];
-        const values = [7.8, 8.8, 9.4, 9.8, 10.3, 10.5, 10.7, 11.0, 11.3, 11.5, 11.8];
-
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: years,
+                labels: ['2022','2023','2024','2025','2026','2027','2028','2029','2030','2031','2032'],
                 datasets: [{
-                    label: 'Työttömyysaste (%)',
-                    data: values,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 6,
-                    pointBackgroundColor: values.map((v, i) => i >= 4 ? '#FF6F3C' : '#00BFA6'),
-                    borderColor: values.map((v, i) => i >= 4 ? '#FF6F3C' : '#00BFA6'),
-                    backgroundColor: 'rgba(0,191,166,0.1)',
-                    segment: {
-                        borderColor: ctx => ctx.p0DataIndex >= 3 ? '#FF6F3C' : '#00BFA6',
-                        backgroundColor: ctx => ctx.p0DataIndex >= 3 ? 'rgba(255,111,60,0.1)' : 'rgba(0,191,166,0.1)'
-                    }
+                    data: [7.8, 8.8, 9.4, 9.8, 10.3, 10.5, 10.7, 11.0, 11.3, 11.5, 11.8],
+                    fill: true, tension: 0.4, pointRadius: 5,
+                    borderColor: '#00BFA6', backgroundColor: 'rgba(0,191,166,0.1)'
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: { 
-                        backgroundColor: '#1A1A1A', 
-                        titleColor: '#00BFA6', 
-                        bodyColor: '#FFF', 
-                        displayColors: false,
-                        padding: 12
-                    }
-                },
-                scales: {
-                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#CCC' } },
-                    x: { grid: { display: false }, ticks: { color: '#CCC' } }
-                }
-            }
-        });
-    }
-
-    const authForm = document.getElementById('auth-form');
-    if (authForm) {
-        authForm.addEventListener('submit', e => {
-            e.preventDefault();
-            alert('Kirjautuminen vaatii aktiivisen tilauksen. Ohjataan hinnoitteluun.');
-            document.getElementById('pricing').scrollIntoView({behavior: 'smooth'});
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
         });
     }
 });
 </script>
-
 </body>
 </html>
