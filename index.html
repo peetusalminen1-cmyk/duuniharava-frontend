@@ -81,6 +81,7 @@
             <div class="hidden lg:flex gap-8 text-sm font-medium text-gray-400">
                 <a href="#hero" class="hover:text-white transition" data-i18n="nav-home">Etusivu</a>
                 <a href="#features" class="hover:text-white transition" data-i18n="nav-services">Palvelut</a>
+                <a href="#testimonials" class="hover:text-white transition" data-i18n="nav-testimonials">Kokemuksia</a>
                 <a href="#pricing" class="hover:text-white transition" data-i18n="nav-pricing">Hinnasto</a>
                 <a href="#faq" class="hover:text-white transition" data-i18n="nav-faq">FAQ</a>
             </div>
@@ -183,6 +184,24 @@
         </div>
     </section>
 
+    <section id="testimonials" class="py-16 md:py-24 max-w-6xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-12" data-i18n="testi-title">Käyttäjien kokemuksia</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="glass p-8 rounded-2xl italic text-gray-300">
+                <p class="mb-4" data-i18n="testi-1-text">"Sain viisi haastattelukutsua viikossa CV-optimoinnin jälkeen. Uskomaton työkalu!"</p>
+                <span class="text-sm font-bold turkoosi-text">— Mikko S., Ohjelmistokehittäjä</span>
+            </div>
+            <div class="glass p-8 rounded-2xl italic text-gray-300 border-t-2 border-[#FF6F3C]">
+                <p class="mb-4" data-i18n="testi-2-text">"Automaattinen haku säästi minulta kymmeniä tunteja aikaa. Suosittelen kaikille!"</p>
+                <span class="text-sm font-bold oranssi-text">— Elena V., Markkinointi</span>
+            </div>
+            <div class="glass p-8 rounded-2xl italic text-gray-300">
+                <p class="mb-4" data-i18n="testi-3-text">"LinkedIn-profiilini hionta toi heti rekrytoijia viestittelemään minulle suoraan."</p>
+                <span class="text-sm font-bold turkoosi-text">— Joonas K., Myyntipäällikkö</span>
+            </div>
+        </div>
+    </section>
+
     <section id="pricing" class="py-16 md:py-24 max-w-6xl mx-auto text-center">
         <h2 class="text-2xl md:text-3xl font-bold mb-12 md:mb-16" data-i18n="pricing-title">Valitse pakettisi</h2>
         <div class="grid md:grid-cols-3 gap-6 md:gap-8 px-4">
@@ -253,13 +272,15 @@
 </main>
 
 <script>
-// Kielitiedostot
 const translations = {
     fi: {
-        "nav-home": "Etusivu", "nav-services": "Palvelut", "nav-pricing": "Hinnasto", "nav-faq": "FAQ", "nav-login": "KIRJAUDU",
+        "nav-home": "Etusivu", "nav-services": "Palvelut", "nav-pricing": "Hinnasto", "nav-faq": "FAQ", "nav-login": "KIRJAUDU", "nav-testimonials": "Kokemuksia",
         "hero-title": "Tehokas työkalu työnhakuun ja urakehitykseen", "hero-desc": "Suomessa työttömyysaste on tammikuussa 2026 10,3%. Duuniharava automatisoi työnhaun ja optimoi profiilisi.",
         "chart-title": "Työttömyyden trendi ja ennuste", "chart-legend": "Vihreä: Historia | Oranssi: Ennuste (2026-2032)",
         "btn-pricing": "KATSO HINNASTO", "btn-more": "LUE LISÄÄ", "features-title": "Kenelle ja mitä tarjoamme",
+        "testi-title": "Käyttäjien kokemuksia", "testi-1-text": "\"Sain viisi haastattelukutsua viikossa CV-optimoinnin jälkeen. Uskomaton työkalu!\"",
+        "testi-2-text": "\"Automaattinen haku säästi minulta kymmeniä tunteja aikaa. Suosittelen kaikille!\"",
+        "testi-3-text": "\"LinkedIn-profiilini hionta toi heti rekrytoijia viestittelemään minulle suoraan.\"",
         "target-title": "Kenelle se sopii?", "target-1-name": "🌍 Maahanmuuttajat", "target-1-desc": "Madalla kynnystä kääntämällä osaamisesi paikalliseen muotoon.",
         "target-2-name": "🎓 Opiskelijat", "target-2-desc": "Löydä harjoittelupaikat vaivatta.",
         "opt-title": "Profiilin optimointi", "opt-1-name": "CV-analyysi", "opt-1-desc": "Saat konkreettista palautetta CV:n parantamiseksi.",
@@ -270,10 +291,13 @@ const translations = {
         "faq-title": "Usein kysytyt kysymykset", "faq-1-q": "Saanko palautetta CV:stä?", "login-title": "Kirjaudu sisään", "login-btn": "KIRJAUDU SISÄÄN ➔"
     },
     en: {
-        "nav-home": "Home", "nav-services": "Services", "nav-pricing": "Pricing", "nav-faq": "FAQ", "nav-login": "LOGIN",
+        "nav-home": "Home", "nav-services": "Services", "nav-pricing": "Pricing", "nav-faq": "FAQ", "nav-login": "LOGIN", "nav-testimonials": "Stories",
         "hero-title": "Powerful Tool for Job Search and Career Growth", "hero-desc": "Unemployment in Finland is 10.3% in Jan 2026. Duuniharava automates your search and optimizes your profile.",
         "chart-title": "Unemployment Trends & Forecast", "chart-legend": "Green: History | Orange: Forecast (2026-2032)",
         "btn-pricing": "SEE PRICING", "btn-more": "READ MORE", "features-title": "Who We Serve & What We Offer",
+        "testi-title": "Success Stories", "testi-1-text": "\"I got five interview invites in a week after CV optimization. Amazing tool!\"",
+        "testi-2-text": "\"Automated search saved me dozens of hours. I highly recommend it to everyone!\"",
+        "testi-3-text": "\"Polishing my LinkedIn profile immediately brought recruiters to message me directly.\"",
         "target-title": "Who is it for?", "target-1-name": "🌍 Immigrants", "target-1-desc": "Lower the barrier by localizing your expertise.",
         "target-2-name": "🎓 Students", "target-2-desc": "Find internships and first career steps with ease.",
         "opt-title": "Profile Optimization", "opt-1-name": "CV Analysis", "opt-1-desc": "Get concrete feedback to improve your CV impact.",
@@ -290,7 +314,6 @@ function setLanguage(lang) {
         const key = el.getAttribute('data-i18n');
         if (translations[lang][key]) el.innerText = translations[lang][key];
     });
-    // Päivitä painikkeiden aktiivisuus
     document.getElementById('lang-fi').classList.toggle('active', lang === 'fi');
     document.getElementById('lang-en').classList.toggle('active', lang === 'en');
 }
@@ -303,8 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (canvas) {
         const ctx = canvas.getContext('2d');
         const isMobile = window.innerWidth < 640;
-        const tickFontSize = isMobile ? 9 : 11; // Pienempi fontti mobiilissa numeroiden luettavuuden varmistamiseksi
-
+        const tickFontSize = isMobile ? 9 : 11;
         new Chart(ctx, {
             type: 'line',
             data: {
@@ -316,8 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }]
             },
             options: { 
-                responsive: true, 
-                maintainAspectRatio: false, 
+                responsive: true, maintainAspectRatio: false, 
                 plugins: { legend: { display: false } },
                 scales: {
                     x: { ticks: { color: '#888', font: { size: tickFontSize } }, grid: { display: false } },
