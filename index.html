@@ -6,35 +6,61 @@
 <title>Duuniharava</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
-body { font-family: 'Space Grotesk', sans-serif; background-color: #0F0F0F; color: #FFFFFF; }
+body { 
+    font-family: 'Space Grotesk', sans-serif; 
+    background-color: #0F0F0F; 
+    color: #FFFFFF; 
+}
 .turkoosi-text { color: #00BFA6; }
-.gradient-bg { background: linear-gradient(90deg, #00BFA6, #FF6F3C); }
+.glass { 
+    background: rgba(255, 255, 255, 0.03); 
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+}
+.gradient-bg { 
+    background: linear-gradient(90deg, #00BFA6, #FF6F3C); 
+}
 </style>
 </head>
-<body class="flex items-center justify-center min-h-screen text-center p-6">
 
-<div>
-<h1 class="text-4xl font-black mb-6">
-<span class="turkoosi-text">DUUNI</span><span class="text-[#FF6F3C]">HARAVA</span>
-</h1>
+<body class="flex items-center justify-center min-h-screen p-6">
 
-<p class="text-gray-400 mb-8 max-w-xl">
-Tehokas työkalu työnhakuun ja asiakashankintaan.
-Rakenna oma pakettisi ja aloita heti.
-</p>
+<div class="max-w-2xl w-full glass p-12 rounded-[2.5rem] text-center">
 
-<div class="space-x-4">
-<a href="https://buy.stripe.com/esimerkki" 
-class="gradient-bg px-8 py-4 rounded-2xl font-bold">
-Osta käyttöoikeus
-</a>
+    <!-- Logo -->
+    <div class="text-3xl font-bold tracking-tighter mb-8">
+        <span class="turkoosi-text">DUUNI</span>
+        <span class="text-[#FF6F3C]">HARAVA</span>
+    </div>
 
-<a href="login.html" 
-class="border border-white/20 px-8 py-4 rounded-2xl font-bold">
-Kirjaudu sisään
-</a>
-</div>
+    <!-- Otsikko -->
+    <h1 class="text-3xl font-bold mb-6">
+        Tehokas työkalu työnhakuun ja asiakashankintaan
+    </h1>
+
+    <!-- Kuvaus -->
+    <p class="text-gray-400 mb-10">
+        Rakenna oma pakettisi, automatisoi työnhakusi ja hallitse asiakashankintaa 
+        yhdestä selkeästä työkalusta.
+    </p>
+
+    <!-- Napit -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+
+        <a href="https://buy.stripe.com/esimerkki"
+        class="gradient-bg text-white font-black py-4 px-8 rounded-2xl hover:scale-[1.03] transition active:scale-95">
+            Osta käyttöoikeus
+        </a>
+
+        <a href="login.html"
+        class="glass py-4 px-8 rounded-2xl hover:border-[#00BFA6] transition">
+            Kirjaudu sisään
+        </a>
+
+    </div>
+
 </div>
 
 </body>
