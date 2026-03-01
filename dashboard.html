@@ -54,10 +54,10 @@
 
             <div id="download-area" class="mt-8 p-6 glass border-[#00BFA6] rounded-2xl hidden text-center">
                 <h2 class="text-xl font-bold mb-4">✅ CV:si on valmis!</h2>
-                <a id="download-link" href="#" target="_blank" class="inline-block success-bg text-white font-bold py-4 px-10 rounded-xl hover:scale-105 transition shadow-lg">
+                <a id="download-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-block success-bg text-white font-bold py-4 px-10 rounded-xl hover:scale-105 transition shadow-lg">
                     LATAA OPTIMOITU CV (Google Docs)
                 </a>
-                <p class="mt-4 text-xs text-gray-500 italic">Huom: Linkki avautuu uuteen välilehteen Google Docsina.</p>
+                <p class="mt-4 text-xs text-gray-400 italic">Huom: Linkki avautuu uuteen välilehteen Google Docsina.</p>
             </div>
         </section>
     </div>
@@ -72,7 +72,6 @@
         form.onsubmit = async (e) => {
             e.preventDefault();
             
-            // Piilotetaan vanha linkki ja näytetään latausanimaatio
             statusDiv.classList.remove('hidden');
             downloadArea.classList.add('hidden');
             submitBtn.disabled = true;
@@ -88,28 +87,27 @@
                     body: formData
                 });
 
-                if (response.ok) {
-                    const result = await response.json();
-                    
-                    // Napataan linkki JSON-vastauksesta
-                    if (result && result.downloadUrl) {
-                        downloadLink.href = result.downloadUrl;
-                        downloadArea.classList.remove('hidden');
-                        statusDiv.classList.add('hidden');
-                    } else {
-                        console.error("Vastaus tuli, mutta downloadUrl puuttuu:", result);
-                        alert('Linkkiä ei löytynyt vastauksesta. Tarkista n8n-asetukset.');
-                    }
+                if (!response.ok) throw new Error('Palvelinvirhe');
+
+                const result = await response.json();
+                
+                // Puhdistetaan n8n-vastaus ja asetetaan linkki
+                if (result && result.downloadUrl && !result.downloadUrl.includes('{{')) {
+                    downloadLink.href = result.downloadUrl;
+                    downloadArea.classList.remove('hidden');
+                    statusDiv.classList.add('hidden');
                 } else {
-                    alert('Hups! Palvelin palautti virheen. Yritä uudelleen.');
+                    console.error("Virheellinen linkki vastaanotettu:", result);
+                    alert('AI ei palauttanut toimivaa linkkiä. Tarkista n8n:n Expression-asetukset.');
+                    statusDiv.classList.add('hidden');
                 }
             } catch (err) {
-                console.error("Virhe lähetyksessä:", err);
+                console.error("Virhe:", err);
                 alert('Yhteysvirhe n8n-palvelimeen.');
+                statusDiv.classList.add('hidden');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.style.opacity = '1';
-                statusDiv.classList.add('hidden');
             }
         };
     </script>
