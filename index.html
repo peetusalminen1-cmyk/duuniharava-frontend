@@ -3,179 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duuniharava | Automatisoi työnhakusi</title>
-    
+    <title>Duuniharava | Lopeta etsiminen, aloita urasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
-
     <style>
-        body { 
-            font-family: 'Space Grotesk', sans-serif; 
-            background-color: #0F0F0F; 
-            color: #FFFFFF; 
-            scroll-behavior: smooth;
-        }
+        body { font-family: 'Space Grotesk', sans-serif; background-color: #0F0F0F; color: #FFFFFF; scroll-behavior: smooth; }
         .turkoosi-text { color: #00BFA6; }
-        .glass { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(10px); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-        }
-        .gradient-bg { 
-            background: linear-gradient(90deg, #00BFA6, #FF6F3C); 
-        }
-        input::placeholder { color: rgba(255, 255, 255, 0.3); }
+        .oranssi-bg { background-color: #FF6F3C; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .card-active { border: 2px solid #00BFA6 !important; background: rgba(0, 191, 166, 0.08); shadow: 0 0 20px rgba(0, 191, 166, 0.2); }
+        .gradient-text { background: linear-gradient(90deg, #00BFA6, #FF6F3C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        details summary::-webkit-details-marker { display:none; }
+        .hero-glow { position: absolute; top: 10%; left: 50%; transform: translateX(-50%); width: 80vw; height: 50vh; background: radial-gradient(circle, rgba(0, 191, 166, 0.15) 0%, rgba(15, 15, 15, 0) 70%); z-index: -1; }
     </style>
 </head>
-<body class="px-6">
+<body class="overflow-x-hidden pb-32">
 
-    <section id="hero" class="min-h-screen flex items-center justify-center text-center">
-        <div class="max-w-3xl glass p-12 rounded-[2.5rem] shadow-2xl">
-            
-            <div class="text-3xl font-bold tracking-tighter mb-8">
-                <span class="turkoosi-text">DUUNI</span><span class="text-[#FF6F3C]">HARAVA</span>
-            </div>
+    <div class="hero-glow"></div>
 
-            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                Tehokas työkalu työnhakuun ja asiakashankintaan
-            </h1>
-
-            <p class="text-gray-400 mb-10 text-lg">
-                Rakenna oma pakettisi, automatisoi työnhakusi ja hallitse asiakashankintaa yhdestä selkeästä työkalusta.
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#pricing" class="gradient-bg text-white font-black py-4 px-8 rounded-2xl hover:scale-[1.03] transition shadow-lg">
-                    KATSO HINNASTO
-                </a>
-                <button onclick="document.getElementById('auth-section').scrollIntoView()" class="glass py-4 px-8 rounded-2xl hover:border-[#00BFA6] transition">
-                    KIRJAUDU SISÄÄN
-                </button>
-            </div>
+    <nav class="sticky top-0 z-50 glass px-6 py-4 flex justify-between items-center border-b border-white/5">
+        <div class="text-2xl font-bold tracking-tighter">
+            <span class="turkoosi-text">DUUNI</span><span class="text-[#FF6F3C]">HARAVA</span>
         </div>
-    </section>
+        <div class="flex gap-4">
+            <a href="#hinnasto" class="text-sm font-bold pt-2 hidden md:block hover:text-[#00BFA6] transition">HINNASTO</a>
+            <a href="#hinnasto" class="oranssi-bg text-white px-6 py-2 rounded-full font-bold text-sm uppercase tracking-widest hover:scale-105 transition shadow-lg">Aloita haku</a>
+        </div>
+    </nav>
 
-    <section class="py-24 max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-16">Ominaisuudet</h2>
+    <header class="relative pt-24 pb-20 px-6 text-center max-w-5xl mx-auto">
+        <h1 class="text-5xl md:text-8xl font-bold mb-8 leading-[1.1] tracking-tighter">
+            Lopeta työpaikkojen etsiminen.<br><span class="gradient-text">Aloita urasi uusi luku.</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto mb-12 leading-relaxed">
+            Duuniharava on Suomen älykkäin työnhakujärjestelmä, joka automatisoi raskaan hakuprosessin. Me etsimme paikat ja luomme räätälöidyt hakemukset – <b>sinä keskityt vain haastatteluihin.</b>
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#hinnasto" class="inline-block glass border-[#00BFA6] border-2 px-12 py-5 rounded-2xl font-bold text-xl hover:bg-[#00BFA6] hover:text-black transition shadow-[0_0_20px_rgba(0,191,166,0.2)]">
+                Rakenna pakettisi ➔
+            </a>
+        </div>
+    </header>
+
+    <section class="px-6 py-24 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-[#FF6F3C] font-bold uppercase tracking-widest text-sm mb-4">Miksi työnhaku on rikki?</h2>
+            <h3 class="text-4xl md:text-5xl font-bold">Työnhaku ei pitäisi olla kokopäivätyötä.</h3>
+        </div>
         <div class="grid md:grid-cols-3 gap-8">
-            <div class="glass p-8 rounded-3xl hover:border-[#00BFA6] transition">
-                <h3 class="text-xl font-bold mb-4 turkoosi-text">Automaattinen työnhaku</h3>
-                <p class="text-gray-400">Lähetä hakemuksia tehokkaasti ja hallitse useita prosesseja yhdestä näkymästä.</p>
+            <div class="glass p-10 rounded-[2.5rem] border-white/5">
+                <div class="text-4xl mb-6">⏳</div>
+                <h4 class="font-bold mb-4 text-2xl">Ajanpuute</h4>
+                <p class="text-gray-400 leading-relaxed">Työn ohessa haku on mahdotonta tehdä laadukkaasti. Me palautamme sinulle kymmeniä tunteja vapaa-aikaa kuukaudessa.</p>
             </div>
-            <div class="glass p-8 rounded-3xl hover:border-[#00BFA6] transition">
-                <h3 class="text-xl font-bold mb-4 turkoosi-text">Asiakashallinta</h3>
-                <p class="text-gray-400">Pidä liidit, kontaktit ja tarjoukset järjestyksessä ilman Excel-säätöä.</p>
+            <div class="glass p-10 rounded-[2.5rem] border-white/5">
+                <div class="text-4xl mb-6">🌑</div>
+                <h4 class="font-bold mb-4 text-2xl">Sokeat pisteet</h4>
+                <p class="text-gray-400 leading-relaxed">LinkedIn-algoritmit ja CV-standardit (ATS) muuttuvat jatkuvasti. Me pidämme profiilisi aina kärjessä.</p>
             </div>
-            <div class="glass p-8 rounded-3xl hover:border-[#00BFA6] transition">
-                <h3 class="text-xl font-bold mb-4 turkoosi-text">Analytiikka</h3>
-                <p class="text-gray-400">Näe mikä toimii ja mikä ei – optimoi tekemisesi datan perusteella.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="auth-section" class="py-24 flex justify-center">
-        <div class="max-w-md w-full glass p-10 rounded-[2.5rem] border-t-2 border-[#00BFA6]">
-            <h2 class="text-2xl font-bold mb-6 text-center" id="auth-title">Kirjaudu sisään</h2>
-            
-            <form id="auth-form" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold mb-2 uppercase tracking-widest text-gray-500">Sähköposti</label>
-                    <input type="email" id="email" required placeholder="matti@esimerkki.fi" 
-                        class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition text-white">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold mb-2 uppercase tracking-widest text-gray-500">Salasana</label>
-                    <input type="password" id="password" required placeholder="••••••••"
-                        class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition text-white">
-                </div>
-                <button type="submit" id="submit-btn" class="w-full gradient-bg text-white font-black py-4 rounded-2xl hover:scale-[1.02] transition active:scale-95 shadow-lg">
-                    KIRJAUDU SISÄÄN ➔
-                </button>
-            </form>
-
-            <div id="register-info" class="mt-6 text-center text-sm">
-                <p class="text-gray-400 mb-2">Eikö sinulla ole vielä pääsyä?</p>
-                <a href="#pricing" class="text-[#FF6F3C] font-bold hover:underline">Osta käyttöoikeus tästä</a>
+            <div class="glass p-10 rounded-[2.5rem] border-white/5">
+                <div class="text-4xl mb-6">📉</div>
+                <h4 class="font-bold mb-4 text-2xl">Uupumus</h4>
+                <p class="text-gray-400 leading-relaxed">Geneeriset hakemukset eivät toimi, mutta räätälöinti vie mehut. Me automatisoimme personoinnin puolestasi.</p>
             </div>
         </div>
     </section>
 
-    <section id="pricing" class="py-24 max-w-6xl mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-16">Valitse pakettisi</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="glass p-10 rounded-3xl">
-                <h3 class="text-xl font-bold mb-4 text-gray-300">Starter</h3>
-                <p class="text-4xl font-black mb-6">19€<span class="text-lg font-normal text-gray-500">/kk</span></p>
-                <ul class="text-gray-400 space-y-2 mb-8 text-left">
-                    <li>✔ Perus dashboard</li>
-                    <li>✔ 50 hakemusta / kk</li>
-                </ul>
-                <a href="https://buy.stripe.com/esimerkki1" class="block glass py-3 rounded-xl hover:border-[#00BFA6] transition">Valitse</a>
+    <section id="hinnasto" class="px-6 py-24 max-w-6xl mx-auto bg-white/[0.02] rounded-[4rem] border border-white/10">
+        <div class="text-center mb-16">
+            <h2 class="text-[#00BFA6] font-bold uppercase tracking-widest text-sm mb-4">Modulaarinen apu</h2>
+            <h3 class="text-4xl font-bold mb-4">Valitse tarvitsemasi työkalut.</h3>
+            <p class="text-gray-400 max-w-xl mx-auto italic">Skaalautuu tavoitteidesi mukaan – ei turhia kuluja.</p>
+        </div>
+
+        <div class="max-w-xl mx-auto mb-12 glass p-10 rounded-[3rem] border-2 border-[#00BFA6] relative shadow-[0_0_40px_rgba(0,191,166,0.1)]">
+            <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#00BFA6] text-black px-6 py-1 rounded-full text-xs font-black uppercase tracking-tighter">DUUNIHARAVA CORE (Pohja)</span>
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-3xl italic tracking-tighter">CORE-JÄSENYYS</h3>
+                <div class="text-3xl font-black">12,49 €<span class="text-sm opacity-50 font-normal">/kk</span></div>
             </div>
-            <div class="glass p-10 rounded-3xl border-2 border-[#00BFA6] scale-105 shadow-[0_0_30px_rgba(0,191,166,0.2)]">
-                <h3 class="text-xl font-bold mb-4 turkoosi-text">Pro</h3>
-                <p class="text-4xl font-black mb-6">49€<span class="text-lg font-normal text-gray-500">/kk</span></p>
-                <ul class="text-gray-400 space-y-2 mb-8 text-left">
-                    <li>✔ Rajattomat hakemukset</li>
-                    <li>✔ Asiakashallinta + Analytiikka</li>
-                </ul>
-                <a href="https://buy.stripe.com/esimerkki2" class="block gradient-bg py-3 rounded-xl font-bold hover:scale-[1.03] transition text-white">Suosituin</a>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                <li class="flex items-center gap-2">✅ AI-profiilianalyysi</li>
+                <li class="flex items-center gap-2">✅ Henkilökohtainen Dashboard</li>
+                <li class="flex items-center gap-2">✅ Suomalainen rekry-tuki</li>
+                <li class="flex items-center gap-2">✅ 1 Älykäs hakemus / kk</li>
+            </ul>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div id="m1" onclick="toggleModuuli('m1', 17.50)" class="glass p-8 rounded-[2.5rem] cursor-pointer transition-all hover:translate-y-[-5px] border-2 border-transparent">
+                <div class="text-4xl mb-4">✍️</div>
+                <h3 class="font-bold text-xl mb-2">Räätälöidyt hakemukset</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Analysoimme ilmoituksen ja sovitamme osaamisesi niihin täydellisesti (+4 kpl/kk).</p>
+                <span class="font-bold text-[#00BFA6] text-xl">+17,50 €</span>
             </div>
-            <div class="glass p-10 rounded-3xl">
-                <h3 class="text-xl font-bold mb-4 text-gray-300">Business</h3>
-                <p class="text-4xl font-black mb-6">99€<span class="text-lg font-normal text-gray-500">/kk</span></p>
-                <ul class="text-gray-400 space-y-2 mb-8 text-left">
-                    <li>✔ Kaikki Pro-ominaisuudet</li>
-                    <li>✔ Tiimikäyttö</li>
-                </ul>
-                <a href="https://buy.stripe.com/esimerkki3" class="block glass py-3 rounded-xl hover:border-[#00BFA6] transition">Valitse</a>
+
+            <div id="m2" onclick="toggleModuuli('m2', 15.50)" class="glass p-8 rounded-[2.5rem] cursor-pointer transition-all hover:translate-y-[-5px] border-2 border-transparent">
+                <div class="text-4xl mb-4">🚀</div>
+                <h3 class="font-bold text-xl mb-2">LinkedIn & CV SEO</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Optimoimme profiilisi algoritmeille ja rekrytoijille vakuuttavaan muotoon.</p>
+                <span class="font-bold text-[#00BFA6] text-xl">+15,50 €</span>
+            </div>
+
+            <div id="m3" onclick="toggleModuuli('m3', 12.50)" class="glass p-8 rounded-[2.5rem] cursor-pointer transition-all hover:translate-y-[-5px] border-2 border-transparent">
+                <div class="text-4xl mb-4">🔍</div>
+                <h3 class="font-bold text-xl mb-2">Piilotyöpaikkavahti</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Haravoimme verkon ja tunnistamme profiiliisi sopivat "näkymättömät" tärpit.</p>
+                <span class="font-bold text-[#00BFA6] text-xl">+12,50 €</span>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 text-center text-gray-600 border-t border-white/5">
-        © 2026 Duuniharava. Kaikki oikeudet pidätetään.
-    </footer>
+    <section class="px-6 py-24 max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center">Usein kysytyt kysymykset</h2>
+        <div class="space-y-4">
+            <details class="glass p-6 rounded-2xl group cursor-pointer border-white/5">
+                <summary class="font-bold text-lg flex justify-between items-center">
+                    Voiko työnantaja huomata automaation? <span class="group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="mt-4 text-gray-400 leading-relaxed text-sm">
+                    Ei. Duuniharava ei tuota geneeristä bottitekstiä. Se käyttää sinun todellista osaamistasi ja säilyttää persoonallisen äänesi, mutta optimoi rakenteen ammattimaiseksi.
+                </p>
+            </details>
+            <details class="glass p-6 rounded-2xl group cursor-pointer border-white/5">
+                <summary class="font-bold text-lg flex justify-between items-center">
+                    Miten hinnoittelu toimii käytännössä? <span class="group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="mt-4 text-gray-400 leading-relaxed text-sm">
+                    Maksat vain siitä, mitä tarvitset. Aloitat Core-pohjalla ja voit lisätä tai poistaa moduuleja milloin vain. Ei määräaikaisuuksia.
+                </p>
+            </details>
+            <details class="glass p-6 rounded-2xl group cursor-pointer border-white/5">
+                <summary class="font-bold text-lg flex justify-between items-center">
+                    Onko tietoni turvassa? <span class="group-open:rotate-180 transition">▼</span>
+                </summary>
+                <p class="mt-4 text-gray-400 leading-relaxed text-sm">
+                    Kyllä. Käytämme modernia salausta ja tietosi tallennetaan turvallisiin Eurooppalaisiin pilvipalveluihin (GDPR-yhteensopiva).
+                </p>
+            </details>
+        </div>
+    </section>
+
+    <section class="px-6 py-20 text-center">
+        <div class="max-w-4xl mx-auto glass p-16 rounded-[4rem] border-2 border-[#FF6F3C]/20 relative overflow-hidden shadow-2xl">
+            <h2 class="text-4xl md:text-6xl font-bold mb-8 tracking-tighter">Oletko valmis löytämään unelmatyösi?</h2>
+            <p class="text-gray-400 mb-12 text-xl max-w-2xl mx-auto">Liity satojen suomalaisten osaajien joukkoon, jotka haravoivat markkinat älykkäämmin.</p>
+            <button class="oranssi-bg text-white px-16 py-6 rounded-2xl font-black text-2xl hover:scale-105 transition shadow-[0_10px_40px_rgba(255,111,60,0.3)]">
+                ALOITA KARTOITUS
+            </button>
+            <p class="text-gray-500 mt-6 text-sm uppercase tracking-widest font-bold opacity-50">Ei sitoutumista • Suomalainen palvelu</p>
+        </div>
+    </section>
+
+    <div class="fixed bottom-0 left-0 right-0 glass border-t border-white/10 p-6 z-50 backdrop-blur-xl">
+        <div class="max-w-xl mx-auto flex justify-between items-center">
+            <div>
+                <p class="text-[10px] text-gray-500 uppercase font-black tracking-widest">Valittu paketti / kk</p>
+                <div id="kokonaishinta" class="text-4xl font-black text-white">12,49 €</div>
+            </div>
+            <button class="oranssi-bg px-12 py-4 rounded-2xl font-bold text-xl shadow-[0_0_30px_rgba(255,111,60,0.4)] hover:scale-105 transition active:scale-95 text-white">
+                JATKA ➔
+            </button>
+        </div>
+    </div>
 
     <script>
-        const SUPABASE_URL = 'https://zxtnhitxachrudrcrotk.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dG5oaXR4YWNocnVkcmNyb3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyODEwOTUsImV4cCI6MjA4Nzg1NzA5NX0.DPXJlYDI2L8oLYo6ofyPJzQDTbXAhreJx7VsqhV7VdI';
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        let valitut = new Set();
+        const pohjahinta = 12.49;
+        let lisaSumma = 0;
 
-        // Tarkistetaan onko urlissa ?signup=true (esim. Stripe-maksun jälkeen)
-        const urlParams = new URLSearchParams(window.location.search);
-        const isSignUpMode = urlParams.get('signup') === 'true';
-
-        if (isSignUpMode) {
-            document.getElementById('auth-title').innerText = 'Luo uusi tili';
-            document.getElementById('submit-btn').innerText = 'LUO TILI JA ALOITA';
-            document.getElementById('register-info').style.display = 'none';
-        }
-
-        const authForm = document.getElementById('auth-form');
-
-        authForm.onsubmit = async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            if (isSignUpMode) {
-                const { data, error } = await supabaseClient.auth.signUp({
-                    email,
-                    password
-                });
-                if (error) alert("Virhe tiliä luotaessa: " + error.message);
-                else {
-                    alert('Tili luotu! Voit nyt kirjautua sisään.');
-                    window.location.href = 'dashboard.html';
-                }
+        function toggleModuuli(id, hinta) {
+            const el = document.getElementById(id);
+            if (valitut.has(id)) {
+                valitut.delete(id);
+                lisaSumma -= hinta;
+                el.classList.remove('card-active');
             } else {
-                const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-                if (error) alert("Kirjautumisvirhe: " + error.message);
-                else window.location.href = 'dashboard.html';
+                valitut.add(id);
+                lisaSumma += hinta;
+                el.classList.add('card-active');
             }
-        };
+            let kokonaissumma = (pohjahinta + lisaSumma).toFixed(2);
+            document.getElementById('kokonaishinta').innerText = kokonaissumma.replace('.', ',') + " €";
+        }
     </script>
 </body>
 </html>
