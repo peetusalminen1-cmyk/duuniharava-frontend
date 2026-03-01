@@ -72,7 +72,7 @@
         form.onsubmit = async (e) => {
             e.preventDefault();
             
-            // Nollataan näkymä ja aloitetaan lataus-animaatio
+            // Piilotetaan vanha linkki ja näytetään latausanimaatio
             statusDiv.classList.remove('hidden');
             downloadArea.classList.add('hidden');
             submitBtn.disabled = true;
@@ -83,7 +83,6 @@
             formData.append('ilmoitus', document.getElementById('ilmoitus-teksti').value);
 
             try {
-                // Lähetetään data n8n-webhookiin
                 const response = await fetch('https://n8nscalera.eu/webhook-test/uusi-hakemus', {
                     method: 'POST',
                     body: formData
@@ -92,27 +91,25 @@
                 if (response.ok) {
                     const result = await response.json();
                     
-                    // Tarkistetaan saatiinko n8n:ltä se 'downloadUrl' jonka teimme Respond-solmuun
-                    if (result.downloadUrl) {
+                    // Napataan linkki JSON-vastauksesta
+                    if (result && result.downloadUrl) {
                         downloadLink.href = result.downloadUrl;
-                        downloadArea.classList.remove('hidden'); // Näytetään latausnappi
-                        statusDiv.classList.add('hidden'); // Piilotetaan latausteksti
+                        downloadArea.classList.remove('hidden');
+                        statusDiv.classList.add('hidden');
                     } else {
-                        alert('Automaatio onnistui, mutta linkkiä ei löytynyt vastauksesta.');
+                        console.error("Vastaus tuli, mutta downloadUrl puuttuu:", result);
+                        alert('Linkkiä ei löytynyt vastauksesta. Tarkista n8n-asetukset.');
                     }
                 } else {
-                    alert('Hups! Jokin meni vikaan n8n-palvelimella. Yritä uudelleen.');
+                    alert('Hups! Palvelin palautti virheen. Yritä uudelleen.');
                 }
             } catch (err) {
-                console.error(err);
-                alert('Yhteysvirhe n8n-palvelimeen. Tarkista internetyhteytesi.');
+                console.error("Virhe lähetyksessä:", err);
+                alert('Yhteysvirhe n8n-palvelimeen.');
             } finally {
-                // Palautetaan nappi entiselleen, mutta jätetään latausnappi näkyviin
                 submitBtn.disabled = false;
                 submitBtn.style.opacity = '1';
-                if (!downloadArea.classList.contains('hidden')) {
-                    statusDiv.classList.add('hidden');
-                }
+                statusDiv.classList.add('hidden');
             }
         };
     </script>
