@@ -27,12 +27,18 @@ input::placeholder { color: rgba(255, 255, 255, 0.3); }
   100% {opacity:1; transform: translateY(0);}
 }
 .animate-fadeIn { animation: fadeIn 0.6s ease forwards; }
+@keyframes bounceLogo {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(-10px);}
+}
+.logo-bounce { animation: bounceLogo 1.5s infinite; }
 </style>
 </head>
 <body class="px-6">
 
 <!-- Hero / Tarina -->
-<section id="hero" class="min-h-screen flex items-center justify-center text-center">
+<section id="hero" class="min-h-screen flex flex-col items-center justify-center text-center">
+  <div class="logo-bounce mb-8 text-6xl font-bold turkoosi-text">🦡</div>
   <div class="max-w-3xl glass p-12 rounded-[2.5rem] shadow-2xl">
     <div class="text-3xl font-bold tracking-tighter mb-8">
       <span class="turkoosi-text">DUUNI</span><span class="text-[#FF6F3C]">HARAVA</span>
@@ -41,10 +47,10 @@ input::placeholder { color: rgba(255, 255, 255, 0.3); }
       Tehokas työkalu työnhakuun ja asiakashankintaan
     </h1>
     <p class="text-gray-400 mb-6 text-lg">
-      Oletko kyllästynyt rikkinäiseen työnhakuprosessiin? Duuniharava automatisoi hakemusten lähetyksen, ATS-järjestelmien kiertämisen ja piilotyöpaikkojen löytämisen yhdestä selkeästä työkalusta.
+      Suomessa työttömyysaste on noin 6,7% (2025), ja hallitus pyrkii edistämään työllisyyttä muun muassa koulutus-, start-up- ja työllistämistukiohjelmilla. Silti monet työnhakijat jäävät piilotyöpaikkojen ja ATS-järjestelmien taakse. Duuniharava tarjoaa ratkaisun tähän.
     </p>
     <p class="text-gray-400 mb-10 text-lg font-semibold">
-      Rakenna oma sotasuunnitelmasi ja hallitse työnhakusi tehokkaasti yhdellä työkalulla.
+      Me automatisoimme työnhaun ja optimoimme hakemukset, CV:t sekä LinkedIn-profiilit, jotta jokainen hakija saa paremman mahdollisuuden tulla huomatuksi. Hallitse työnhakusi strategisesti ja tehokkaasti yhdellä työkalulla.
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
       <a href="#pricing" class="gradient-bg text-white font-black py-4 px-8 rounded-2xl hover:scale-[1.03] transition shadow-lg">KATSO HINNASTO</a>
@@ -56,9 +62,6 @@ input::placeholder { color: rgba(255, 255, 255, 0.3); }
 <!-- Työnhakijat vs Yritykset -->
 <section class="py-24 max-w-6xl mx-auto">
   <h2 class="text-3xl font-bold text-center mb-16">Mitä tarjoamme</h2>
-  <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto">
-    Suomessa työttömyys on monimutkainen ongelma: monet työnhakijat eivät löydä piilotyöpaikkoja, hakemukset eivät erotu ja LinkedIn-profiilit eivät tuota tuloksia. Duuniharava auttaa työnhakijoita optimoimaan CV:t, hakemukset ja profiilit, jotta oikeat mahdollisuudet löytyvät ja työnhaku tehostuu.
-  </p>
   <div class="grid md:grid-cols-2 gap-12">
 
     <!-- Työnhakijoille -->
@@ -69,35 +72,35 @@ input::placeholder { color: rgba(255, 255, 255, 0.3); }
           <span class="text-3xl">📄</span>
           <div>
             <h4 class="text-xl font-bold mb-1">CV-optimoija</h4>
-            <p class="text-gray-400">Paranna CV:si houkuttelevuutta rekrytoijille ja ATS-järjestelmille.</p>
+            <p class="text-gray-400">Paranna CV:si houkuttelevuutta rekrytoijille ja ATS-järjestelmille automaattisesti.</p>
           </div>
         </div>
         <div class="glass p-6 rounded-2xl hover:border-[#00BFA6] transition flex items-start gap-4 animate-fadeIn">
           <span class="text-3xl">✉️</span>
           <div>
             <h4 class="text-xl font-bold mb-1">Hakemusoptimointi</h4>
-            <p class="text-gray-400">Muokkaa hakemukset toimimaan ATS-järjestelmien läpi tehokkaasti.</p>
+            <p class="text-gray-400">Optimoi hakemukset niin, että ne erottuvat ja ohittavat ATS-suodattimet.</p>
           </div>
         </div>
         <div class="glass p-6 rounded-2xl hover:border-[#00BFA6] transition flex items-start gap-4 animate-fadeIn">
           <span class="text-3xl">🔗</span>
           <div>
             <h4 class="text-xl font-bold mb-1">LinkedIn-profiilin kehitys</h4>
-            <p class="text-gray-400">Optimoi profiilisi näkyvyyttä ja verkostoitumismahdollisuuksia varten.</p>
+            <p class="text-gray-400">Lisää profiilisi näkyvyyttä, verkostoitumista ja uskottavuutta työnhaussa.</p>
           </div>
         </div>
         <div class="glass p-6 rounded-2xl hover:border-[#00BFA6] transition flex items-start gap-4 animate-fadeIn">
           <span class="text-3xl">🚀</span>
           <div>
             <h4 class="text-xl font-bold mb-1">Automaattinen hakemuslähetys</h4>
-            <p class="text-gray-400">Lähetä hakemuksia yhdestä näkymästä ja säästä aikaa.</p>
+            <p class="text-gray-400">Säästä aikaa ja lähetä hakemuksia yhdestä näkymästä strategisesti.</p>
           </div>
         </div>
         <div class="glass p-6 rounded-2xl hover:border-[#00BFA6] transition flex items-start gap-4 animate-fadeIn">
           <span class="text-3xl">📊</span>
           <div>
             <h4 class="text-xl font-bold mb-1">Analytiikka</h4>
-            <p class="text-gray-400">Seuraa hakemustesi tehokkuutta ja optimoi työnhaku datan avulla.</p>
+            <p class="text-gray-400">Seuraa, mikä toimii, ja optimoi työnhaku datan avulla tehokkaasti.</p>
           </div>
         </div>
       </div>
@@ -243,8 +246,4 @@ authForm.onsubmit = async (e) => {
     const { data, error } = await supabaseClient.auth.signUp({email,password});
     if (error) alert("Virhe tiliä luotaessa: " + error.message);
     else {
-      alert('Tili luotu! Voit nyt kirjautua sisään.');
-      window.location.href = 'dashboard.html';
-    }
-  } else {
-    const { error } = await supabase
+     
