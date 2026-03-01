@@ -25,43 +25,159 @@ body {
 </style>
 </head>
 
-<body class="flex items-center justify-center min-h-screen p-6">
+<body class="px-6">
 
-<div class="max-w-2xl w-full glass p-12 rounded-[2.5rem] text-center">
+<!-- HERO -->
+<section class="min-h-screen flex items-center justify-center text-center">
+<div class="max-w-3xl glass p-12 rounded-[2.5rem]">
 
-    <!-- Logo -->
-    <div class="text-3xl font-bold tracking-tighter mb-8">
-        <span class="turkoosi-text">DUUNI</span>
-        <span class="text-[#FF6F3C]">HARAVA</span>
-    </div>
+<div class="text-3xl font-bold tracking-tighter mb-8">
+<span class="turkoosi-text">DUUNI</span>
+<span class="text-[#FF6F3C]">HARAVA</span>
+</div>
 
-    <!-- Otsikko -->
-    <h1 class="text-3xl font-bold mb-6">
-        Tehokas työkalu työnhakuun ja asiakashankintaan
-    </h1>
+<h1 class="text-4xl font-bold mb-6">
+Tehokas työkalu työnhakuun ja asiakashankintaan
+</h1>
 
-    <!-- Kuvaus -->
-    <p class="text-gray-400 mb-10">
-        Rakenna oma pakettisi, automatisoi työnhakusi ja hallitse asiakashankintaa 
-        yhdestä selkeästä työkalusta.
-    </p>
+<p class="text-gray-400 mb-10">
+Rakenna oma pakettisi, automatisoi työnhakusi ja hallitse asiakashankintaa yhdestä selkeästä työkalusta.
+</p>
 
-    <!-- Napit -->
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-
-        <a href="https://buy.stripe.com/esimerkki"
-        class="gradient-bg text-white font-black py-4 px-8 rounded-2xl hover:scale-[1.03] transition active:scale-95">
-            Osta käyttöoikeus
-        </a>
-
-        <a href="login.html"
-        class="glass py-4 px-8 rounded-2xl hover:border-[#00BFA6] transition">
-            Kirjaudu sisään
-        </a>
-
-    </div>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a href="#pricing" class="gradient-bg text-white font-black py-4 px-8 rounded-2xl hover:scale-[1.03] transition">
+Katso hinnasto
+</a>
+<a href="login.html" class="glass py-4 px-8 rounded-2xl hover:border-[#00BFA6] transition">
+Kirjaudu sisään
+</a>
+</div>
 
 </div>
+</section>
+
+<!-- FEATURES -->
+<section class="py-24 max-w-6xl mx-auto">
+<h2 class="text-3xl font-bold text-center mb-16">Ominaisuudet</h2>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div class="glass p-8 rounded-3xl">
+<h3 class="text-xl font-bold mb-4 turkoosi-text">Automaattinen työnhaku</h3>
+<p class="text-gray-400">
+Lähetä hakemuksia tehokkaasti ja hallitse useita prosesseja yhdestä näkymästä.
+</p>
+</div>
+
+<div class="glass p-8 rounded-3xl">
+<h3 class="text-xl font-bold mb-4 turkoosi-text">Asiakashankinnan hallinta</h3>
+<p class="text-gray-400">
+Pidä liidit, kontaktit ja tarjoukset järjestyksessä ilman Excel-säätöä.
+</p>
+</div>
+
+<div class="glass p-8 rounded-3xl">
+<h3 class="text-xl font-bold mb-4 turkoosi-text">Pakettirakentaja</h3>
+<p class="text-gray-400">
+Rakenna oma palvelupakettisi ja seuraa kannattavuutta reaaliajassa.
+</p>
+</div>
+
+<div class="glass p-8 rounded-3xl">
+<h3 class="text-xl font-bold mb-4 turkoosi-text">Dashboard</h3>
+<p class="text-gray-400">
+Selkeä näkymä kaikkiin hakemuksiin, liideihin ja projekteihin.
+</p>
+</div>
+
+<div class="glass p-8 rounded-3xl">
+<h3 class="text-xl font-bold mb-4 turkoosi-text">Analytiikka</h3>
+<p class="text-gray-400">
+Näe mikä toimii ja mikä ei – optimoi tekemisesi datan perusteella.
+</p>
+</div>
+
+<div class="glass p-8 rounded-3xl">
+<h3 class="text-xl font-bold mb-4 turkoosi-text">Yksinkertainen käyttöliittymä</h3>
+<p class="text-gray-400">
+Ei turhaa säätöä. Kaikki toimii nopeasti ja selkeästi.
+</p>
+</div>
+
+</div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="py-24 max-w-6xl mx-auto">
+<h2 class="text-3xl font-bold text-center mb-16">Hinnasto</h2>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div class="glass p-10 rounded-3xl text-center">
+<h3 class="text-xl font-bold mb-4">Starter</h3>
+<p class="text-4xl font-black mb-6">19€<span class="text-lg font-normal text-gray-400">/kk</span></p>
+<ul class="text-gray-400 space-y-2 mb-8">
+<li>✔ Perus dashboard</li>
+<li>✔ 50 hakemusta / kk</li>
+<li>✔ Sähköpostituki</li>
+</ul>
+<a href="#" class="glass py-3 px-6 rounded-xl hover:border-[#00BFA6] transition">Valitse</a>
+</div>
+
+<div class="glass p-10 rounded-3xl text-center border border-[#00BFA6]">
+<h3 class="text-xl font-bold mb-4 turkoosi-text">Pro</h3>
+<p class="text-4xl font-black mb-6">49€<span class="text-lg font-normal text-gray-400">/kk</span></p>
+<ul class="text-gray-400 space-y-2 mb-8">
+<li>✔ Rajattomat hakemukset</li>
+<li>✔ Asiakashallinta</li>
+<li>✔ Analytiikka</li>
+<li>✔ Prioriteettituki</li>
+</ul>
+<a href="#" class="gradient-bg py-3 px-6 rounded-xl font-bold hover:scale-[1.03] transition">Valitse</a>
+</div>
+
+<div class="glass p-10 rounded-3xl text-center">
+<h3 class="text-xl font-bold mb-4">Business</h3>
+<p class="text-4xl font-black mb-6">99€<span class="text-lg font-normal text-gray-400">/kk</span></p>
+<ul class="text-gray-400 space-y-2 mb-8">
+<li>✔ Kaikki Pro-ominaisuudet</li>
+<li>✔ Tiimikäyttö</li>
+<li>✔ Räätälöity onboarding</li>
+</ul>
+<a href="#" class="glass py-3 px-6 rounded-xl hover:border-[#00BFA6] transition">Valitse</a>
+</div>
+
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="py-24 max-w-4xl mx-auto">
+<h2 class="text-3xl font-bold text-center mb-16">Usein kysytyt kysymykset</h2>
+
+<div class="space-y-6">
+
+<div class="glass p-6 rounded-2xl">
+<h3 class="font-bold mb-2">Voinko peruuttaa milloin tahansa?</h3>
+<p class="text-gray-400">Kyllä. Voit lopettaa tilauksen koska tahansa ilman sitoutumista.</p>
+</div>
+
+<div class="glass p-6 rounded-2xl">
+<h3 class="font-bold mb-2">Onko ilmainen kokeilu?</h3>
+<p class="text-gray-400">Voimme tarjota 7 päivän kokeilun Pro-versiosta.</p>
+</div>
+
+<div class="glass p-6 rounded-2xl">
+<h3 class="font-bold mb-2">Toimiiko tämä freelancereille?</h3>
+<p class="text-gray-400">Kyllä. Duuniharava on suunniteltu erityisesti itsensätyöllistäjille ja työnhakijoille.</p>
+</div>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-10 text-center text-gray-500">
+© 2026 Duuniharava. Kaikki oikeudet pidätetään.
+</footer>
 
 </body>
 </html>
