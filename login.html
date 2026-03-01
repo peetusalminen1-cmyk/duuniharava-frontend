@@ -31,7 +31,7 @@
                 <label class="block text-xs font-bold mb-2 uppercase tracking-widest text-gray-500">Salasana</label>
                 <input type="password" id="password" required class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition">
             </div>
-            <button type="submit" class="w-full gradient-bg text-white font-black py-4 rounded-2xl hover:scale-[1.02] transition active:scale-95">
+            <button type="submit" id="submit-btn" class="w-full gradient-bg text-white font-black py-4 rounded-2xl hover:scale-[1.02] transition active:scale-95">
                 JATKA ➔
             </button>
         </form>
@@ -52,6 +52,7 @@
 
         const form = document.getElementById('auth-form');
         const toggleBtn = document.getElementById('toggle-auth');
+        const submitBtn = document.getElementById('submit-btn');
         let isSignUp = false;
 
         toggleBtn.onclick = (e) => {
@@ -64,17 +65,33 @@
 
         form.onsubmit = async (e) => {
             e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.innerText = "HETKI...";
+            
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
             if (isSignUp) {
+                // Rekisteröityminen
                 const { error } = await supabaseClient.auth.signUp({ email, password });
-                if (error) alert(error.message);
-                else alert('Vahvistusviesti lähetetty sähköpostiisi! Käy klikkaamassa linkkiä sähköpostissasi ennen kirjautumista.');
+                if (error) {
+                    alert("Virhe: " + error.message);
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "JATKA ➔";
+                } else {
+                    // Koska vahvistus on pois päältä, ohjataan suoraan sisään
+                    window.location.href = 'dashboard.html';
+                }
             } else {
+                // Kirjautuminen
                 const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-                if (error) alert("Kirjautumisvirhe: " + error.message);
-                else window.location.href = 'dashboard.html';
+                if (error) {
+                    alert("Kirjautumisvirhe: " + error.message);
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "JATKA ➔";
+                } else {
+                    window.location.href = 'dashboard.html';
+                }
             }
         };
     </script>
