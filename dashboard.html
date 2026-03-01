@@ -82,7 +82,8 @@
             formData.append('ilmoitus', document.getElementById('ilmoitus-teksti').value);
 
             try {
-                const response = await fetch('https://n8nscalera.eu/webhook-test/uusi-hakemus', {
+                // PÄIVITETTY PRODUCTION URL
+                const response = await fetch('https://n8nscalera.eu/webhook/uusi-hakemus', {
                     method: 'POST',
                     body: formData
                 });
@@ -91,19 +92,19 @@
 
                 const result = await response.json();
                 
-                // Puhdistetaan n8n-vastaus ja asetetaan linkki
+                // Tarkistetaan linkin laatu
                 if (result && result.downloadUrl && !result.downloadUrl.includes('{{')) {
                     downloadLink.href = result.downloadUrl;
                     downloadArea.classList.remove('hidden');
                     statusDiv.classList.add('hidden');
                 } else {
-                    console.error("Virheellinen linkki vastaanotettu:", result);
-                    alert('AI ei palauttanut toimivaa linkkiä. Tarkista n8n:n Expression-asetukset.');
+                    console.error("Viallinen linkki n8n:ltä:", result);
+                    alert('Hups! AI-moottori ei palauttanut linkkiä oikein. Varmista, että n8n workflow on Aktiivinen (Active).');
                     statusDiv.classList.add('hidden');
                 }
             } catch (err) {
-                console.error("Virhe:", err);
-                alert('Yhteysvirhe n8n-palvelimeen.');
+                console.error("Lähetysvirhe:", err);
+                alert('Yhteysvirhe n8n-palvelimeen. Tarkista verkkoyhteys.');
                 statusDiv.classList.add('hidden');
             } finally {
                 submitBtn.disabled = false;
