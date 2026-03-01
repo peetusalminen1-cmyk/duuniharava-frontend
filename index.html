@@ -46,7 +46,7 @@ input::placeholder { color: rgba(255, 255, 255, 0.3); }
       Tehokas työkalu työnhakuun ja asiakashankintaan
     </h1>
     <p class="text-gray-400 mb-6 text-lg">
-      Työttömyysaste 15–74-vuotiailla alkoi nousta vuodesta 2022. Vuonna 2026 tammikuussa työttömyysaste on <strong>10,3 %</strong>. Hallitus leikkaa tukia ja vähentää työllistämistoimia, joten nyt on erityisen tärkeää tehostaa omaa työnhakua.
+      Työttömyysaste 15–74-vuotiailla oli alhainen alkuvuonna 2022, mutta nousu alkoi loppuvuodesta. Vuonna 2026 tammikuussa työttömyysaste on <strong>10,3 %</strong>. Hallitus leikkaa tukia ja vähentää työllistämistoimia, joten nyt on erityisen tärkeää tehostaa omaa työnhakua.
     </p>
 
     <!-- Työttömyyskaavio -->
@@ -65,8 +65,8 @@ input::placeholder { color: rgba(255, 255, 255, 0.3); }
 <script>
 const ctx = document.getElementById('unemploymentChart').getContext('2d');
 
-const years = ['2022','2023','2024','2025','2026','2027','2028','2029','2030','2031','2032'];
-const data = [11.5, 11.6, 11.8, 11.9, 10.3, 10.5, 10.7, 11.0, 11.3, 11.5, 11.8];
+const years = ['2022 Q1','2022 Q2','2022 Q3','2022 Q4','2023','2024','2025','2026','2027','2028','2029','2030','2031','2032'];
+const data = [7.8, 7.6, 7.9, 8.3, 8.8, 9.4, 9.8, 10.3, 10.5, 10.7, 11.0, 11.3, 11.5, 11.8];
 
 // Yksi linja, segmentti-värit
 const chart = new Chart(ctx, {
@@ -81,18 +81,21 @@ const chart = new Chart(ctx, {
             pointRadius: 5,
             pointBackgroundColor: function(ctx) {
                 const index = ctx.dataIndex;
-                return index <= 3 ? '#00BFA6' : '#FF6F3C'; // 2022-2025 turkoosi, 2026 eteenpäin oranssi
+                return index <= 3 ? '#00BFA6' : (index >= 7 ? '#FF6F3C' : '#00BFA6'); 
             },
             borderColor: function(ctx) {
                 const index = ctx.dataIndex;
-                return index <= 3 ? '#00BFA6' : '#FF6F3C';
+                return index <= 3 ? '#00BFA6' : (index >= 7 ? '#FF6F3C' : '#00BFA6'); 
             },
             segment: {
-                borderColor: ctx => ctx.p0DataIndex <= 3 ? '#00BFA6' : '#FF6F3C'
+                borderColor: ctx => {
+                    const i = ctx.p0DataIndex;
+                    return i <= 3 ? '#00BFA6' : (i >= 7 ? '#FF6F3C' : '#00BFA6');
+                }
             },
             backgroundColor: function(ctx) {
                 const index = ctx.dataIndex;
-                return index <= 3 ? 'rgba(0,191,166,0.2)' : 'rgba(255,111,60,0.2)';
+                return index <= 3 ? 'rgba(0,191,166,0.2)' : (index >=7 ? 'rgba(255,111,60,0.2)' : 'rgba(0,191,166,0.2)');
             }
         }]
     },
@@ -109,7 +112,7 @@ const chart = new Chart(ctx, {
                 ticks: { color:'#FFFFFF' }
             },
             x: { 
-                title: { display: true, text: 'Vuosi', color:'#FFFFFF' },
+                title: { display: true, text: 'Vuosi / Kvartaali', color:'#FFFFFF' },
                 ticks: { color:'#FFFFFF' }
             }
         }
