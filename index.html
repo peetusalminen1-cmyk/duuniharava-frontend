@@ -1,183 +1,181 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Duuniharava</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duuniharava | Automatisoi työnhakusi</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 
-<style>
-body { 
-    font-family: 'Space Grotesk', sans-serif; 
-    background-color: #0F0F0F; 
-    color: #FFFFFF; 
-}
-.turkoosi-text { color: #00BFA6; }
-.glass { 
-    background: rgba(255, 255, 255, 0.03); 
-    backdrop-filter: blur(10px); 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-}
-.gradient-bg { 
-    background: linear-gradient(90deg, #00BFA6, #FF6F3C); 
-}
-</style>
+    <style>
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background-color: #0F0F0F; 
+            color: #FFFFFF; 
+            scroll-behavior: smooth;
+        }
+        .turkoosi-text { color: #00BFA6; }
+        .glass { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+        .gradient-bg { 
+            background: linear-gradient(90deg, #00BFA6, #FF6F3C); 
+        }
+        input::placeholder { color: rgba(255, 255, 255, 0.3); }
+    </style>
 </head>
-
 <body class="px-6">
 
-<!-- HERO -->
-<section class="min-h-screen flex items-center justify-center text-center">
-<div class="max-w-3xl glass p-12 rounded-[2.5rem]">
+    <section id="hero" class="min-h-screen flex items-center justify-center text-center">
+        <div class="max-w-3xl glass p-12 rounded-[2.5rem] shadow-2xl">
+            
+            <div class="text-3xl font-bold tracking-tighter mb-8">
+                <span class="turkoosi-text">DUUNI</span><span class="text-[#FF6F3C]">HARAVA</span>
+            </div>
 
-<div class="text-3xl font-bold tracking-tighter mb-8">
-<span class="turkoosi-text">DUUNI</span>
-<span class="text-[#FF6F3C]">HARAVA</span>
-</div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                Tehokas työkalu työnhakuun ja asiakashankintaan
+            </h1>
 
-<h1 class="text-4xl font-bold mb-6">
-Tehokas työkalu työnhakuun ja asiakashankintaan
-</h1>
+            <p class="text-gray-400 mb-10 text-lg">
+                Rakenna oma pakettisi, automatisoi työnhakusi ja hallitse asiakashankintaa yhdestä selkeästä työkalusta.
+            </p>
 
-<p class="text-gray-400 mb-10">
-Rakenna oma pakettisi, automatisoi työnhakusi ja hallitse asiakashankintaa yhdestä selkeästä työkalusta.
-</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#pricing" class="gradient-bg text-white font-black py-4 px-8 rounded-2xl hover:scale-[1.03] transition shadow-lg">
+                    KATSO HINNASTO
+                </a>
+                <button onclick="document.getElementById('auth-section').scrollIntoView()" class="glass py-4 px-8 rounded-2xl hover:border-[#00BFA6] transition">
+                    KIRJAUDU SISÄÄN
+                </button>
+            </div>
+        </div>
+    </section>
 
-<div class="flex flex-col sm:flex-row gap-4 justify-center">
-<a href="#pricing" class="gradient-bg text-white font-black py-4 px-8 rounded-2xl hover:scale-[1.03] transition">
-Katso hinnasto
-</a>
-<a href="login.html" class="glass py-4 px-8 rounded-2xl hover:border-[#00BFA6] transition">
-Kirjaudu sisään
-</a>
-</div>
+    <section class="py-24 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-16">Ominaisuudet</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass p-8 rounded-3xl hover:border-[#00BFA6] transition">
+                <h3 class="text-xl font-bold mb-4 turkoosi-text">Automaattinen työnhaku</h3>
+                <p class="text-gray-400">Lähetä hakemuksia tehokkaasti ja hallitse useita prosesseja yhdestä näkymästä.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl hover:border-[#00BFA6] transition">
+                <h3 class="text-xl font-bold mb-4 turkoosi-text">Asiakashallinta</h3>
+                <p class="text-gray-400">Pidä liidit, kontaktit ja tarjoukset järjestyksessä ilman Excel-säätöä.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl hover:border-[#00BFA6] transition">
+                <h3 class="text-xl font-bold mb-4 turkoosi-text">Analytiikka</h3>
+                <p class="text-gray-400">Näe mikä toimii ja mikä ei – optimoi tekemisesi datan perusteella.</p>
+            </div>
+        </div>
+    </section>
 
-</div>
-</section>
+    <section id="auth-section" class="py-24 flex justify-center">
+        <div class="max-w-md w-full glass p-10 rounded-[2.5rem] border-t-2 border-[#00BFA6]">
+            <h2 class="text-2xl font-bold mb-6 text-center" id="auth-title">Kirjaudu sisään</h2>
+            
+            <form id="auth-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold mb-2 uppercase tracking-widest text-gray-500">Sähköposti</label>
+                    <input type="email" id="email" required placeholder="matti@esimerkki.fi" 
+                        class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold mb-2 uppercase tracking-widest text-gray-500">Salasana</label>
+                    <input type="password" id="password" required placeholder="••••••••"
+                        class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition text-white">
+                </div>
+                <button type="submit" id="submit-btn" class="w-full gradient-bg text-white font-black py-4 rounded-2xl hover:scale-[1.02] transition active:scale-95 shadow-lg">
+                    KIRJAUDU SISÄÄN ➔
+                </button>
+            </form>
 
-<!-- FEATURES -->
-<section class="py-24 max-w-6xl mx-auto">
-<h2 class="text-3xl font-bold text-center mb-16">Ominaisuudet</h2>
+            <div id="register-info" class="mt-6 text-center text-sm">
+                <p class="text-gray-400 mb-2">Eikö sinulla ole vielä pääsyä?</p>
+                <a href="#pricing" class="text-[#FF6F3C] font-bold hover:underline">Osta käyttöoikeus tästä</a>
+            </div>
+        </div>
+    </section>
 
-<div class="grid md:grid-cols-3 gap-8">
+    <section id="pricing" class="py-24 max-w-6xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-16">Valitse pakettisi</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass p-10 rounded-3xl">
+                <h3 class="text-xl font-bold mb-4 text-gray-300">Starter</h3>
+                <p class="text-4xl font-black mb-6">19€<span class="text-lg font-normal text-gray-500">/kk</span></p>
+                <ul class="text-gray-400 space-y-2 mb-8 text-left">
+                    <li>✔ Perus dashboard</li>
+                    <li>✔ 50 hakemusta / kk</li>
+                </ul>
+                <a href="https://buy.stripe.com/esimerkki1" class="block glass py-3 rounded-xl hover:border-[#00BFA6] transition">Valitse</a>
+            </div>
+            <div class="glass p-10 rounded-3xl border-2 border-[#00BFA6] scale-105 shadow-[0_0_30px_rgba(0,191,166,0.2)]">
+                <h3 class="text-xl font-bold mb-4 turkoosi-text">Pro</h3>
+                <p class="text-4xl font-black mb-6">49€<span class="text-lg font-normal text-gray-500">/kk</span></p>
+                <ul class="text-gray-400 space-y-2 mb-8 text-left">
+                    <li>✔ Rajattomat hakemukset</li>
+                    <li>✔ Asiakashallinta + Analytiikka</li>
+                </ul>
+                <a href="https://buy.stripe.com/esimerkki2" class="block gradient-bg py-3 rounded-xl font-bold hover:scale-[1.03] transition text-white">Suosituin</a>
+            </div>
+            <div class="glass p-10 rounded-3xl">
+                <h3 class="text-xl font-bold mb-4 text-gray-300">Business</h3>
+                <p class="text-4xl font-black mb-6">99€<span class="text-lg font-normal text-gray-500">/kk</span></p>
+                <ul class="text-gray-400 space-y-2 mb-8 text-left">
+                    <li>✔ Kaikki Pro-ominaisuudet</li>
+                    <li>✔ Tiimikäyttö</li>
+                </ul>
+                <a href="https://buy.stripe.com/esimerkki3" class="block glass py-3 rounded-xl hover:border-[#00BFA6] transition">Valitse</a>
+            </div>
+        </div>
+    </section>
 
-<div class="glass p-8 rounded-3xl">
-<h3 class="text-xl font-bold mb-4 turkoosi-text">Automaattinen työnhaku</h3>
-<p class="text-gray-400">
-Lähetä hakemuksia tehokkaasti ja hallitse useita prosesseja yhdestä näkymästä.
-</p>
-</div>
+    <footer class="py-12 text-center text-gray-600 border-t border-white/5">
+        © 2026 Duuniharava. Kaikki oikeudet pidätetään.
+    </footer>
 
-<div class="glass p-8 rounded-3xl">
-<h3 class="text-xl font-bold mb-4 turkoosi-text">Asiakashankinnan hallinta</h3>
-<p class="text-gray-400">
-Pidä liidit, kontaktit ja tarjoukset järjestyksessä ilman Excel-säätöä.
-</p>
-</div>
+    <script>
+        const SUPABASE_URL = 'https://zxtnhitxachrudrcrotk.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dG5oaXR4YWNocnVkcmNyb3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyODEwOTUsImV4cCI6MjA4Nzg1NzA5NX0.DPXJlYDI2L8oLYo6ofyPJzQDTbXAhreJx7VsqhV7VdI';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-<div class="glass p-8 rounded-3xl">
-<h3 class="text-xl font-bold mb-4 turkoosi-text">Pakettirakentaja</h3>
-<p class="text-gray-400">
-Rakenna oma palvelupakettisi ja seuraa kannattavuutta reaaliajassa.
-</p>
-</div>
+        // Tarkistetaan onko urlissa ?signup=true (esim. Stripe-maksun jälkeen)
+        const urlParams = new URLSearchParams(window.location.search);
+        const isSignUpMode = urlParams.get('signup') === 'true';
 
-<div class="glass p-8 rounded-3xl">
-<h3 class="text-xl font-bold mb-4 turkoosi-text">Dashboard</h3>
-<p class="text-gray-400">
-Selkeä näkymä kaikkiin hakemuksiin, liideihin ja projekteihin.
-</p>
-</div>
+        if (isSignUpMode) {
+            document.getElementById('auth-title').innerText = 'Luo uusi tili';
+            document.getElementById('submit-btn').innerText = 'LUO TILI JA ALOITA';
+            document.getElementById('register-info').style.display = 'none';
+        }
 
-<div class="glass p-8 rounded-3xl">
-<h3 class="text-xl font-bold mb-4 turkoosi-text">Analytiikka</h3>
-<p class="text-gray-400">
-Näe mikä toimii ja mikä ei – optimoi tekemisesi datan perusteella.
-</p>
-</div>
+        const authForm = document.getElementById('auth-form');
 
-<div class="glass p-8 rounded-3xl">
-<h3 class="text-xl font-bold mb-4 turkoosi-text">Yksinkertainen käyttöliittymä</h3>
-<p class="text-gray-400">
-Ei turhaa säätöä. Kaikki toimii nopeasti ja selkeästi.
-</p>
-</div>
+        authForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-</div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing" class="py-24 max-w-6xl mx-auto">
-<h2 class="text-3xl font-bold text-center mb-16">Hinnasto</h2>
-
-<div class="grid md:grid-cols-3 gap-8">
-
-<div class="glass p-10 rounded-3xl text-center">
-<h3 class="text-xl font-bold mb-4">Starter</h3>
-<p class="text-4xl font-black mb-6">19€<span class="text-lg font-normal text-gray-400">/kk</span></p>
-<ul class="text-gray-400 space-y-2 mb-8">
-<li>✔ Perus dashboard</li>
-<li>✔ 50 hakemusta / kk</li>
-<li>✔ Sähköpostituki</li>
-</ul>
-<a href="#" class="glass py-3 px-6 rounded-xl hover:border-[#00BFA6] transition">Valitse</a>
-</div>
-
-<div class="glass p-10 rounded-3xl text-center border border-[#00BFA6]">
-<h3 class="text-xl font-bold mb-4 turkoosi-text">Pro</h3>
-<p class="text-4xl font-black mb-6">49€<span class="text-lg font-normal text-gray-400">/kk</span></p>
-<ul class="text-gray-400 space-y-2 mb-8">
-<li>✔ Rajattomat hakemukset</li>
-<li>✔ Asiakashallinta</li>
-<li>✔ Analytiikka</li>
-<li>✔ Prioriteettituki</li>
-</ul>
-<a href="#" class="gradient-bg py-3 px-6 rounded-xl font-bold hover:scale-[1.03] transition">Valitse</a>
-</div>
-
-<div class="glass p-10 rounded-3xl text-center">
-<h3 class="text-xl font-bold mb-4">Business</h3>
-<p class="text-4xl font-black mb-6">99€<span class="text-lg font-normal text-gray-400">/kk</span></p>
-<ul class="text-gray-400 space-y-2 mb-8">
-<li>✔ Kaikki Pro-ominaisuudet</li>
-<li>✔ Tiimikäyttö</li>
-<li>✔ Räätälöity onboarding</li>
-</ul>
-<a href="#" class="glass py-3 px-6 rounded-xl hover:border-[#00BFA6] transition">Valitse</a>
-</div>
-
-</div>
-</section>
-
-<!-- FAQ -->
-<section class="py-24 max-w-4xl mx-auto">
-<h2 class="text-3xl font-bold text-center mb-16">Usein kysytyt kysymykset</h2>
-
-<div class="space-y-6">
-
-<div class="glass p-6 rounded-2xl">
-<h3 class="font-bold mb-2">Voinko peruuttaa milloin tahansa?</h3>
-<p class="text-gray-400">Kyllä. Voit lopettaa tilauksen koska tahansa ilman sitoutumista.</p>
-</div>
-
-<div class="glass p-6 rounded-2xl">
-<h3 class="font-bold mb-2">Onko ilmainen kokeilu?</h3>
-<p class="text-gray-400">Voimme tarjota 7 päivän kokeilun Pro-versiosta.</p>
-</div>
-
-<div class="glass p-6 rounded-2xl">
-<h3 class="font-bold mb-2">Toimiiko tämä freelancereille?</h3>
-<p class="text-gray-400">Kyllä. Duuniharava on suunniteltu erityisesti itsensätyöllistäjille ja työnhakijoille.</p>
-</div>
-
-</div>
-</section>
-
-<!-- FOOTER -->
-<footer class="py-10 text-center text-gray-500">
-© 2026 Duuniharava. Kaikki oikeudet pidätetään.
-</footer>
-
+            if (isSignUpMode) {
+                const { data, error } = await supabaseClient.auth.signUp({
+                    email,
+                    password
+                });
+                if (error) alert("Virhe tiliä luotaessa: " + error.message);
+                else {
+                    alert('Tili luotu! Voit nyt kirjautua sisään.');
+                    window.location.href = 'dashboard.html';
+                }
+            } else {
+                const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                if (error) alert("Kirjautumisvirhe: " + error.message);
+                else window.location.href = 'dashboard.html';
+            }
+        };
+    </script>
 </body>
 </html>
