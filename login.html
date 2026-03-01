@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kirjaudu | Duuniharava</title>
+    <title>Duuniharava | Löydä unelmiesi työ</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Space Grotesk', sans-serif; background-color: #0F0F0F; color: #FFFFFF; }
@@ -14,86 +13,27 @@
         .gradient-bg { background: linear-gradient(90deg, #00BFA6, #FF6F3C); }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-6">
-    <div class="max-w-md w-full glass p-10 rounded-[2.5rem] text-center">
-        <div class="text-2xl font-bold tracking-tighter mb-8">
+<body>
+    <nav class="flex justify-between items-center p-8 max-w-6xl mx-auto">
+        <div class="text-2xl font-bold tracking-tighter">
             <span class="turkoosi-text">DUUNI</span><span class="text-[#FF6F3C]">HARAVA</span>
         </div>
+        <a href="auth.html" class="glass px-6 py-2 rounded-full hover:bg-white/10 transition">Kirjaudu</a>
+    </nav>
+
+    <main class="max-w-4xl mx-auto text-center mt-20 px-6">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 italic">Löydä parhaat työpaikat <span class="turkoosi-text">automaattisesti.</span></h1>
+        <p class="text-gray-400 text-xl mb-10">Duuniharava etsii ja suodattaa sinulle sopivimmat avoimet paikat puolestasi. Säästä aikaa ja hae vain parhaisiin.</p>
         
-        <h1 class="text-2xl font-bold mb-6" id="auth-title">Kirjaudu sisään</h1>
-        
-        <form id="auth-form" class="space-y-4 text-left">
-            <div>
-                <label class="block text-xs font-bold mb-2 uppercase tracking-widest text-gray-500">Sähköposti</label>
-                <input type="email" id="email" required class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition">
-            </div>
-            <div>
-                <label class="block text-xs font-bold mb-2 uppercase tracking-widest text-gray-500">Salasana</label>
-                <input type="password" id="password" required class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition">
-            </div>
-            <button type="submit" id="submit-btn" class="w-full gradient-bg text-white font-black py-4 rounded-2xl hover:scale-[1.02] transition active:scale-95">
-                JATKA ➔
-            </button>
-        </form>
+        <div class="flex flex-col md:flex-row gap-4 justify-center">
+            <a href="#hinnoittelu" class="gradient-bg px-10 py-4 rounded-2xl font-black text-lg hover:scale-105 transition">
+                ALOITA NYT ➔
+            </a>
+            <a href="auth.html" class="glass px-10 py-4 rounded-2xl font-bold hover:bg-white/10 transition">
+                Kirjaudu sisään
+            </a>
+        </div>
+    </main>
 
-        <p class="mt-6 text-sm text-gray-400">
-            <span id="toggle-text">Eikö sinulla ole tunnuksia?</span> 
-            <button id="toggle-auth" class="text-[#00BFA6] font-bold hover:underline">Luo tili</button>
-        </p>
-    </div>
-
-    <script>
-        // SUPABASE TUNNUKSET
-        const SUPABASE_URL = 'https://zxtnhitxachrudrcrotk.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dG5oaXR4YWNocnVkcmNyb3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyODEwOTUsImV4cCI6MjA4Nzg1NzA5NX0.DPXJlYDI2L8oLYo6ofyPJzQDTbXAhreJx7VsqhV7VdI';
-        
-        // Alustetaan Supabase-asiakas
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        const form = document.getElementById('auth-form');
-        const toggleBtn = document.getElementById('toggle-auth');
-        const submitBtn = document.getElementById('submit-btn');
-        let isSignUp = false;
-
-        toggleBtn.onclick = (e) => {
-            e.preventDefault();
-            isSignUp = !isSignUp;
-            document.getElementById('auth-title').innerText = isSignUp ? 'Luo tili' : 'Kirjaudu sisään';
-            document.getElementById('toggle-text').innerText = isSignUp ? 'Onko sinulla jo tili?' : 'Eikö sinulla ole tunnuksia?';
-            toggleBtn.innerText = isSignUp ? 'Kirjaudu' : 'Luo tili';
-        };
-
-        form.onsubmit = async (e) => {
-            e.preventDefault();
-            submitBtn.disabled = true;
-            submitBtn.innerText = "HETKI...";
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            if (isSignUp) {
-                // Rekisteröityminen
-                const { error } = await supabaseClient.auth.signUp({ email, password });
-                if (error) {
-                    alert("Virhe: " + error.message);
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = "JATKA ➔";
-                } else {
-                    // Koska vahvistus on pois päältä, ohjataan suoraan sisään
-                    window.location.href = 'dashboard.html';
-                }
-            } else {
-                // Kirjautuminen
-                const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-                if (error) {
-                    alert("Kirjautumisvirhe: " + error.message);
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = "JATKA ➔";
-                } else {
-                    window.location.href = 'dashboard.html';
-                }
-            }
-        };
-    </script>
-</body>
+    </body>
 </html>
