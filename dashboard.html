@@ -11,6 +11,7 @@
         .turkoosi-text { color: #00BFA6; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
         .gradient-bg { background: linear-gradient(90deg, #00BFA6, #FF6F3C); }
+        .success-bg { background: linear-gradient(90deg, #00BFA6, #008f7a); }
     </style>
 </head>
 <body class="p-6 md:p-12">
@@ -44,8 +45,19 @@
                 </button>
             </form>
 
-            <div id="status" class="mt-6 text-center hidden">
-                <p class="text-[#00BFA6] animate-pulse">AI analysoi CV:täsi... Odota hetki.</p>
+            <div id="status" class="mt-8 text-center hidden">
+                <div class="flex flex-col items-center space-y-4">
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#00BFA6]"></div>
+                    <p class="text-[#00BFA6] font-medium tracking-wide">AI analysoi CV:täsi ja luo uutta dokumenttia... <br><span class="text-xs text-gray-500">Tässä menee yleensä 15-30 sekuntia.</span></p>
+                </div>
+            </div>
+
+            <div id="download-area" class="mt-8 p-6 glass border-[#00BFA6] rounded-2xl hidden text-center">
+                <h2 class="text-xl font-bold mb-4">✅ CV:si on valmis!</h2>
+                <a id="download-link" href="#" target="_blank" class="inline-block success-bg text-white font-bold py-4 px-10 rounded-xl hover:scale-105 transition shadow-lg">
+                    LATAA OPTIMOITU CV (Google Docs)
+                </a>
+                <p class="mt-4 text-xs text-gray-500 italic">Huom: Linkki avautuu uuteen välilehteen Google Docsina.</p>
             </div>
         </section>
     </div>
@@ -54,10 +66,15 @@
         const form = document.getElementById('haku-form');
         const statusDiv = document.getElementById('status');
         const submitBtn = document.getElementById('submit-btn');
+        const downloadArea = document.getElementById('download-area');
+        const downloadLink = document.getElementById('download-link');
 
         form.onsubmit = async (e) => {
             e.preventDefault();
+            
+            // Nollataan näkymä ja aloitetaan lataus-animaatio
             statusDiv.classList.remove('hidden');
+            downloadArea.classList.add('hidden');
             submitBtn.disabled = true;
             submitBtn.style.opacity = '0.5';
 
@@ -66,24 +83,36 @@
             formData.append('ilmoitus', document.getElementById('ilmoitus-teksti').value);
 
             try {
-                // TÄMÄ ON SINUN WEBHOOK-OSOITTEESI
+                // Lähetetään data n8n-webhookiin
                 const response = await fetch('https://n8nscalera.eu/webhook-test/uusi-hakemus', {
                     method: 'POST',
                     body: formData
                 });
 
                 if (response.ok) {
-                    alert('Hienoa! AI aloitti työt. Saat valmiin hakemuksen pian.');
+                    const result = await response.json();
+                    
+                    // Tarkistetaan saatiinko n8n:ltä se 'downloadUrl' jonka teimme Respond-solmuun
+                    if (result.downloadUrl) {
+                        downloadLink.href = result.downloadUrl;
+                        downloadArea.classList.remove('hidden'); // Näytetään latausnappi
+                        statusDiv.classList.add('hidden'); // Piilotetaan latausteksti
+                    } else {
+                        alert('Automaatio onnistui, mutta linkkiä ei löytynyt vastauksesta.');
+                    }
                 } else {
-                    alert('Hups! Jokin meni vikaan. Yritä uudelleen.');
+                    alert('Hups! Jokin meni vikaan n8n-palvelimella. Yritä uudelleen.');
                 }
             } catch (err) {
                 console.error(err);
-                alert('Yhteysvirhe n8n-palvelimeen.');
+                alert('Yhteysvirhe n8n-palvelimeen. Tarkista internetyhteytesi.');
             } finally {
-                statusDiv.classList.add('hidden');
+                // Palautetaan nappi entiselleen, mutta jätetään latausnappi näkyviin
                 submitBtn.disabled = false;
                 submitBtn.style.opacity = '1';
+                if (!downloadArea.classList.contains('hidden')) {
+                    statusDiv.classList.add('hidden');
+                }
             }
         };
     </script>
