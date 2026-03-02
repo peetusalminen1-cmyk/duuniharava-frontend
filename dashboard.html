@@ -1,121 +1,79 @@
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Duuniharava</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; background-color: #0F0F0F; color: white; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .turkoosi-text { color: #00BFA6; }
+        .oranssi-text { color: #FF6F3C; }
+    </style>
+</head>
+<body class="p-8">
 
-<script>
-    // Käytetään 'DOMContentLoaded' varmistamaan että DOM on valmis
-    document.addEventListener('DOMContentLoaded', async () => {
+    <div class="max-w-4xl mx-auto">
+        <header class="flex justify-between items-center mb-12">
+            <div class="font-bold text-xl tracking-tighter">
+                <span class="turkoosi-text">DUUNI</span><span class="oranssi-text">HARAVA</span>
+            </div>
+            <button id="logout-btn" class="text-xs bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition">
+                KIRJAUDU ULOS
+            </button>
+        </header>
+
+        <div class="glass p-8 rounded-[2rem]">
+            <h1 class="text-3xl font-bold mb-4">Tervetuloa takaisin!</h1>
+            <p id="user-email" class="text-gray-400 mb-8 font-mono">Ladataan käyttäjää...</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass p-6 rounded-2xl border-l-4 border-[#00BFA6]">
+                    <h3 class="text-sm font-bold uppercase tracking-widest text-gray-500 mb-2">Aktiiviset haut</h3>
+                    <p class="text-2xl font-bold">0 kpl</p>
+                </div>
+                <div class="glass p-6 rounded-2xl border-l-4 border-[#FF6F3C]">
+                    <h3 class="text-sm font-bold uppercase tracking-widest text-gray-500 mb-2">Uudet osumat</h3>
+                    <p class="text-2xl font-bold">0 kpl</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Supabase-määritykset (Varmista että nämä ovat samat kuin loginissa)
         const SUPABASE_URL = 'https://zxtnhitxachrudrcrotk.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dG5oaXR4YWNocnVkcmNyb3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyODEwOTUsImV4cCI6MjA4Nzg1NzA5NX0.DPXJlYDI2L8oLYo6ofyPJzQDTbXAhreJx7VsqhV7VdI';
         
-        // TARKISTUS: Onko kirjasto latautunut?
-        if (typeof supabase === 'undefined') {
-            console.error("Supabase-kirjastoa ei löytynyt! Tarkista <script>-latauslinkki.");
-            alert("Virhe järjestelmän latauksessa. Päivitä sivu.");
-            return;
-        }
-
-        // ALUSTUS: Luodaan client oikein
+        // Luodaan asiakas ilman 'import' komentoa
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        async function tarkistaKayttaja() {
-            try {
-                const { data: { user }, error: authError } = await supabaseClient.auth.getUser();
-                
-                if (authError || !user) {
-                    console.log("Ei kirjautunutta käyttäjää");
-                    window.location.href = 'login.html';
-                    return;
-                }
+        // 1. Tarkista onko käyttäjä kirjautunut
+        async function checkUser() {
+            const { data: { session }, error } = await supabaseClient.auth.getSession();
 
-                console.log("Yritetään hakea profiilia sähköpostilla:", user.email);
-
-                // Haetaan profiili. HUOM: Jos RLS on päällä, varmista että policy sallii tämän.
-                const { data: profile, error: dbError } = await supabaseClient
-                    .from('profiles')
-                    .select('customer_group')
-                    .eq('email', user.email) // .eq on varmempi jos sähköposti on tarkka
-                    .single();
-
-                if (dbError) {
-                    console.error("Tietokantavirhe:", dbError.message);
-                    alert("Tietokantavirhe: " + dbError.message);
-                    window.location.href = 'login.html';
-                    return;
-                }
-
-                if (!profile || profile.customer_group !== 'paid_customer') {
-                    console.warn("Käyttäjä löytyi, mutta ryhmä ei ole paid_customer. Ryhmä oli:", profile?.customer_group);
-                    alert("Pääsy evätty. Sähköpostiasi ei löydy maksettujen asiakkaiden listalta.");
-                    await supabaseClient.auth.signOut();
-                    window.location.href = 'login.html';
-                } else {
-                    console.log("Pääsy sallittu!");
-                    // Näytetään sisältö
-                    document.body.style.display = 'block';
-                    const emailElement = document.getElementById('user-email');
-                    if (emailElement) emailElement.innerText = user.email;
-                }
-            } catch (e) {
-                console.error("Odottamaton virhe:", e);
+            if (error || !session) {
+                // Jos ei sessiota, palauta login-sivulle
                 window.location.href = 'login.html';
+                return;
             }
+
+            // Näytä käyttäjän sähköposti
+            document.getElementById('user-email').innerText = "Käyttäjä: " + session.user.email;
+            console.log("Pääsy sallittu sähköpostille:", session.user.email);
         }
 
-        // Globaali funktio uloskirjautumiselle
-        window.uloskirjautuminen = async () => {
+        // 2. Uloskirjautuminen
+        document.getElementById('logout-btn').addEventListener('click', async () => {
             await supabaseClient.auth.signOut();
-            window.location.href = 'login.html';
-        }
+            window.location.href = 'index.html';
+        });
 
-        // Suoritetaan tarkistus
-        await tarkistaKayttaja();
-
-        // Lomakkeen käsittely
-        const form = document.getElementById('haku-form');
-        if (form) {
-            form.onsubmit = async (e) => {
-                e.preventDefault();
-                
-                const statusElem = document.getElementById('status');
-                const downloadArea = document.getElementById('download-area');
-                const btn = document.getElementById('submit-btn');
-                const emailElem = document.getElementById('user-email');
-
-                if (statusElem) statusElem.classList.remove('hidden');
-                if (downloadArea) downloadArea.classList.add('hidden');
-                if (btn) {
-                    btn.disabled = true;
-                    btn.style.opacity = '0.5';
-                }
-
-                const formData = new FormData();
-                formData.append('cv', document.getElementById('cv-tiedosto').files[0]);
-                formData.append('ilmoitus', document.getElementById('ilmoitus-teksti').value);
-                formData.append('user_email', emailElem ? emailElem.innerText : '');
-
-                try {
-                    const response = await fetch('https://n8nscalera.eu/webhook/uusi-hakemus', {
-                        method: 'POST',
-                        body: formData
-                    });
-                    
-                    if (!response.ok) throw new Error("Palvelinvirhe");
-                    
-                    const result = await response.json();
-                    if (result.downloadUrl) {
-                        const dlLink = document.getElementById('download-link');
-                        if (dlLink) dlLink.href = result.downloadUrl;
-                        if (downloadArea) downloadArea.classList.remove('hidden');
-                    }
-                } catch (err) {
-                    alert('Yhteysvirhe AI-palvelimeen: ' + err.message);
-                } finally {
-                    if (statusElem) statusElem.classList.add('hidden');
-                    if (btn) {
-                        btn.disabled = false;
-                        btn.style.opacity = '1';
-                    }
-                }
-            };
-        }
-    });
-</script>
+        // Suoritetaan tarkistus heti
+        checkUser();
+    </script>
+</body>
+</html>
