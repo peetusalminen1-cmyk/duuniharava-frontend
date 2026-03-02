@@ -146,7 +146,7 @@
                         <span>🇬🇧</span> EN
                     </button>
                 </div>
-                <button onclick="document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" 
+                <button onclick="const s = document.getElementById('auth-section'); s.classList.remove('hidden'); s.scrollIntoView({behavior:'smooth'})" 
                         class="text-[10px] md:text-xs font-bold py-2 px-3 md:px-4 rounded-lg border border-[#00BFA6] turkoosi-text hover:bg-[#00BFA6] hover:text-black transition" data-i18n="nav-login">
                     KIRJAUDU
                 </button>
@@ -356,7 +356,7 @@
         </div>
     </section>
 
-    <section id="auth-section" class="py-16 md:py-24 flex justify-center px-4 reveal">
+    <section id="auth-section" class="py-16 md:py-24 flex justify-center px-4 reveal hidden">
         <div class="max-w-md w-full glass p-8 md:p-10 rounded-[2rem] border-t-2 border-[#00BFA6] shadow-2xl">
             <h2 class="text-xl md:text-2xl font-bold mb-6 text-center" data-i18n="login-title">Kirjaudu sisään</h2>
             <form id="auth-form" class="space-y-4">
