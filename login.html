@@ -48,43 +48,58 @@
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dG5oaXR4YWNocnVkcmNyb3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyODEwOTUsImV4cCI6MjA4Nzg1NzA5NX0.DPXJlYDI2L8oLYo6ofyPJzQDTbXAhreJx7VsqhV7VdI';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Tarkistetaan onko urlissa ?signup=true (tämä linkki annetaan vain maksaneille)
-        const urlParams = new URLSearchParams(window.location.search);
-        const isSignUpMode = urlParams.get('signup') === 'true';
-
-        // Jos ollaan rekisteröitymistilassa, muutetaan tekstit
-        if (isSignUpMode) {
-            document.getElementById('auth-title').innerText = 'Luo tunnukset';
-            document.getElementById('submit-btn').innerText = 'REKISTERÖIDY JA ALOITA ➔';
-            document.getElementById('no-access-section').style.display = 'none';
-        }
-
         const form = document.getElementById('auth-form');
 
         form.onsubmit = async (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const submitBtn = document.getElementById('submit-btn');
+            
+            submitBtn.disabled = true;
+            submitBtn.innerText = "TARKISTETAAN...";
 
-            if (isSignUpMode) {
-                // REKISTERÖITYMINEN
-                const { data, error } = await supabaseClient.auth.signUp({ email, password });
-                
-                if (error) {
-                    alert("Virhe: " + error.message);
+            try {
+                // 1. LUKKO: Tarkistetaan löytyykö sähköposti 'profiles'-taulusta
+                const { data: profile, error: profileError } = await supabaseClient
+                    .from('profiles')
+                    .select('customer_group')
+                    .eq('email', email)
+                    .single();
+
+                if (profileError || !profile || profile.customer_group !== 'paid_customer') {
+                    alert("Pääsy evätty. Sähköpostiasi ei löydy maksettujen asiakkaiden listalta.");
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "KIRJAUDU SISÄÄN ➔";
+                    return;
+                }
+
+                // 2. YRITETÄÄN KIRJAUTUMISTA
+                const { data, error: loginError } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+                if (loginError) {
+                    // Jos tiliä ei ole vielä (mutta sähköposti oli profiles-listalla), luodaan se
+                    if (loginError.message.includes("Invalid login credentials")) {
+                        const { error: signUpError } = await supabaseClient.auth.signUp({ email, password });
+                        
+                        if (signUpError) {
+                            alert("Virhe tilin luonnissa: " + signUpError.message);
+                        } else {
+                            alert("Tili luotu onnistuneesti! Tervetuloa.");
+                            window.location.href = 'dashboard.html';
+                        }
+                    } else {
+                        alert("Kirjautumisvirhe: " + loginError.message);
+                    }
                 } else {
-                    // Jos sähköpostivahvistus on pois päältä Supabasessa, kirjaudutaan suoraan sisään
-                    alert('Tili luotu! Tervetuloa.');
+                    // Kirjautuminen onnistui
                     window.location.href = 'dashboard.html';
                 }
-            } else {
-                // TAVALLINEN KIRJAUTUMINEN
-                const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-                if (error) {
-                    alert("Kirjautumisvirhe: " + error.message);
-                } else {
-                    window.location.href = 'dashboard.html';
-                }
+            } catch (err) {
+                alert("Järjestelmävirhe: " + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "KIRJAUDU SISÄÄN ➔";
             }
         };
     </script>
