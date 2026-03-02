@@ -44,36 +44,39 @@
     </div>
 
     <script>
-        // Supabase-määritykset (Varmista että nämä ovat samat kuin loginissa)
-        const SUPABASE_URL = 'https://zxtnhitxachrudrcrotk.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dG5oaXR4YWNocnVkcmNyb3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyODEwOTUsImV4cCI6MjA4Nzg1NzA5NX0.DPXJlYDI2L8oLYo6ofyPJzQDTbXAhreJx7VsqhV7VdI';
-        
-        // Luodaan asiakas ilman 'import' komentoa
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // Käytetään suoraan ikkunan globaalia supabase-oliota
+        const config = {
+            url: 'https://zxtnhitxachrudrcrotk.supabase.co',
+            key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dG5oaXR4YWNocnVkcmNyb3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyODEwOTUsImV4cCI6MjA4Nzg1NzA5NX0.DPXJlYDI2L8oLYo6ofyPJzQDTbXAhreJx7VsqhV7VdI'
+        };
 
-        // 1. Tarkista onko käyttäjä kirjautunut
-        async function checkUser() {
-            const { data: { session }, error } = await supabaseClient.auth.getSession();
+        const supabaseClient = supabase.createClient(config.url, config.key);
 
-            if (error || !session) {
-                // Jos ei sessiota, palauta login-sivulle
-                window.location.href = 'login.html';
-                return;
+        async function initDashboard() {
+            try {
+                const { data: { session }, error } = await supabaseClient.auth.getSession();
+
+                if (error || !session) {
+                    console.log("Ei istuntoa, ohjataan kirjautumiseen...");
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                document.getElementById('user-email').innerText = "Käyttäjä: " + session.user.email;
+                console.log("Dashboard ladattu käyttäjälle:", session.user.email);
+            } catch (err) {
+                console.error("Hups! Jotain meni pieleen:", err);
             }
-
-            // Näytä käyttäjän sähköposti
-            document.getElementById('user-email').innerText = "Käyttäjä: " + session.user.email;
-            console.log("Pääsy sallittu sähköpostille:", session.user.email);
         }
 
-        // 2. Uloskirjautuminen
-        document.getElementById('logout-btn').addEventListener('click', async () => {
+        // Logout-painikkeen toiminnallisuus
+        document.getElementById('logout-btn').onclick = async function() {
             await supabaseClient.auth.signOut();
             window.location.href = 'index.html';
-        });
+        };
 
-        // Suoritetaan tarkistus heti
-        checkUser();
+        // Käynnistys
+        initDashboard();
     </script>
 </body>
 </html>
