@@ -71,15 +71,25 @@
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dG5oaXR4YWNocnVkcmNyb3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyODEwOTUsImV4cCI6MjA4Nzg1NzA5NX0.DPXJlYDI2L8oLYo6ofyPJzQDTbXAhreJx7VsqhV7VdI';
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // --- AUTH TARKISTUS ---
+        // --- PÄIVITETTY AUTH JA MAKSUTARKISTUS ---
         async function tarkistaKayttaja() {
             const { data: { user } } = await supabaseClient.auth.getUser();
             
             if (!user) {
-                // Jos ei kirjautunut, ohjaus login-sivulle
-                window.location.href = 'login.html';
+                // Ei kirjautunut -> ohjaus pääsivulle
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Tarkistetaan onko käyttäjällä "paid_customer" -leima metadatassa
+            const isPaid = user.user_metadata && user.user_metadata.source === 'paid_customer';
+
+            if (!isPaid) {
+                // Jos käyttäjä on kirjautunut, mutta metadata puuttuu
+                alert("Pääsy vain maksaville asiakkaille.");
+                window.location.href = 'index.html';
             } else {
-                // Jos kirjautunut, näytetään sivu ja sähköposti
+                // Kaikki kunnossa, näytetään sivu
                 document.body.style.display = 'block';
                 document.getElementById('user-email').innerText = user.email;
             }
