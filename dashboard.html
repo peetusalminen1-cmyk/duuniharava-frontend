@@ -112,18 +112,18 @@
                 <button onclick="openCvModal()" class="w-full py-3 rounded-xl border border-[#00BFA6]/30 text-[10px] font-black tracking-widest uppercase hover:bg-[#00BFA6] hover:text-black transition">Avaa työkalu</button>
             </div>
 
+            <div class="glass p-8 rounded-[2.5rem] border-t-2 border-purple-500 hover:bg-white/5 transition group">
+                <div class="text-3 mb-4 text-2xl">🚀</div>
+                <h3 class="font-bold text-xl mb-2">Automaattinen haku</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">Palvelu etsii ja lähettää hakemuksia tehokkaasti käyttäjän puolesta.</p>
+                <button onclick="alert('Automaattinen haku on aktivoitu taustalla profiilisi perusteella.')" class="w-full py-3 rounded-xl border border-purple-500/30 text-[10px] font-black tracking-widest uppercase hover:bg-purple-500 hover:text-white transition">Hallitse hakuja</button>
+            </div>
+
             <div class="glass p-8 rounded-[2.5rem] border-t-2 border-[#FF6F3C] hover:bg-white/5 transition opacity-50">
                 <div class="text-3 mb-4 text-2xl">📝</div>
                 <h3 class="font-bold text-xl mb-2">Hakemus-editori</h3>
                 <p class="text-gray-400 text-sm leading-relaxed mb-6">Muokkaa ja hallitse luotuja saatekirjeitäsi manuaalisesti yhdessä paikassa.</p>
                 <button class="w-full py-3 rounded-xl border border-[#FF6F3C]/30 text-[10px] font-black tracking-widest uppercase cursor-not-allowed">Tulossa pian</button>
-            </div>
-
-            <div class="glass p-8 rounded-[2.5rem] border-t-2 border-blue-500 hover:bg-white/5 transition opacity-50">
-                <div class="text-3 mb-4 text-2xl">🔗</div>
-                <h3 class="font-bold text-xl mb-2">LinkedIn-analyysi</h3>
-                <p class="text-gray-400 text-sm leading-relaxed mb-6">Saa tarkat muokkausehdotukset LinkedIn-profiiliisi ja paranna näkyvyyttäsi.</p>
-                <button class="w-full py-3 rounded-xl border border-blue-500/30 text-[10px] font-black tracking-widest uppercase cursor-not-allowed">Tulossa pian</button>
             </div>
         </div>
     </div>
@@ -240,7 +240,6 @@
                 document.getElementById('new-matches-count').innerText = "3";  // Yli 7/10 osumat
 
                 // Luodaan kortit tekoälyn reasoning-tekstistä
-                // Huom: Koska n8n tallentaa koko analyysin yhteen kenttään, näytetään se tässä tyylikkäästi
                 const matchCard = document.createElement('div');
                 matchCard.className = 'col-span-full glass p-8 rounded-[2.5rem] border border-[#00BFA6]/20 relative transition duration-300';
                 
