@@ -27,6 +27,12 @@
         @keyframes spin { to { transform: rotate(360deg); } }
 
         .match-card:hover { border-color: rgba(0, 191, 166, 0.4); transform: translateY(-2px); }
+        .line-clamp-4 {
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
     </style>
 </head>
 <body class="p-8">
@@ -56,11 +62,11 @@
                 <div class="grid grid-cols-2 gap-4 w-full md:w-auto">
                     <div class="glass p-4 rounded-2xl border-l-4 border-[#00BFA6]">
                         <h3 class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1">Viikon uudet</h3>
-                        <p id="active-jobs-count" class="text-2xl font-bold">Ladataan...</p>
+                        <p id="active-jobs-count" class="text-2xl font-bold">0</p>
                     </div>
                     <div class="glass p-4 rounded-2xl border-l-4 border-[#FF6F3C]">
                         <h3 class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1">Huippuosumat</h3>
-                        <p id="new-matches-count" class="text-2xl font-bold">Ladataan...</p>
+                        <p id="new-matches-count" class="text-2xl font-bold">0</p>
                     </div>
                 </div>
             </div>
@@ -93,8 +99,7 @@
 
                 <div class="flex-grow">
                     <h2 class="text-2xl font-bold mb-4 uppercase tracking-tighter turkoosi-text">Tekoälyn analyysi</h2>
-                    <div id="report-content" class="text-sm text-gray-300 leading-relaxed whitespace-pre-wrap mb-6">
-                        </div>
+                    <div id="report-content" class="text-sm text-gray-300 leading-relaxed whitespace-pre-wrap mb-6"></div>
                     <a id="doc-link" href="#" target="_blank" class="inline-block bg-[#00BFA6] text-black px-8 py-4 rounded-2xl transition font-black text-xs uppercase tracking-widest hover:scale-105 active:scale-95 shadow-lg shadow-[#00BFA6]/20">
                         AVAA OPTIMOITU CV (Google Docs) ➔
                     </a>
@@ -207,7 +212,7 @@
                 const userEmail = session.user.email;
                 document.getElementById('user-email').innerText = "Käyttäjä: " + userEmail;
 
-                // HAETAAN VIIKKO-HARAVAN TULOKSET SUPABASESTA
+                // HAETAAN VIIKKO-HARAVAN TULOKSET
                 fetchWeeklyMatches(userEmail);
 
             } catch (err) {
@@ -215,49 +220,62 @@
             }
         }
 
-        // --- VIIKKO-HARAVA LOGIIKKA ALKAA ---
         async function fetchWeeklyMatches(email) {
             const jobList = document.getElementById('job-list');
             
             try {
+                // Haetaan osumat tietokannasta
                 const { data, error } = await supabaseClient
                     .from('matches')
                     .select('*')
                     .eq('customer_id', email)
-                    .order('created_at', { ascending: false });
+                    .order('created_at', { ascending: false })
+                    .limit(6); // Haetaan max 6 uusinta osumaa
 
                 if (error) throw error;
 
                 if (!data || data.length === 0) {
                     jobList.innerHTML = '<div class="col-span-full glass p-8 rounded-3xl text-center text-gray-500">Ei vielä viikoittaisia hakuja. Odottele seuraavaa ajoa!</div>';
-                    document.getElementById('active-jobs-count').innerText = "0";
-                    document.getElementById('new-matches-count').innerText = "0";
                     return;
                 }
 
                 jobList.innerHTML = '';
-                const latestRun = data[0];
                 document.getElementById('active-jobs-count').innerText = "19"; 
-                document.getElementById('new-matches-count').innerText = "3";  
+                document.getElementById('new-matches-count').innerText = data.length.toString();
 
-                const matchCard = document.createElement('div');
-                matchCard.className = 'col-span-full glass p-8 rounded-[2.5rem] border border-[#00BFA6]/20 relative transition duration-300';
-                
-                matchCard.innerHTML = `
-                    <div class="absolute top-6 right-6 bg-[#00BFA6]/10 text-[#00BFA6] px-4 py-2 rounded-full text-xs font-black uppercase">Viikon Analyysi Valmis</div>
-                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Tekoälyn poiminnat</p>
-                    <h3 class="text-2xl font-bold mb-6 turkoosi-text">Uusimmat huippuosumasi</h3>
-                    <div class="text-sm text-gray-300 leading-relaxed whitespace-pre-wrap font-mono bg-black/20 p-6 rounded-2xl border border-white/5">
-                        ${latestRun.reasoning}
-                    </div>
-                `;
-                jobList.appendChild(matchCard);
+                // Luodaan jokaiselle osumalle oma kortti
+                data.forEach(match => {
+                    const matchCard = document.createElement('div');
+                    matchCard.className = 'glass p-6 rounded-[2rem] border border-[#00BFA6]/10 hover:border-[#00BFA6]/40 transition duration-300 flex flex-col justify-between';
+                    
+                    matchCard.innerHTML = `
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-[#00BFA6]/10 text-[#00BFA6] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
+                                    ${match.match_percent}% Match
+                                </span>
+                                <span class="text-[10px] text-gray-600 font-mono">${new Date(match.created_at).toLocaleDateString('fi-FI')}</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-1 text-white">${match.job_title}</h3>
+                            <p class="text-sm oranssi-text font-bold mb-4 uppercase tracking-tighter">${match.company || 'Yritys tiedossa'}</p>
+                            <p class="text-xs text-gray-400 leading-relaxed mb-6 line-clamp-4">
+                                ${match.reasoning}
+                            </p>
+                        </div>
+                        <button class="w-full py-3 rounded-xl bg-white/5 hover:bg-[#00BFA6] hover:text-black text-white text-[10px] font-black uppercase tracking-widest transition">
+                            Lue lisää / Hae
+                        </button>
+                    `;
+                    jobList.appendChild(matchCard);
+                });
 
             } catch (err) {
                 console.error("Virhe matches-haussa:", err);
                 jobList.innerHTML = '<div class="col-span-full text-red-500 text-center">Virhe haettaessa työpaikkoja.</div>';
             }
         }
+
+        // --- APUFUNKTIOT ---
 
         function openCvModal() {
             document.getElementById('cv-modal').classList.remove('modal-hidden');
