@@ -33,6 +33,7 @@
             overflow: hidden;
         }
 
+        /* Custom scrollbar for the large modal */
         #search-modal .modal-content::-webkit-scrollbar { width: 6px; }
         #search-modal .modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
     </style>
@@ -142,7 +143,7 @@
 
     <div id="cv-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 modal-hidden">
         <div class="glass max-w-2xl w-full p-8 rounded-[2.5rem] border border-white/10 relative">
-            <button onclick="closeCvModal()" class="absolute top-6 right-6 text-gray-500 hover:text-white text-xl">✕</button>
+            <button onclick="closeCvModal()" id="close-btn" class="absolute top-6 right-6 text-gray-500 hover:text-white text-xl">✕</button>
             <div id="step-1">
                 <h2 class="text-2xl font-bold mb-2 uppercase tracking-tighter">1/2: Lataa CV</h2>
                 <p class="text-gray-400 text-sm mb-8">Lataa nykyinen CV:si PDF-muodossa analyysia varten.</p>
@@ -203,19 +204,40 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
                         <h3 class="text-xs font-black uppercase text-[#00BFA6] border-b border-white/10 pb-2">Työn sisältö & Laatu</h3>
-                        <textarea id="crit-content" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Päivittäiset tehtävät..."></textarea>
+                        <textarea id="crit-content" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Päivittäiset tehtävät, itsenäisyys vs tiimi..."></textarea>
                     </div>
 
                     <div class="space-y-4">
                         <h3 class="text-xs font-black uppercase text-[#00BFA6] border-b border-white/10 pb-2">Palkka & Ehdot</h3>
-                        <textarea id="crit-salary" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Palkkahaitari..."></textarea>
+                        <textarea id="crit-salary" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Palkkahaitari, palkkamalli..."></textarea>
                     </div>
+
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-black uppercase text-[#00BFA6] border-b border-white/10 pb-2">Työaika & Joustavuus</h3>
+                        <textarea id="crit-time" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Työaika, etätyö-%..."></textarea>
                     </div>
+
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-black uppercase text-[#00BFA6] border-b border-white/10 pb-2">Yritys & Kulttuuri</h3>
+                        <textarea id="crit-culture" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Yrityksen koko, arvot..."></textarea>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-black uppercase text-[#00BFA6] border-b border-white/10 pb-2">Kehitys & Ura</h3>
+                        <textarea id="crit-career" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Urakehitys, koulutukset..."></textarea>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-black uppercase text-[#00BFA6] border-b border-white/10 pb-2">Vaatimukset</h3>
+                        <textarea id="crit-reqs" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Pakolliset taidot, kielitaito..."></textarea>
+                    </div>
+                </div>
 
                 <div>
                     <label class="block text-[10px] font-bold uppercase tracking-widest text-orange-500/70 mb-2">Suodatus (SMART NOT-LISTA)</label>
                     <input type="text" id="search-exclude" class="w-full glass p-4 rounded-xl focus:outline-none focus:border-orange-500/50 text-sm text-white border-orange-500/10" 
                            value="epärealistinen palkka, nopea rikastuminen, vain provisio, kylmämyynti, freelance ilman takuuta, harjoittelu ilman palkkaa, useita hattuja ilman selkeyttä">
+                    <p class="text-[9px] text-gray-600 mt-2 font-mono uppercase tracking-tighter italic">Karsii huijaukset ja huonot ehdot automaattisesti.</p>
                 </div>
             </div>
 
@@ -297,7 +319,34 @@
             }
         }
 
-        function openSearchModal() { document.getElementById('search-modal').classList.remove('modal-hidden'); }
+        async function openSearchModal() { 
+            document.getElementById('search-modal').classList.remove('modal-hidden'); 
+            
+            // Haetaan aiemmat asetukset Supabasesta
+            try {
+                const { data: { session } } = await supabaseClient.auth.getSession();
+                const { data, error } = await supabaseClient
+                    .from('user_settings')
+                    .select('*')
+                    .eq('customer_id', session.user.email)
+                    .single();
+
+                if (data) {
+                    document.getElementById('search-job-title').value = data.job_title || '';
+                    document.getElementById('search-location').value = data.location || '';
+                    document.getElementById('crit-content').value = data.content || '';
+                    document.getElementById('crit-salary').value = data.salary || '';
+                    document.getElementById('crit-time').value = data.time || '';
+                    document.getElementById('crit-culture').value = data.culture || '';
+                    document.getElementById('crit-career').value = data.career || '';
+                    document.getElementById('crit-reqs').value = data.requirements || '';
+                    document.getElementById('search-exclude').value = data.exclude || '';
+                }
+            } catch (err) {
+                console.log("Ei aiempia asetuksia tai virhe haussa.");
+            }
+        }
+
         function closeSearchModal() { document.getElementById('search-modal').classList.add('modal-hidden'); }
 
         document.getElementById('confirm-haku-btn').onclick = async function() {
@@ -306,13 +355,17 @@
             if (!title) { alert("Työnimike on pakollinen."); return; }
 
             btn.disabled = true;
-            btn.innerText = "KÄYNNISTETÄÄN...";
+            btn.innerText = "TALLENNETAAN...";
 
             const criteria = {
-                title: title,
+                job_title: title,
                 location: document.getElementById('search-location').value,
                 content: document.getElementById('crit-content').value,
                 salary: document.getElementById('crit-salary').value,
+                time: document.getElementById('crit-time').value,
+                culture: document.getElementById('crit-culture').value,
+                career: document.getElementById('crit-career').value,
+                requirements: document.getElementById('crit-reqs').value,
                 exclude: document.getElementById('search-exclude').value
             };
 
@@ -320,28 +373,32 @@
                 const { data: { session } } = await supabaseClient.auth.getSession();
                 const userEmail = session.user.email;
 
-                // KORJATTU: Käytetään POST-metodia ja JSON-bodya CORS-ongelmien välttämiseksi
-                const response = await fetch('https://n8nscalera.eu/webhook/dbf6d297-1d27-4d24-839d-bb98ebc87cc4', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email: userEmail,
-                        data: criteria
-                    })
-                });
+                // 1. Tallennetaan asetukset Supabaseen (upsert)
+                const { error: upsertError } = await supabaseClient
+                    .from('user_settings')
+                    .upsert({ 
+                        customer_id: userEmail, 
+                        ...criteria,
+                        updated_at: new Date()
+                    }, { onConflict: 'customer_id' });
+
+                if (upsertError) throw upsertError;
+
+                btn.innerText = "KÄYNNISTETÄÄN...";
+
+                // 2. Kutsutaan webhookia
+                const response = await fetch(`https://n8nscalera.eu/webhook/dbf6d297-1d27-4d24-839d-bb98ebc87cc4?email=${userEmail}&data=${encodeURIComponent(JSON.stringify(criteria))}`);
 
                 if (response.ok) {
                     closeSearchModal();
-                    alert("Tarkka haravointi käynnistetty!");
+                    alert("Asetukset tallennettu ja haravointi käynnistetty!");
                     window.location.reload();
                 } else {
-                    alert("Haku epäonnistui palvelimen puolella.");
+                    alert("Haku epäonnistui webhook-vaiheessa.");
                 }
             } catch (err) {
-                console.error("Virhe haussa:", err);
-                alert("Yhteysvirhe. Tarkista verkkoyhteys tai CORS-asetukset.");
+                console.error("Virhe prosessissa:", err);
+                alert("Virhe tallennuksessa: " + err.message);
             } finally {
                 btn.disabled = false;
                 btn.innerText = "KÄYNNISTÄ HARAVOINTI ➔";
