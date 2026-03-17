@@ -33,7 +33,6 @@
             overflow: hidden;
         }
 
-        /* Custom scrollbar for the large modal */
         #search-modal .modal-content::-webkit-scrollbar { width: 6px; }
         #search-modal .modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
     </style>
@@ -143,7 +142,7 @@
 
     <div id="cv-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 modal-hidden">
         <div class="glass max-w-2xl w-full p-8 rounded-[2.5rem] border border-white/10 relative">
-            <button onclick="closeCvModal()" id="close-btn" class="absolute top-6 right-6 text-gray-500 hover:text-white text-xl">✕</button>
+            <button onclick="closeCvModal()" class="absolute top-6 right-6 text-gray-500 hover:text-white text-xl">✕</button>
             <div id="step-1">
                 <h2 class="text-2xl font-bold mb-2 uppercase tracking-tighter">1/2: Lataa CV</h2>
                 <p class="text-gray-400 text-sm mb-8">Lataa nykyinen CV:si PDF-muodossa analyysia varten.</p>
@@ -204,40 +203,19 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
                         <h3 class="text-xs font-black uppercase text-[#00BFA6] border-b border-white/10 pb-2">Työn sisältö & Laatu</h3>
-                        <textarea id="crit-content" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Päivittäiset tehtävät, itsenäisyys vs tiimi, operatiivinen vs kehittävä, asiakaskontaktien määrä, vastuualueen selkeys..."></textarea>
+                        <textarea id="crit-content" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Päivittäiset tehtävät..."></textarea>
                     </div>
 
                     <div class="space-y-4">
                         <h3 class="text-xs font-black uppercase text-[#00BFA6] border-b border-white/10 pb-2">Palkka & Ehdot</h3>
-                        <textarea id="crit-salary" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Palkkahaitari, palkkamalli (kiinteä/provisio), bonukset, edut, työsuhteen muoto..."></textarea>
+                        <textarea id="crit-salary" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Palkkahaitari..."></textarea>
                     </div>
-
-                    <div class="space-y-4">
-                        <h3 class="text-xs font-black uppercase text-[#00BFA6] border-b border-white/10 pb-2">Työaika & Joustavuus</h3>
-                        <textarea id="crit-time" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Työaika (liukuva/vuoro), etätyö-%, sijaintisidonnaisuus, matkustaminen..."></textarea>
                     </div>
-
-                    <div class="space-y-4">
-                        <h3 class="text-xs font-black uppercase text-[#00BFA6] border-b border-white/10 pb-2">Yritys & Kulttuuri</h3>
-                        <textarea id="crit-culture" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Yrityksen koko, toimiala, maine, arvot, kasvu vs vakaus..."></textarea>
-                    </div>
-
-                    <div class="space-y-4">
-                        <h3 class="text-xs font-black uppercase text-[#00BFA6] border-b border-white/10 pb-2">Kehitys & Ura</h3>
-                        <textarea id="crit-career" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Urakehitys, koulutukset, roolin senioriteetti, laajentumiskyky..."></textarea>
-                    </div>
-
-                    <div class="space-y-4">
-                        <h3 class="text-xs font-black uppercase text-[#00BFA6] border-b border-white/10 pb-2">Vaatimukset</h3>
-                        <textarea id="crit-reqs" class="w-full glass p-3 rounded-xl text-xs h-24 focus:outline-none border-white/5" placeholder="Pakolliset taidot, kielitaito, tutkintovaatimus, kokemusvuosien realismi..."></textarea>
-                    </div>
-                </div>
 
                 <div>
                     <label class="block text-[10px] font-bold uppercase tracking-widest text-orange-500/70 mb-2">Suodatus (SMART NOT-LISTA)</label>
                     <input type="text" id="search-exclude" class="w-full glass p-4 rounded-xl focus:outline-none focus:border-orange-500/50 text-sm text-white border-orange-500/10" 
                            value="epärealistinen palkka, nopea rikastuminen, vain provisio, kylmämyynti, freelance ilman takuuta, harjoittelu ilman palkkaa, useita hattuja ilman selkeyttä">
-                    <p class="text-[9px] text-gray-600 mt-2 font-mono uppercase tracking-tighter italic">Karsii huijaukset ja huonot ehdot automaattisesti.</p>
                 </div>
             </div>
 
@@ -330,16 +308,11 @@
             btn.disabled = true;
             btn.innerText = "KÄYNNISTETÄÄN...";
 
-            // Kerätään kaikki tarkat kriteerit yhteen tekstiin n8n:ää varten
             const criteria = {
                 title: title,
                 location: document.getElementById('search-location').value,
                 content: document.getElementById('crit-content').value,
                 salary: document.getElementById('crit-salary').value,
-                time: document.getElementById('crit-time').value,
-                culture: document.getElementById('crit-culture').value,
-                career: document.getElementById('crit-career').value,
-                requirements: document.getElementById('crit-reqs').value,
                 exclude: document.getElementById('search-exclude').value
             };
 
@@ -347,24 +320,34 @@
                 const { data: { session } } = await supabaseClient.auth.getSession();
                 const userEmail = session.user.email;
 
-                const response = await fetch(`https://n8nscalera.eu/webhook/dbf6d297-1d27-4d24-839d-bb98ebc87cc4?email=${userEmail}&data=${encodeURIComponent(JSON.stringify(criteria))}`);
+                // KORJATTU: Käytetään POST-metodia ja JSON-bodya CORS-ongelmien välttämiseksi
+                const response = await fetch('https://n8nscalera.eu/webhook/dbf6d297-1d27-4d24-839d-bb98ebc87cc4', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: userEmail,
+                        data: criteria
+                    })
+                });
 
                 if (response.ok) {
                     closeSearchModal();
                     alert("Tarkka haravointi käynnistetty!");
                     window.location.reload();
                 } else {
-                    alert("Haku epäonnistui.");
+                    alert("Haku epäonnistui palvelimen puolella.");
                 }
             } catch (err) {
                 console.error("Virhe haussa:", err);
+                alert("Yhteysvirhe. Tarkista verkkoyhteys tai CORS-asetukset.");
             } finally {
                 btn.disabled = false;
                 btn.innerText = "KÄYNNISTÄ HARAVOINTI ➔";
             }
         };
 
-        // Modal helperit
         function openCvModal() { document.getElementById('cv-modal').classList.remove('modal-hidden'); }
         function closeCvModal() { document.getElementById('cv-modal').classList.add('modal-hidden'); }
         function nextStep() { document.getElementById('step-1').classList.add('hidden'); document.getElementById('step-2').classList.remove('hidden'); }
