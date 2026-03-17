@@ -195,12 +195,25 @@
 
     <div id="search-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 modal-hidden">
         <div class="glass max-w-lg w-full p-8 rounded-[2.5rem] border border-white/10">
-            <h2 class="text-2xl font-bold mb-2 uppercase tracking-tighter">Käynnistä haku</h2>
-            <p class="text-gray-400 text-sm mb-6">Millaista työtä etsitään? Tekoäly haravoi avoimia paikkoja kriteeriesi mukaan.</p>
+            <h2 class="text-2xl font-bold mb-2 uppercase tracking-tighter">Haravoinnin asetukset</h2>
+            <p class="text-gray-400 text-sm mb-8">Täytä tarkat kriteerit, jotta tekoäly löytää vain parhaat palat.</p>
             
-            <div class="mb-8">
-                <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Hakukriteerit</label>
-                <textarea id="search-criteria-input" rows="3" class="w-full glass p-4 rounded-xl focus:outline-none focus:border-purple-500 text-sm text-white resize-none" placeholder="Esim. Etätyö markkinoinnin parissa, Helsinki, vähintään 3500€/kk..."></textarea>
+            <div class="space-y-6 mb-8">
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Mitä etsitään? (Esim. Myyntipäällikkö, Koodari)</label>
+                    <input type="text" id="search-job-title" class="w-full glass p-4 rounded-xl focus:outline-none focus:border-purple-500 text-sm text-white" placeholder="Työnimike tai ala">
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Missä? (Kaupunki tai 'Etätyö')</label>
+                    <input type="text" id="search-location" class="w-full glass p-4 rounded-xl focus:outline-none focus:border-purple-500 text-sm text-white" placeholder="Helsinki, Tampere, Etä...">
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold uppercase tracking-widest text-orange-500/70 mb-2">Karkota nämä (NOT-lista)</label>
+                    <input type="text" id="search-exclude" class="w-full glass p-4 rounded-xl focus:outline-none focus:border-orange-500/50 text-sm text-white border-orange-500/10" placeholder="Esim. feissari, puhelinmyynti, provisio">
+                    <p class="text-[9px] text-gray-600 mt-2 font-mono uppercase tracking-tighter">Näitä sanoja sisältävät ilmoitukset piilotetaan automaattisesti.</p>
+                </div>
             </div>
 
             <div class="flex gap-4">
@@ -285,10 +298,9 @@
             }
         }
 
-        // --- UUDET MODAALI-FUNKTIOT HAKUA VARTEN ---
         function openSearchModal() {
             document.getElementById('search-modal').classList.remove('modal-hidden');
-            document.getElementById('search-criteria-input').focus();
+            document.getElementById('search-job-title').focus();
         }
 
         function closeSearchModal() {
@@ -296,16 +308,17 @@
         }
 
         document.getElementById('confirm-haku-btn').onclick = async function() {
-            const kriteerit = document.getElementById('search-criteria-input').value;
+            const title = document.getElementById('search-job-title').value;
+            const location = document.getElementById('search-location').value;
+            const exclude = document.getElementById('search-exclude').value;
             
-            if (!kriteerit || kriteerit.trim() === "") {
-                alert("Syötä vähintään yksi hakuehto.");
+            if (!title) {
+                alert("Syötä vähintään haettava työnimike.");
                 return;
             }
 
             const btn = this;
             btn.disabled = true;
-            const originalText = btn.innerText;
             btn.innerText = "KÄYNNISTETÄÄN...";
             btn.classList.add('opacity-50');
 
@@ -313,11 +326,19 @@
                 const { data: { session } } = await supabaseClient.auth.getSession();
                 const userEmail = session.user.email;
 
-                const response = await fetch(`https://n8nscalera.eu/webhook/dbf6d297-1d27-4d24-839d-bb98ebc87cc4?email=${userEmail}&kriteerit=${encodeURIComponent(kriteerit)}`);
+                // Rakennetaan n8n ymmärtämä query-string
+                // Esim: Myyjä Helsinki NOT (feissari, stemma)
+                let queryParts = [title];
+                if (location) queryParts.push(location);
+                if (exclude) queryParts.push(`NOT (${exclude})`);
+                
+                const lopullinenHaku = queryParts.join(' ');
+
+                const response = await fetch(`https://n8nscalera.eu/webhook/dbf6d297-1d27-4d24-839d-bb98ebc87cc4?email=${userEmail}&kriteerit=${encodeURIComponent(lopullinenHaku)}`);
 
                 if (response.ok) {
                     closeSearchModal();
-                    alert("Haku käynnistetty! Tulokset ilmestyvät pian näkymään.");
+                    alert("Haku käynnistetty! Haravointi on alkanut taustalla.");
                     window.location.reload();
                 } else {
                     alert("Haku epäonnistui.");
@@ -327,7 +348,7 @@
                 alert("Yhteysvirhe n8n-palveluun.");
             } finally {
                 btn.disabled = false;
-                btn.innerText = originalText;
+                btn.innerText = "KÄYNNISTÄ HARAVOINTI ➔";
                 btn.classList.remove('opacity-50');
             }
         };
