@@ -335,6 +335,7 @@
             try {
                 const response = await fetch(CV_BOTTI_URL, {
                     method: 'POST',
+                    mode: 'cors',
                     body: formData
                 });
 
@@ -353,7 +354,7 @@
             } catch (err) {
                 console.error('Virhe:', err);
                 [1,2,3,4].forEach(n => setStep(n, 'error'));
-                alert('Yhteys n8n-palvelimeen epäonnistui.');
+                alert('Yhteys n8n-palvelimeen epäonnistui. Varmista, että n8n webhook on aktiivinen ja Respond to Webhook -solmu on käytössä.');
             } finally {
                 btn.disabled = false;
             }
