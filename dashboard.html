@@ -1,38 +1,38 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-    // 1. Supabase konfiguraatio - Käytetään aiemmin toimivaksi todettua avaintasi
+    // 1. Supabase konfiguraatio antamallasi avaimella
     const SUPABASE_URL = 'https://zxtnhitxachrudrcrotk.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dG5oaXR4YWNocnVkcmNyb3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyODEwOTUsImV4cCI6MjA4Nzg1NzA5NX0.DPXJlYDI2L8oLYo6ofyPJzQDTbXAhreJx7VsqhV7VdI';
     
-    // Luodaan client (huomaa 'window.supabase' varmistus)
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // Alustetaan client
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     const n8nWebhookUrl = 'https://n8nscalera.eu/webhook/uusi-hakemus';
 
     async function handleOptimization(event) {
-        // Estetään sivun latautuminen jos nappi on linkki tai submit-tyyppinen
         if (event) event.preventDefault();
 
         // Haetaan kirjautunut käyttäjä
         const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
 
         if (userError || !user) {
-            alert("Kirjaudu sisään ensin nähdäksesi profiilitiedot!");
+            alert("Kirjaudu sisään ensin!");
             console.error("Käyttäjävirhe:", userError);
             return;
         }
 
-        // Muutetaan napin tila (etsitään nappia jota painettiin)
+        // Napin visuaalinen palaute
         const btn = event.currentTarget;
         const originalText = btn.innerText;
         btn.innerText = "Käsitellään...";
         btn.disabled = true;
 
         try {
+            // Lähetetään data n8n-webhookiin
             const response = await fetch(n8nWebhookUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                mode: 'no-cors', // Lisätty, jos n8n ei salli CORS-pyyntöjä suoraan selaimesta
+                mode: 'no-cors', // Auttaa jos n8n päässä on CORS-rajoituksia
                 body: JSON.stringify({
                     email: user.email,
                     userId: user.id,
@@ -41,28 +41,25 @@
                 })
             });
 
-            // Huom: 'no-cors' tilassa response.ok on aina false, mutta pyyntö menee perille
-            alert("Pyyntö lähetetty automaatioon (n8n)!");
+            alert("CV:n optimointipyyntö lähetetty onnistuneesti!");
             
         } catch (error) {
-            console.error("Virhe:", error);
-            alert("Jotain meni pieleen pyyntöä lähetettäessä.");
+            console.error("Webhook-virhe:", error);
+            alert("Yhteysvirhe n8n-palvelimeen.");
         } finally {
             btn.innerText = originalText;
             btn.disabled = false;
         }
     }
 
-    // Lisätään kuuntelija kun sivu on latautunut
+    // Lisätään tapahtumakuuntelija
     document.addEventListener('DOMContentLoaded', () => {
-        // Etsitään nappi. Jos sinulla on id="optimoi-btn", käytä sitä: document.getElementById('optimoi-btn')
-        // Tässä haetaan nappia, jossa on teksti "VALITSE" tai vastaava luokka
+        // Etsitään nappi, joka käynnistää toiminnon
+        // Voit vaihtaa tähän esim. id-valitsimen: document.getElementById('oma-nappi-id')
         const startBtn = document.querySelector('.optimoitu-nappi') || document.querySelector('button'); 
         
         if (startBtn) {
             startBtn.addEventListener('click', handleOptimization);
-        } else {
-            console.warn("Nappia ei löytynyt! Varmista että napilla on luokka 'optimoitu-nappi'.");
         }
     });
 </script>
