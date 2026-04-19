@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duuniharava | Säästä 20h viikossa ja löydä töitä</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
@@ -109,11 +108,6 @@
 <body class="px-6 pt-20">
 
     <script>
-        // --- SUPABASE ALUSTUS ---
-        const SUPABASE_URL = 'https://zxtnhitxachrudrcrotk.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4dG5oaXR4YWNocnVkcmNyb3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyODEwOTUsImV4cCI6MjA4Nzg1NzA5NX0.DPXJlYDI2L8oLYo6ofyPJzQDTbXAhreJx7VsqhV7VdI';
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
         // Lehdet animaatio
         document.addEventListener('DOMContentLoaded', () => {
             const colors = ['#00BFA6', '#FF6F3C', '#2D2D2D'];
@@ -367,19 +361,11 @@
 
     <section id="auth-section" class="py-16 md:py-24 flex justify-center px-4 reveal hidden">
         <div class="max-w-md w-full glass p-8 md:p-10 rounded-[2rem] border-t-2 border-[#00BFA6] shadow-2xl">
-            <h2 class="text-xl md:text-2xl font-bold mb-6 text-center" data-i18n="login-title">Kirjaudu sisään</h2>
-            <form id="auth-form" class="space-y-4">
-                <div>
-                    <label class="block text-[10px] font-bold mb-2 uppercase tracking-widest text-gray-500" data-i18n="login-email">Sähköposti</label>
-                    <input type="email" id="email" required placeholder="matti@esimerkki.fi" class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition text-white text-sm">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold mb-2 uppercase tracking-widest text-gray-500" data-i18n="login-pass">Salasana</label>
-                    <input type="password" id="password" required placeholder="••••••••" class="w-full glass p-4 rounded-xl focus:outline-none focus:border-[#00BFA6] transition text-white text-sm">
-                </div>
-                <button type="submit" id="auth-btn" class="w-full gradient-bg text-white font-black py-4 rounded-xl hover:scale-[1.02] active:scale-95 transition shadow-lg text-sm" data-i18n="login-btn">KIRJAUDU SISÄÄN ➔</button>
-                <p class="text-center text-[10px] text-gray-500 mt-4">Jos sinulla ei ole vielä tiliä, se luodaan automaattisesti ensikirjautumisen yhteydessä.</p>
-            </form>
+            <h2 class="text-xl md:text-2xl font-bold mb-3 text-center">Jatka tuotteen kirjautumiseen</h2>
+            <p class="text-center text-sm text-gray-400 mb-6">Varsinainen kirjautuminen tapahtuu Duuniharavan tech-tuotteessa.</p>
+            <button type="button" id="product-login-btn" class="w-full gradient-bg text-white font-black py-4 rounded-xl hover:scale-[1.02] active:scale-95 transition shadow-lg text-sm">
+                SIIRRY KIRJAUTUMAAN TUOTTEESEEN ➔
+            </button>
         </div>
     </section>
 
@@ -387,54 +373,19 @@
 </main>
 
 <script>
-// --- SUPABASE KIRJAUTUMINEN ---
-document.getElementById('auth-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const btn = document.getElementById('auth-btn');
+// --- TUOTTEEN KIRJAUTUMISEEN OHJAUS ---
+const PRODUCT_APP_BASE_URL = 'https://app.duuniharava.org/';
 
-    btn.disabled = true;
-    const originalText = btn.innerText;
-    btn.innerText = "KÄSITELLÄÄN...";
+function getProductAppBaseUrl() {
+    return PRODUCT_APP_BASE_URL.endsWith("/") ? PRODUCT_APP_BASE_URL : `${PRODUCT_APP_BASE_URL}/`;
+}
 
-    try {
-        const { data: signInData, error: signInError } = await supabaseClient.auth.signInWithPassword({
-            email: email,
-            password: password,
-        });
+function redirectToProductLogin() {
+    const productBase = getProductAppBaseUrl();
+    window.location.href = new URL('/login', productBase).toString();
+}
 
-        if (signInError && (signInError.message.includes("Invalid login credentials") || signInError.status === 400)) {
-            const { data: signUpData, error: signUpError } = await supabaseClient.auth.signUp({
-                email: email,
-                password: password,
-            });
-
-            if (signUpError) throw signUpError;
-
-            if (signUpData.user) {
-                await supabaseClient.from('profiles').insert([
-                    { id: signUpData.user.id, email: email, customer_group: 'paid_customer' }
-                ]);
-            }
-            
-            alert("Tili luotu onnistuneesti!");
-            window.location.href = 'dashboard.html';
-            return;
-        }
-
-        if (signInError) throw signInError;
-
-        if (signInData.user) {
-            window.location.href = 'dashboard.html';
-        }
-
-    } catch (err) {
-        alert("Virhe: " + err.message);
-        btn.disabled = false;
-        btn.innerText = originalText;
-    }
-});
+document.getElementById('product-login-btn').addEventListener('click', redirectToProductLogin);
 
 // --- TRANSLATIONS ---
 const translations = {
