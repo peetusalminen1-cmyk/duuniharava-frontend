@@ -295,11 +295,11 @@
         </div>
     </section>
 
-    <section id="pricing" class="py-32 px-6 max-w-7xl mx-auto text-center reveal">
-        <h2 class="text-4xl md:text-6xl font-black mb-8 tracking-tight" data-i18n="nav-pricing">Valitse sinulle sopiva taso</h2>
-        <p class="text-gray-400 mb-20 text-xl max-w-2xl mx-auto" data-i18n="pricing-desc">Skaalautuvat työkalut riippuen siitä, haetko aktiivisesti uutta suuntaa vai tarkkailetko vain markkinoita.</p>
+    <section id="pricing" class="py-32 px-6 max-w-5xl mx-auto text-center reveal">
+        <h2 class="text-4xl md:text-6xl font-black mb-8 tracking-tight" data-i18n="nav-pricing">Tilausvaihtoehdot</h2>
+        <p class="text-gray-400 mb-20 text-xl max-w-2xl mx-auto" data-i18n="pricing-desc">Kokeile ensin ilmaiseksi ja päivitä Pro-tasolle, kun haluat tehokkaamman ja rajattoman hakuprosessin.</p>
         
-        <div class="grid md:grid-cols-3 gap-10">
+        <div class="grid md:grid-cols-2 gap-10">
             <div class="glass p-12 rounded-[3rem] hover-lift border border-white/5 text-left flex flex-col">
                 <h3 class="text-2xl font-black mb-2 text-white">Starter</h3>
                 <p class="text-base text-gray-500 mb-10 border-b border-white/10 pb-8" data-i18n="price-free-desc">Kokeile palvelua riskittä.</p>
@@ -307,8 +307,8 @@
                     <span class="text-5xl font-black text-white">0 €</span>
                 </div>
                 <ul class="text-gray-300 space-y-5 mb-12 flex-1 text-lg">
-                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> 1 Visuaalinen CV</li>
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> 3 Tekoälyhakemusta</li>
+                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> 3 CV:n Räätälöintiä</li>
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Työpaikkojen seuranta</li>
                 </ul>
                 <button onclick="document.getElementById('auth-section').classList.remove('hidden'); document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" class="w-full glass border-white/20 py-5 rounded-2xl hover:bg-white hover:text-black transition-all text-lg font-black text-white" data-i18n="btn-start-free">Aloita ilmaiseksi</button>
@@ -325,23 +325,9 @@
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Rajattomat CV-versiot</li>
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Rajattomat hakemukset</li>
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Haastattelusimulaattori</li>
-                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> 3 eri äänensävyä</li>
+                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Kaikki CV-teemat</li>
                 </ul>
                 <button onclick="document.getElementById('auth-section').classList.remove('hidden'); document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" class="w-full gradient-bg py-5 rounded-2xl font-black text-black hover:scale-[1.03] active:scale-95 transition-all shadow-[0_10px_30px_rgba(0,191,166,0.3)] text-lg" data-i18n="btn-upgrade">Päivitä Pro-tasolle</button>
-            </div>
-            
-            <div class="glass p-12 rounded-[3rem] hover-lift border border-white/5 text-left flex flex-col">
-                <h3 class="text-2xl font-black mb-2 text-gray-300">Coaching</h3>
-                <p class="text-base text-gray-500 mb-10 border-b border-white/10 pb-8" data-i18n="price-coach-desc">Kun kaipaat henkilökohtaista sparrausta.</p>
-                <div class="mb-10">
-                    <span class="text-5xl font-black text-white">49 €</span><span class="text-gray-500 text-lg"> / kerta</span>
-                </div>
-                <ul class="text-gray-300 space-y-5 mb-12 flex-1 text-lg">
-                    <li class="flex items-center gap-4"><span class="text-gray-500 font-black text-xl">✓</span> Kaikki Pro-edut</li>
-                    <li class="flex items-center gap-4"><span class="text-gray-500 font-black text-xl">✓</span> LinkedInin syväanalyysi</li>
-                    <li class="flex items-center gap-4"><span class="text-gray-500 font-black text-xl">✓</span> Yksityiskohtainen palaute</li>
-                </ul>
-                <button onclick="document.getElementById('auth-section').classList.remove('hidden'); document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" class="w-full glass border-white/20 py-5 rounded-2xl hover:bg-white hover:text-black transition-all text-lg font-black text-white" data-i18n="btn-contact">Ota yhteyttä</button>
             </div>
         </div>
     </section>
@@ -388,7 +374,7 @@
     </section>
 
     <footer class="mt-20 border-t border-white/10 bg-black pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
             <div>
                 <div class="font-black text-2xl tracking-tighter flex items-center gap-2 mb-6">
                     <span class="turkoosi-text">DUUNI</span><span class="oranssi-text">HARAVA</span>
@@ -396,21 +382,12 @@
                 <p class="text-gray-400 text-sm leading-relaxed max-w-xs">Tekoälyavusteinen ura- ja työnhakualusta, joka tekee erottumisesta helppoa ja stressitöntä.</p>
             </div>
             
-            <div>
-                <h4 class="text-white font-bold mb-6 tracking-widest uppercase text-sm">Navigaatio</h4>
-                <ul class="space-y-4 text-sm text-gray-400">
-                    <li><a href="#features" class="hover:text-[#00BFA6] transition">Ominaisuudet</a></li>
-                    <li><a href="#pricing" class="hover:text-[#00BFA6] transition">Hinnasto</a></li>
-                    <li><a href="#faq" class="hover:text-[#00BFA6] transition">Usein Kysytyt</a></li>
-                </ul>
-            </div>
-            
-            <div>
-                <h4 class="text-white font-bold mb-6 tracking-widest uppercase text-sm" data-i18n="footer-legal">Lakitiedot</h4>
+            <div class="md:justify-self-end">
+                <h4 class="text-white font-bold mb-6 tracking-widest uppercase text-sm" data-i18n="footer-legal">Lakitiedot & Yhteys</h4>
                 <ul class="space-y-4 text-sm text-gray-400">
                     <li><button onclick="openModal('privacy-modal')" class="hover:text-[#00BFA6] transition" data-i18n="footer-privacy">Tietosuojaseloste</button></li>
                     <li><button onclick="openModal('terms-modal')" class="hover:text-[#00BFA6] transition" data-i18n="footer-terms">Käyttöehdot</button></li>
-                    <li><a href="mailto:peetu.salminen1@gmail.com" class="hover:text-[#00BFA6] transition">Ota yhteyttä</a></li>
+                    <li><a href="mailto:peetu.salminen1@gmail.com" class="hover:text-[#00BFA6] transition text-lg mt-2 inline-block">peetu.salminen1@gmail.com</a></li>
                 </ul>
             </div>
         </div>
@@ -523,7 +500,7 @@ const translations = {
         "testi-title": "Työnhakijat luottavat meihin",
         "testi-1-text": "\"Sain ensimmäisen haastattelukutsuni kahteen kuukauteen heti ensimmäisellä hakemuksella, jonka Duuniharava kirjoitti minulle. Visuaalinen CV-editori säästi tunteja aikaa.\"",
         "testi-2-text": "\"En ole hyvä kirjoittamaan itsestäni, joten tekoälyn luoma 'koukku' profiiliini oli pelastus. Kanban-taulu auttaa pitämään hakemukset järjestyksessä.\"",
-        "pricing-desc": "Skaalautuvat työkalut riippuen siitä, haetko aktiivisesti uutta suuntaa vai tarkkailetko vain markkinoita.",
+        "pricing-desc": "Kokeile ensin ilmaiseksi ja päivitä Pro-tasolle, kun haluat tehokkaamman ja rajattoman hakuprosessin.",
         "price-free-desc": "Kokeile palvelua riskittä.",
         "price-pro-desc": "Täysi tekoälyn tuki tehokkaaseen työnhakuun.",
         "price-coach-desc": "Kun kaipaat henkilökohtaista sparrausta.",
@@ -539,7 +516,7 @@ const translations = {
         "auth-title": "Siirry studioon",
         "auth-desc": "Duuniharavan työtila, jossa optimoit CV:si ja hallinnoit hakuprosessiasi, aukeaa omassa näkymässään.",
         "auth-btn": "KIRJAUDU TAI LUO TILI ➔",
-        "footer-legal": "Lakitiedot",
+        "footer-legal": "Lakitiedot & Yhteys",
         "footer-privacy": "Tietosuojaseloste",
         "footer-terms": "Käyttöehdot",
         "modal-privacy-title": "Tietosuojaseloste",
@@ -568,7 +545,7 @@ const translations = {
         "testi-title": "Trusted by Job Seekers",
         "testi-1-text": "\"I got my first interview invite in two months with the very first application Duuniharava wrote for me. The visual CV editor saved me hours.\"",
         "testi-2-text": "\"I'm not good at writing about myself, so the AI-generated 'hook' for my profile was a lifesaver. The Kanban board also helps keep applications organized.\"",
-        "pricing-desc": "Scalable tools depending on whether you are actively seeking a new direction or just monitoring the market.",
+        "pricing-desc": "Try the service risk-free and upgrade to Pro when you need a more powerful and unlimited job search process.",
         "price-free-desc": "Try the service risk-free.",
         "price-pro-desc": "Full AI support for effective job hunting.",
         "price-coach-desc": "When you need personal coaching.",
@@ -584,7 +561,7 @@ const translations = {
         "auth-title": "Go to Studio",
         "auth-desc": "The Duuniharava workspace, where you optimize your CV and manage your application process, opens in its own view.",
         "auth-btn": "LOGIN OR CREATE ACCOUNT ➔",
-        "footer-legal": "Legal",
+        "footer-legal": "Legal & Contact",
         "footer-privacy": "Privacy Policy",
         "footer-terms": "Terms of Service",
         "modal-privacy-title": "Privacy Policy",
