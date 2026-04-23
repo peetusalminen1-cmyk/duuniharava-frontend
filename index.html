@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: 'Space Grotesk', sans-serif;
-            background-color: #0A0A0A; /* Aavistuksen tummempi tausta tuo kontrastia */
+            background-color: #0A0A0A;
             color: #FFFFFF;
             scroll-behavior: smooth;
             overflow-x: hidden;
@@ -18,7 +18,6 @@
         .turkoosi-text { color: #00BFA6; }
         .oranssi-text { color: #FF6F3C; }
         
-        /* Pehmeämpi ja tyylikkäämpi lasiefekti */
         .glass {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(16px);
@@ -70,7 +69,6 @@
             animation: particleSuck 2.5s infinite linear;
         }
 
-        /* Uusi hehku taustalle */
         .glow-blob {
             position: absolute;
             border-radius: 50%;
@@ -103,6 +101,77 @@
             background: rgba(0, 191, 166, 0.05);
             color: #00BFA6;
         }
+
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+
+        /* Modaalit */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            background: #141414;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 40px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: rgba(255,255,255,0.05);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background 0.2s;
+        }
+        .modal-close:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .legal-text h3 {
+            font-weight: 900;
+            color: #00BFA6;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+        }
+        .legal-text p, .legal-text ul {
+            color: #9ca3af;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .legal-text ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
     </style>
 </head>
 <body class="pt-24 selection:bg-[#00BFA6]/30">
@@ -116,8 +185,8 @@
             <div class="hidden lg:flex gap-12 text-sm font-bold text-gray-400">
                 <a href="#hero" class="hover:text-white transition" data-i18n="nav-home">Etusivu</a>
                 <a href="#features" class="hover:text-white transition" data-i18n="nav-services">Ominaisuudet</a>
-                <a href="#value-proposition" class="hover:text-white transition" data-i18n="nav-value">Miksi me?</a>
                 <a href="#pricing" class="hover:text-white transition" data-i18n="nav-pricing">Hinnasto</a>
+                <a href="#faq" class="hover:text-white transition" data-i18n="nav-faq">UKK</a>
             </div>
             <div class="flex items-center gap-5">
                 <div class="hidden sm:flex gap-2 border-r border-white/10 pr-5">
@@ -182,76 +251,44 @@
                 <div class="group">
                     <div class="w-20 h-20 bg-[#FF6F3C]/10 rounded-[24px] border border-[#FF6F3C]/20 flex items-center justify-center text-4xl mb-8 group-hover:scale-110 transition-transform duration-500">📡</div>
                     <h3 class="text-3xl font-black mb-5 text-white tracking-tight" data-i18n="value-1-h">Oikeaa dataa</h3>
-                    <p class="text-gray-400 text-lg leading-relaxed">Emme hallusinoi. Duuniharava on kytketty virallisiin rajapintoihin (kuten Työmarkkinatori). Etsimme aidosti tällä sekunnilla avoinna olevia paikkoja suoraan markkinoilta.</p>
+                    <p class="text-gray-400 text-lg leading-relaxed" data-i18n="value-1-desc">Emme hallusinoi. Duuniharava on kytketty virallisiin rajapintoihin. Etsimme aidosti tällä sekunnilla avoinna olevia paikkoja suoraan markkinoilta.</p>
                 </div>
                 <div class="group">
                     <div class="w-20 h-20 bg-[#00BFA6]/10 rounded-[24px] border border-[#00BFA6]/20 flex items-center justify-center text-4xl mb-8 group-hover:scale-110 transition-transform duration-500">🧠</div>
                     <h3 class="text-3xl font-black mb-5 text-white tracking-tight" data-i18n="value-2-h">Lippulaiva-AI</h3>
-                    <p class="text-gray-400 text-lg leading-relaxed">Taustalla hyrrää markkinoiden älykkäin GPT-4o -malli, joka on erikseen roolitettu ymmärtämään suomalaista rekrytointikulttuuria. Ei tekoälyjargonia.</p>
+                    <p class="text-gray-400 text-lg leading-relaxed" data-i18n="value-2-desc">Taustalla hyrrää markkinoiden älykkäin malli, joka on erikseen roolitettu ymmärtämään suomalaista rekrytointikulttuuria. Ei tekoälyjargonia.</p>
                 </div>
                 <div class="group">
                     <div class="w-20 h-20 bg-white/5 rounded-[24px] border border-white/10 flex items-center justify-center text-4xl mb-8 group-hover:scale-110 transition-transform duration-500">⚡</div>
                     <h3 class="text-3xl font-black mb-5 text-white tracking-tight" data-i18n="value-3-h">Kaikki yhdessä</h3>
-                    <p class="text-gray-400 text-lg leading-relaxed">Unohda Word-pohjien kanssa säätäminen. Suunnittele visuaalinen CV, selaa työpaikkoja ja generoi niihin osuvat hakemukset samassa Studiossa.</p>
+                    <p class="text-gray-400 text-lg leading-relaxed" data-i18n="value-3-desc">Unohda Word-pohjien kanssa säätäminen. Suunnittele visuaalinen CV, selaa työpaikkoja ja generoi niihin osuvat hakemukset samassa Studiossa.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="features" class="py-32 px-6 max-w-7xl mx-auto reveal relative">
-        <h2 class="text-4xl md:text-6xl font-black text-center mb-20 tracking-tight" data-i18n="features-title">Kenelle ja mitä tarjoamme</h2>
-        
-        <div class="grid lg:grid-cols-3 gap-12">
-            <div class="space-y-8">
-                <h3 class="text-3xl font-black text-white mb-10 border-b border-white/10 pb-6" data-i18n="target-title">Työnhakijoille</h3>
-                
-                <div class="glass p-10 rounded-[32px] hover-lift bg-white/[0.01]">
-                    <h4 class="font-black text-xl turkoosi-text mb-4" data-i18n="target-1-name">🌍 Kansainväliset osaajat</h4>
-                    <p class="text-lg text-gray-400 leading-relaxed" data-i18n="target-1-desc">Ota Suomen työmarkkinat haltuun vaivattomasti ja ylitä kielimuurit tekoälyn tuella.</p>
-                </div>
-                
-                <div class="glass p-10 rounded-[32px] hover-lift bg-white/[0.01]">
-                    <h4 class="font-black text-xl oranssi-text mb-4" data-i18n="target-2-name">🎓 Vastavalmistuneet</h4>
-                    <p class="text-lg text-gray-400 leading-relaxed" data-i18n="target-2-desc">Käännä vähäinen työkokemus vahvuudeksi ja nappaa urasi ensimmäinen oman alan työpaikka.</p>
-                </div>
-            </div>
-
-            <div class="space-y-8">
-                <h3 class="text-3xl font-black turkoosi-text mb-10 border-b border-[#00BFA6]/20 pb-6" data-i18n="opt-title">Älykkäät työkalut</h3>
-                
-                <div class="glass p-10 rounded-[32px] hover-lift flex flex-col gap-6 bg-white/[0.01]">
-                    <div class="w-14 h-14 rounded-2xl bg-[#00BFA6]/10 flex items-center justify-center text-3xl">📄</div>
+    <section class="py-20 px-6 max-w-7xl mx-auto reveal">
+        <h2 class="text-3xl md:text-5xl font-black text-center mb-16 tracking-tight" data-i18n="testi-title">Työnhakijat luottavat meihin</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="glass p-10 rounded-3xl relative">
+                <div class="text-[#00BFA6] text-6xl absolute top-6 right-6 opacity-20 font-serif">"</div>
+                <p class="text-xl text-gray-300 mb-6 italic" data-i18n="testi-1-text">"Sain ensimmäisen haastattelukutsuni kahteen kuukauteen heti ensimmäisellä hakemuksella, jonka Duuniharava kirjoitti minulle. Visuaalinen CV-editori säästi tunteja aikaa."</p>
+                <div class="flex items-center gap-4 mt-8 pt-6 border-t border-white/10">
+                    <div class="w-12 h-12 bg-gradient-to-br from-[#00BFA6] to-blue-600 rounded-full"></div>
                     <div>
-                        <h4 class="font-black text-xl text-white mb-3" data-i18n="opt-1-name">CV:n optimointi</h4>
-                        <p class="text-gray-400 text-lg leading-relaxed" data-i18n="opt-1-desc">Analysoimme ja muotoilemme ansioluettelosi ammattimaiseen ja erottuvaan muotoon.</p>
-                    </div>
-                </div>
-                
-                <div class="glass p-10 rounded-[32px] hover-lift flex flex-col gap-6 bg-white/[0.01]">
-                    <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-3xl">🎯</div>
-                    <div>
-                        <h4 class="font-black text-xl text-white mb-3" data-i18n="opt-3-name">Räätälöidyt hakemukset</h4>
-                        <p class="text-gray-400 text-lg leading-relaxed" data-i18n="opt-3-desc">Luo juuri siihen tiettyyn unelmatyöpaikkaan kohdennettu hakemusteksti sekunneissa.</p>
+                        <p class="font-bold text-white">Mikael K.</p>
+                        <p class="text-sm text-gray-500">Ohjelmistokehittäjä</p>
                     </div>
                 </div>
             </div>
-
-            <div class="space-y-8">
-                <h3 class="text-3xl font-black oranssi-text mb-10 border-b border-[#FF6F3C]/20 pb-6" data-i18n="net-title">Uranhallinta</h3>
-                
-                <div class="glass p-10 rounded-[32px] hover-lift flex flex-col gap-6 bg-white/[0.01]">
-                    <div class="w-14 h-14 rounded-2xl bg-[#FF6F3C]/10 flex items-center justify-center text-3xl">📊</div>
+            <div class="glass p-10 rounded-3xl relative">
+                <div class="text-[#FF6F3C] text-6xl absolute top-6 right-6 opacity-20 font-serif">"</div>
+                <p class="text-xl text-gray-300 mb-6 italic" data-i18n="testi-2-text">"En ole hyvä kirjoittamaan itsestäni, joten tekoälyn luoma 'koukku' profiiliini oli pelastus. Kanban-taulu auttaa myös pitämään hakemukset järjestyksessä."</p>
+                <div class="flex items-center gap-4 mt-8 pt-6 border-t border-white/10">
+                    <div class="w-12 h-12 bg-gradient-to-br from-[#FF6F3C] to-pink-600 rounded-full"></div>
                     <div>
-                        <h4 class="font-black text-xl text-white mb-3" data-i18n="net-1-name">Työpaikkojen Kanban</h4>
-                        <p class="text-gray-400 text-lg leading-relaxed" data-i18n="net-1-desc">Pidä avoimet haut, deadlinet ja haastattelut selkeässä järjestyksessä samalla alustalla.</p>
-                    </div>
-                </div>
-                
-                <div class="glass p-10 rounded-[32px] hover-lift flex flex-col gap-6 bg-white/[0.01]">
-                    <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-3xl">🔗</div>
-                    <div>
-                        <h4 class="font-black text-xl text-white mb-3" data-i18n="net-2-name">Aktiivinen hakuprofiili</h4>
-                        <p class="text-gray-400 text-lg leading-relaxed" data-i18n="net-2-desc">Aseta kriteerit, ja anna järjestelmän seuloa sinulle osuvimmat mahdollisuudet markkinoilta.</p>
+                        <p class="font-bold text-white">Laura S.</p>
+                        <p class="text-sm text-gray-500">Myyntipäällikkö</p>
                     </div>
                 </div>
             </div>
@@ -260,12 +297,12 @@
 
     <section id="pricing" class="py-32 px-6 max-w-7xl mx-auto text-center reveal">
         <h2 class="text-4xl md:text-6xl font-black mb-8 tracking-tight" data-i18n="nav-pricing">Valitse sinulle sopiva taso</h2>
-        <p class="text-gray-400 mb-20 text-xl max-w-2xl mx-auto">Skaalautuvat työkalut riippuen siitä, haetko aktiivisesti uutta suuntaa vai tarkkailetko vain markkinoita.</p>
+        <p class="text-gray-400 mb-20 text-xl max-w-2xl mx-auto" data-i18n="pricing-desc">Skaalautuvat työkalut riippuen siitä, haetko aktiivisesti uutta suuntaa vai tarkkailetko vain markkinoita.</p>
         
         <div class="grid md:grid-cols-3 gap-10">
             <div class="glass p-12 rounded-[3rem] hover-lift border border-white/5 text-left flex flex-col">
                 <h3 class="text-2xl font-black mb-2 text-white">Starter</h3>
-                <p class="text-base text-gray-500 mb-10 border-b border-white/10 pb-8">Kokeile palvelua riskittä.</p>
+                <p class="text-base text-gray-500 mb-10 border-b border-white/10 pb-8" data-i18n="price-free-desc">Kokeile palvelua riskittä.</p>
                 <div class="mb-10">
                     <span class="text-5xl font-black text-white">0 €</span>
                 </div>
@@ -274,28 +311,28 @@
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> 3 Tekoälyhakemusta</li>
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Työpaikkojen seuranta</li>
                 </ul>
-                <button onclick="document.getElementById('auth-section').classList.remove('hidden'); document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" class="w-full glass border-white/20 py-5 rounded-2xl hover:bg-white hover:text-black transition-all text-lg font-black text-white" data-i18n="btn-select">Aloita ilmaiseksi</button>
+                <button onclick="document.getElementById('auth-section').classList.remove('hidden'); document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" class="w-full glass border-white/20 py-5 rounded-2xl hover:bg-white hover:text-black transition-all text-lg font-black text-white" data-i18n="btn-start-free">Aloita ilmaiseksi</button>
             </div>
             
             <div class="glass p-12 rounded-[3rem] border-2 border-[#00BFA6]/50 scale-100 md:scale-105 shadow-[0_30px_60px_-15px_rgba(0,191,166,0.2)] relative text-left flex flex-col bg-gradient-to-b from-[#00BFA6]/10 to-transparent">
                 <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#00BFA6] text-black text-sm font-black px-8 py-2.5 rounded-full tracking-widest uppercase shadow-lg" data-i18n="popular">Suosituin</div>
                 <h3 class="text-2xl font-black mb-2 turkoosi-text">Pro Hakija</h3>
-                <p class="text-base text-gray-400 mb-10 border-b border-white/10 pb-8">Täysi tekoälyn tuki tehokkaaseen työnhakuun.</p>
+                <p class="text-base text-gray-400 mb-10 border-b border-white/10 pb-8" data-i18n="price-pro-desc">Täysi tekoälyn tuki tehokkaaseen työnhakuun.</p>
                 <div class="mb-10">
                     <span class="text-5xl font-black text-white">9,90 €</span><span class="text-gray-500 text-lg"> / kk</span>
                 </div>
                 <ul class="text-white space-y-5 mb-12 flex-1 text-lg font-medium">
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Rajattomat CV-versiot</li>
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Rajattomat hakemukset</li>
-                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Live-rajapintahaku (API)</li>
+                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Haastattelusimulaattori</li>
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> 3 eri äänensävyä</li>
                 </ul>
-                <button onclick="document.getElementById('auth-section').classList.remove('hidden'); document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" class="w-full gradient-bg py-5 rounded-2xl font-black text-black hover:scale-[1.03] active:scale-95 transition-all shadow-[0_10px_30px_rgba(0,191,166,0.3)] text-lg" data-i18n="btn-select">Päivitä Pro-tasolle</button>
+                <button onclick="document.getElementById('auth-section').classList.remove('hidden'); document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" class="w-full gradient-bg py-5 rounded-2xl font-black text-black hover:scale-[1.03] active:scale-95 transition-all shadow-[0_10px_30px_rgba(0,191,166,0.3)] text-lg" data-i18n="btn-upgrade">Päivitä Pro-tasolle</button>
             </div>
             
             <div class="glass p-12 rounded-[3rem] hover-lift border border-white/5 text-left flex flex-col">
                 <h3 class="text-2xl font-black mb-2 text-gray-300">Coaching</h3>
-                <p class="text-base text-gray-500 mb-10 border-b border-white/10 pb-8">Kun kaipaat henkilökohtaista sparrausta.</p>
+                <p class="text-base text-gray-500 mb-10 border-b border-white/10 pb-8" data-i18n="price-coach-desc">Kun kaipaat henkilökohtaista sparrausta.</p>
                 <div class="mb-10">
                     <span class="text-5xl font-black text-white">49 €</span><span class="text-gray-500 text-lg"> / kerta</span>
                 </div>
@@ -304,29 +341,137 @@
                     <li class="flex items-center gap-4"><span class="text-gray-500 font-black text-xl">✓</span> LinkedInin syväanalyysi</li>
                     <li class="flex items-center gap-4"><span class="text-gray-500 font-black text-xl">✓</span> Yksityiskohtainen palaute</li>
                 </ul>
-                <button onclick="document.getElementById('auth-section').classList.remove('hidden'); document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" class="w-full glass border-white/20 py-5 rounded-2xl hover:bg-white hover:text-black transition-all text-lg font-black text-white" data-i18n="btn-select">Ota yhteyttä</button>
+                <button onclick="document.getElementById('auth-section').classList.remove('hidden'); document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" class="w-full glass border-white/20 py-5 rounded-2xl hover:bg-white hover:text-black transition-all text-lg font-black text-white" data-i18n="btn-contact">Ota yhteyttä</button>
             </div>
         </div>
     </section>
 
-    <section id="auth-section" class="py-32 flex justify-center px-6 reveal hidden">
+    <section id="faq" class="py-20 px-6 max-w-4xl mx-auto reveal">
+        <h2 class="text-3xl md:text-5xl font-black text-center mb-16 tracking-tight" data-i18n="faq-title">Usein Kysytyt Kysymykset</h2>
+        
+        <div class="space-y-4">
+            <details class="glass p-6 rounded-2xl cursor-pointer group">
+                <summary class="font-bold text-xl text-white outline-none flex justify-between items-center" data-i18n="faq-1-q">
+                    Onko järjestelmä turvallinen käyttää?
+                    <span class="text-[#00BFA6] group-open:rotate-45 transition-transform text-2xl">+</span>
+                </summary>
+                <p class="mt-4 text-gray-400 leading-relaxed" data-i18n="faq-1-a">Kyllä. Kaikki tietosi tallennetaan suojatuille EU-alueen palvelimille. Emme koskaan myy tietojasi kolmansille osapuolille, ja voit poistaa tilisi ja tietosi milloin tahansa yhdellä napin painalluksella.</p>
+            </details>
+
+            <details class="glass p-6 rounded-2xl cursor-pointer group">
+                <summary class="font-bold text-xl text-white outline-none flex justify-between items-center" data-i18n="faq-2-q">
+                    Miten voin perua Pro-tilauksen?
+                    <span class="text-[#00BFA6] group-open:rotate-45 transition-transform text-2xl">+</span>
+                </summary>
+                <p class="mt-4 text-gray-400 leading-relaxed" data-i18n="faq-2-a">Tilaus ei sido sinua pitkiin sopimuksiin. Voit peruuttaa tilauksesi suoraan asetuksista milloin tahansa, ja tilauksesi päättyy kuluvan laskutuskauden loppuun.</p>
+            </details>
+
+            <details class="glass p-6 rounded-2xl cursor-pointer group">
+                <summary class="font-bold text-xl text-white outline-none flex justify-between items-center" data-i18n="faq-3-q">
+                    Lukaisevatko työnantajat CV:ni suoraan alustalta?
+                    <span class="text-[#00BFA6] group-open:rotate-45 transition-transform text-2xl">+</span>
+                </summary>
+                <p class="mt-4 text-gray-400 leading-relaxed" data-i18n="faq-3-a">Ei. Duuniharava on sinun henkilökohtainen työpöytäsi. Luot täällä CV:t ja hakemukset, lataat ne PDF-muodossa laitteellesi ja lähetät ne itse haluamiisi työpaikkoihin.</p>
+            </details>
+        </div>
+    </section>
+
+    <section id="auth-section" class="py-20 flex justify-center px-6 reveal hidden">
         <div class="max-w-2xl w-full glass p-12 md:p-20 rounded-[3rem] border-t-4 border-[#00BFA6] shadow-2xl bg-zinc-900/80 text-center relative overflow-hidden">
             <div class="absolute top-0 right-0 p-8 text-[#00BFA6] opacity-5 text-9xl font-black pointer-events-none leading-none">🔐</div>
-            <h2 class="text-4xl font-black mb-6 text-white relative z-10">Siirry studioon</h2>
-            <p class="text-lg text-gray-400 mb-12 leading-relaxed relative z-10">Duuniharavan työtila, jossa optimoit CV:si ja hallinnoit hakuprosessiasi, aukeaa omassa näkymässään.</p>
-            <button type="button" id="product-login-btn" class="w-full bg-white text-black font-black py-6 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_20px_40px_rgba(255,255,255,0.2)] text-xl relative z-10">
+            <h2 class="text-4xl font-black mb-6 text-white relative z-10" data-i18n="auth-title">Siirry studioon</h2>
+            <p class="text-lg text-gray-400 mb-12 leading-relaxed relative z-10" data-i18n="auth-desc">Duuniharavan työtila, jossa optimoit CV:si ja hallinnoit hakuprosessiasi, aukeaa omassa näkymässään.</p>
+            <button type="button" id="product-login-btn" class="w-full bg-white text-black font-black py-6 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_20px_40px_rgba(255,255,255,0.2)] text-xl relative z-10" data-i18n="auth-btn">
                 KIRJAUDU TAI LUO TILI ➔
             </button>
         </div>
     </section>
 
-    <footer class="py-16 mt-20 text-center text-gray-500 border-t border-white/5 font-bold text-sm tracking-widest uppercase">
-        <p>© 2026 DUUNIHARAVA. KAIKKI OIKEUDET PIDÄTETÄÄN.</p>
+    <footer class="mt-20 border-t border-white/10 bg-black pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div>
+                <div class="font-black text-2xl tracking-tighter flex items-center gap-2 mb-6">
+                    <span class="turkoosi-text">DUUNI</span><span class="oranssi-text">HARAVA</span>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed max-w-xs">Tekoälyavusteinen ura- ja työnhakualusta, joka tekee erottumisesta helppoa ja stressitöntä.</p>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-bold mb-6 tracking-widest uppercase text-sm">Navigaatio</h4>
+                <ul class="space-y-4 text-sm text-gray-400">
+                    <li><a href="#features" class="hover:text-[#00BFA6] transition">Ominaisuudet</a></li>
+                    <li><a href="#pricing" class="hover:text-[#00BFA6] transition">Hinnasto</a></li>
+                    <li><a href="#faq" class="hover:text-[#00BFA6] transition">Usein Kysytyt</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-bold mb-6 tracking-widest uppercase text-sm" data-i18n="footer-legal">Lakitiedot</h4>
+                <ul class="space-y-4 text-sm text-gray-400">
+                    <li><button onclick="openModal('privacy-modal')" class="hover:text-[#00BFA6] transition" data-i18n="footer-privacy">Tietosuojaseloste</button></li>
+                    <li><button onclick="openModal('terms-modal')" class="hover:text-[#00BFA6] transition" data-i18n="footer-terms">Käyttöehdot</button></li>
+                    <li><a href="mailto:peetu.salminen1@gmail.com" class="hover:text-[#00BFA6] transition">Ota yhteyttä</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="border-t border-white/5 pt-8 text-center text-gray-600 text-xs font-bold tracking-widest uppercase">
+            <p>© 2026 Duuniharava. Kaikki oikeudet pidätetään.</p>
+        </div>
     </footer>
+
+    <div id="privacy-modal" class="modal-overlay" onclick="closeModalOutside(event, 'privacy-modal')">
+        <div class="modal-content custom-scrollbar">
+            <button onclick="closeModal('privacy-modal')" class="modal-close">✕</button>
+            <h2 class="text-3xl font-black text-white mb-6" data-i18n="modal-privacy-title">Tietosuojaseloste</h2>
+            <div class="legal-text" data-i18n="modal-privacy-text">
+                <h3>1. Rekisterinpitäjä</h3>
+                <p><strong>Nimi:</strong> Duuniharva<br>
+                <strong>Y-tunnus:</strong> 3605255-8<br>
+                <strong>Osoite:</strong> Vaaralan talkootie 6a A, 01230 Vantaa<br>
+                <strong>Sähköposti:</strong> peetu.salminen1@gmail.com</p>
+
+                <h3>2. Mitä tietoja keräämme?</h3>
+                <p>Keräämme vain ne tiedot, jotka syötät itse palveluun: nimesi, yhteystietosi, työhistoriasi, koulutuksesi ja muut CV-tiedot. Tallennetut työpaikat ja luodut hakemukset kytketään käyttäjätiliisi.</p>
+
+                <h3>3. Mihin tietoja käytetään ja missä niitä säilytetään?</h3>
+                <p>Tietojasi käytetään yksinomaan CV:n ja työhakemusten luomiseen sekä alustan toiminnallisuuksien tarjoamiseen. Datan tallennukseen käytämme Supabase-tietokantapalvelua. Kaikki käyttäjätieto tallennetaan ja käsitellään turvallisesti EU-alueella sijaitsevilla palvelimilla GDPR-asetuksen mukaisesti.</p>
+
+                <h3>4. Kolmannet osapuolet (Tekoälyn käyttö)</h3>
+                <p>Palvelumme ydinominaisuudet on toteutettu yhteistyössä OpenAI:n kanssa. Kun käytät tekoälyä, tietosi siirretään hetkellisesti API-yhteyden kautta prosessoitavaksi. OpenAI ei API-ehtojensa mukaisesti tallenna tai käytä henkilötietojasi omien tekoälymalliensa kouluttamiseen.</p>
+
+                <h3>5. Oikeutesi</h3>
+                <p>Sinulla on oikeus nähdä omat tietosi, korjata niitä tai poistaa tilisi ja datasi kokonaan palvelusta asetuksien kautta.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="terms-modal" class="modal-overlay" onclick="closeModalOutside(event, 'terms-modal')">
+        <div class="modal-content custom-scrollbar">
+            <button onclick="closeModal('terms-modal')" class="modal-close">✕</button>
+            <h2 class="text-3xl font-black text-white mb-6" data-i18n="modal-terms-title">Käyttöehdot (Terms of Service)</h2>
+            <div class="legal-text" data-i18n="modal-terms-text">
+                <h3>1. Palvelun kuvaus</h3>
+                <p>Duuniharava on tekoälyavusteinen ohjelmistopalvelu (SaaS), joka auttaa työnhakijoita luomaan ansioluetteloita ja työhakemuksia. Palvelun tarjoaa Duuniharva ("Palveluntarjoaja").</p>
+
+                <h3>2. Vastuunrajoitus (Disclaimer)</h3>
+                <p>Kaikki palvelun generoima teksti on ohjeellista. <strong>Käyttäjä on itse aina vastuussa lähetetyn CV:n tai työhakemuksen sisällön todenmukaisuudesta.</strong> Palveluntarjoaja ei takaa työpaikkaa tai haastatteluita, eikä vastaa vahingoista joita mahdolliset virheet tekstissä voivat aiheuttaa.</p>
+
+                <h3>3. Maksut ja Tilaukset</h3>
+                <p>Maksulliset ominaisuudet veloitetaan etukäteen valitun laskutuskauden mukaisesti. Voit peruuttaa tilauksesi milloin tahansa profiilisi asetuksista. Peruutuksen jälkeen palvelu pysyy käytössäsi maksetun kauden loppuun asti. Emme tarjoa palautuksia jo alkaneista jaksoista.</p>
+
+                <h3>4. Immateriaalioikeudet</h3>
+                <p>Palvelun koodi ja design ovat Palveluntarjoajan omaisuutta. Sinä omistat täydet oikeudet omaan dataasi, luomaasi CV:hen ja työhakemuksiin.</p>
+
+                <h3>5. Tilin sulkeminen</h3>
+                <p>Palveluntarjoajalla on oikeus evätä pääsy palveluun, mikäli käyttäjä rikkoo käyttöehtoja tai kuormittaa palvelua haitallisella tavalla.</p>
+            </div>
+        </div>
+    </div>
+
 </main>
 
 <script>
-// --- TUOTTEEN KIRJAUTUMISEEN OHJAUS ---
 const PRODUCT_APP_BASE_URL = 'https://app.duuniharava.org/';
 
 function getProductAppBaseUrl() {
@@ -340,61 +485,112 @@ function redirectToProductLogin() {
 
 document.getElementById('product-login-btn').addEventListener('click', redirectToProductLogin);
 
-// --- TRANSLATIONS ---
+function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden'; 
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+function closeModalOutside(event, id) {
+    if (event.target.id === id) {
+        closeModal(id);
+    }
+}
+
 const translations = {
     fi: {
-        "nav-home": "Etusivu", "nav-services": "Ominaisuudet", "nav-value": "Miksi me?", "nav-pricing": "Hinnasto", "nav-login": "KIRJAUDU SISÄÄN",
+        "nav-home": "Etusivu", "nav-services": "Ominaisuudet", "nav-value": "Miksi me?", "nav-pricing": "Hinnasto", "nav-faq": "UKK", "nav-login": "KIRJAUDU SISÄÄN",
         "hero-badge": "Uusi sukupolvi on täällä",
         "hero-title": "Aitoja työpaikkoja. \nTäydellisiä hakemuksia.", 
         "hero-desc": "Unohda ChatGPT:n kanssa säätäminen. Duuniharava hakee oikeat työpaikat suoraan virallisista lähteistä ja luo sinulle voittavan CV:n ja hakemuksen sekunneissa.",
         "hero-cta": "ALOITA ILMAISEKSI", "btn-more": "MITEN TÄMÄ TOIMII?",
         "value-title": "Miksi olemme erilainen?",
-        "value-1-h": "Oikeaa dataa",
-        "value-2-h": "Lippulaiva-AI",
-        "value-3-h": "Kaikki yhdessä",
+        "value-1-h": "Oikeaa dataa", "value-1-desc": "Emme hallusinoi. Duuniharava on kytketty virallisiin rajapintoihin. Etsimme aidosti tällä sekunnilla avoinna olevia paikkoja suoraan markkinoilta.",
+        "value-2-h": "Lippulaiva-AI", "value-2-desc": "Taustalla hyrrää markkinoiden älykkäin malli, joka on erikseen roolitettu ymmärtämään suomalaista rekrytointikulttuuria. Ei tekoälyjargonia.",
+        "value-3-h": "Kaikki yhdessä", "value-3-desc": "Unohda Word-pohjien kanssa säätäminen. Suunnittele visuaalinen CV, selaa työpaikkoja ja generoi niihin osuvat hakemukset samassa Studiossa.",
         "features-title": "Kenelle ja mitä tarjoamme", "target-title": "Työnhakijoille",
         "opt-title": "Älykkäät työkalut", "net-title": "Uranhallinta",
-        "target-1-name": "🌍 Kansainväliset osaajat",
-        "target-1-desc": "Ota Suomen työmarkkinat haltuun vaivattomasti ja ylitä kielimuurit tekoälyn tuella.",
-        "target-2-name": "🎓 Vastavalmistuneet",
-        "target-2-desc": "Käännä vähäinen työkokemus vahvuudeksi ja nappaa urasi ensimmäinen oman alan työpaikka.",
-        "opt-1-name": "CV:n optimointi",
-        "opt-1-desc": "Analysoimme ja muotoilemme ansioluettelosi ammattimaiseen ja erottuvaan muotoon.",
-        "opt-3-name": "Räätälöidyt hakemukset",
-        "opt-3-desc": "Luo juuri siihen tiettyyn unelmatyöpaikkaan kohdennettu hakemusteksti sekunneissa.",
-        "net-1-name": "Työpaikkojen Kanban",
-        "net-1-desc": "Pidä avoimet haut, deadlinet ja haastattelut selkeässä järjestyksessä samalla alustalla.",
-        "net-2-name": "Aktiivinen hakuprofiili",
-        "net-2-desc": "Aseta kriteerit, ja anna järjestelmän seuloa sinulle osuvimmat mahdollisuudet markkinoilta.",
+        "target-1-name": "🌍 Kansainväliset osaajat", "target-1-desc": "Ota Suomen työmarkkinat haltuun vaivattomasti ja ylitä kielimuurit tekoälyn tuella.",
+        "target-2-name": "🎓 Vastavalmistuneet", "target-2-desc": "Käännä vähäinen työkokemus vahvuudeksi ja nappaa urasi ensimmäinen oman alan työpaikka.",
+        "opt-1-name": "CV:n optimointi", "opt-1-desc": "Analysoimme ja muotoilemme ansioluettelosi ammattimaiseen ja erottuvaan muotoon.",
+        "opt-3-name": "Räätälöidyt hakemukset", "opt-3-desc": "Luo juuri siihen tiettyyn unelmatyöpaikkaan kohdennettu hakemusteksti sekunneissa.",
+        "net-1-name": "Työpaikkojen Kanban", "net-1-desc": "Pidä avoimet haut, deadlinet ja haastattelut selkeässä järjestyksessä samalla alustalla.",
+        "net-2-name": "Aktiivinen hakuprofiili", "net-2-desc": "Aseta kriteerit, ja anna järjestelmän seuloa sinulle osuvimmat mahdollisuudet markkinoilta.",
+        "testi-title": "Työnhakijat luottavat meihin",
+        "testi-1-text": "\"Sain ensimmäisen haastattelukutsuni kahteen kuukauteen heti ensimmäisellä hakemuksella, jonka Duuniharava kirjoitti minulle. Visuaalinen CV-editori säästi tunteja aikaa.\"",
+        "testi-2-text": "\"En ole hyvä kirjoittamaan itsestäni, joten tekoälyn luoma 'koukku' profiiliini oli pelastus. Kanban-taulu auttaa pitämään hakemukset järjestyksessä.\"",
+        "pricing-desc": "Skaalautuvat työkalut riippuen siitä, haetko aktiivisesti uutta suuntaa vai tarkkailetko vain markkinoita.",
+        "price-free-desc": "Kokeile palvelua riskittä.",
+        "price-pro-desc": "Täysi tekoälyn tuki tehokkaaseen työnhakuun.",
+        "price-coach-desc": "Kun kaipaat henkilökohtaista sparrausta.",
         "popular": "Suosituin",
-        "btn-select": "Valitse"
+        "btn-start-free": "Aloita ilmaiseksi", "btn-upgrade": "Päivitä Pro-tasolle", "btn-contact": "Ota yhteyttä",
+        "faq-title": "Usein Kysytyt Kysymykset",
+        "faq-1-q": "Onko järjestelmä turvallinen käyttää?",
+        "faq-1-a": "Kyllä. Kaikki tietosi tallennetaan suojatuille EU-alueen palvelimille. Emme koskaan myy tietojasi kolmansille osapuolille, ja voit poistaa tilisi ja tietosi milloin tahansa yhdellä napin painalluksella.",
+        "faq-2-q": "Miten voin perua Pro-tilauksen?",
+        "faq-2-a": "Tilaus ei sido sinua pitkiin sopimuksiin. Voit peruuttaa tilauksesi suoraan asetuksista milloin tahansa, ja tilauksesi päättyy kuluvan laskutuskauden loppuun.",
+        "faq-3-q": "Lukaisevatko työnantajat CV:ni suoraan alustalta?",
+        "faq-3-a": "Ei. Duuniharava on sinun henkilökohtainen työpöytäsi. Luot täällä CV:t ja hakemukset, lataat ne PDF-muodossa laitteellesi ja lähetät ne itse haluamiisi työpaikkoihin.",
+        "auth-title": "Siirry studioon",
+        "auth-desc": "Duuniharavan työtila, jossa optimoit CV:si ja hallinnoit hakuprosessiasi, aukeaa omassa näkymässään.",
+        "auth-btn": "KIRJAUDU TAI LUO TILI ➔",
+        "footer-legal": "Lakitiedot",
+        "footer-privacy": "Tietosuojaseloste",
+        "footer-terms": "Käyttöehdot",
+        "modal-privacy-title": "Tietosuojaseloste",
+        "modal-privacy-text": "<h3>1. Rekisterinpitäjä</h3><p><strong>Nimi:</strong> Duuniharva<br><strong>Y-tunnus:</strong> 3605255-8<br><strong>Osoite:</strong> Vaaralan talkootie 6a A, 01230 Vantaa<br><strong>Sähköposti:</strong> peetu.salminen1@gmail.com</p><h3>2. Mitä tietoja keräämme?</h3><p>Keräämme vain ne tiedot, jotka syötät itse palveluun: nimesi, yhteystietosi, työhistoriasi, koulutuksesi ja muut CV-tiedot. Tallennetut työpaikat ja luodut hakemukset kytketään käyttäjätiliisi.</p><h3>3. Mihin tietoja käytetään ja missä niitä säilytetään?</h3><p>Tietojasi käytetään yksinomaan CV:n ja työhakemusten luomiseen sekä alustan toiminnallisuuksien tarjoamiseen. Datan tallennukseen käytämme Supabase-tietokantapalvelua. Kaikki käyttäjätieto tallennetaan ja käsitellään turvallisesti EU-alueella sijaitsevilla palvelimilla GDPR-asetuksen mukaisesti.</p><h3>4. Kolmannet osapuolet (Tekoälyn käyttö)</h3><p>Palvelumme ydinominaisuudet on toteutettu yhteistyössä OpenAI:n kanssa. Kun käytät tekoälyä, tietosi siirretään hetkellisesti API-yhteyden kautta prosessoitavaksi. OpenAI ei API-ehtojensa mukaisesti tallenna tai käytä henkilötietojasi omien tekoälymalliensa kouluttamiseen.</p><h3>5. Oikeutesi</h3><p>Sinulla on oikeus nähdä omat tietosi, korjata niitä tai poistaa tilisi ja datasi kokonaan palvelusta asetuksien kautta.</p>",
+        "modal-terms-title": "Käyttöehdot",
+        "modal-terms-text": "<h3>1. Palvelun kuvaus</h3><p>Duuniharava on tekoälyavusteinen ohjelmistopalvelu (SaaS), joka auttaa työnhakijoita luomaan ansioluetteloita ja työhakemuksia. Palvelun tarjoaa Duuniharva (\"Palveluntarjoaja\").</p><h3>2. Vastuunrajoitus (Disclaimer)</h3><p>Kaikki palvelun generoima teksti on ohjeellista. <strong>Käyttäjä on itse aina vastuussa lähetetyn CV:n tai työhakemuksen sisällön todenmukaisuudesta.</strong> Palveluntarjoaja ei takaa työpaikkaa tai haastatteluita, eikä vastaa vahingoista joita mahdolliset virheet tekstissä voivat aiheuttaa.</p><h3>3. Maksut ja Tilaukset</h3><p>Maksulliset ominaisuudet veloitetaan etukäteen valitun laskutuskauden mukaisesti. Voit peruuttaa tilauksesi milloin tahansa profiilisi asetuksista. Peruutuksen jälkeen palvelu pysyy käytössäsi maksetun kauden loppuun asti. Emme tarjoa palautuksia jo alkaneista jaksoista.</p><h3>4. Immateriaalioikeudet</h3><p>Palvelun koodi ja design ovat Palveluntarjoajan omaisuutta. Sinä omistat täydet oikeudet omaan dataasi, luomaasi CV:hen ja työhakemuksiin.</p><h3>5. Tilin sulkeminen</h3><p>Palveluntarjoajalla on oikeus evätä pääsy palveluun, mikäli käyttäjä rikkoo käyttöehtoja tai kuormittaa palvelua haitallisella tavalla.</p>"
     },
     en: {
-        "nav-home": "Home", "nav-services": "Features", "nav-value": "Why Us?", "nav-pricing": "Pricing", "nav-login": "LOGIN",
+        "nav-home": "Home", "nav-services": "Features", "nav-value": "Why Us?", "nav-pricing": "Pricing", "nav-faq": "FAQ", "nav-login": "LOGIN",
         "hero-badge": "The next generation is here",
         "hero-title": "Real Jobs. \nPerfect Applications.", 
         "hero-desc": "Forget tweaking ChatGPT. Duuniharava fetches real jobs from official sources and generates a winning CV and cover letter in seconds.",
         "hero-cta": "START FOR FREE", "btn-more": "HOW IT WORKS?",
         "value-title": "Why are we different?",
-        "value-1-h": "Real Data",
-        "value-2-h": "Flagship AI",
-        "value-3-h": "All-in-One",
+        "value-1-h": "Real Data", "value-1-desc": "We don't hallucinate. Duuniharava is connected to official APIs, finding real, currently open positions directly from the market.",
+        "value-2-h": "Flagship AI", "value-2-desc": "Powered by the smartest model on the market, specifically tuned to understand local recruiting culture. No AI jargon.",
+        "value-3-h": "All-in-One", "value-3-desc": "Forget tweaking Word templates. Design a visual CV, browse jobs, and generate tailored applications all in the same Studio.",
         "features-title": "Who We Help & Features", "target-title": "For Job Seekers",
         "opt-title": "Smart Tools", "net-title": "Career Management",
-        "target-1-name": "🌍 International Talents",
-        "target-1-desc": "Conquer the Finnish job market effortlessly and overcome language barriers with AI support.",
-        "target-2-name": "🎓 Graduates",
-        "target-2-desc": "Turn limited experience into a strength and land your first professional role.",
-        "opt-1-name": "CV Optimization",
-        "opt-1-desc": "We analyze and format your resume into a professional, standout document.",
-        "opt-3-name": "Tailored Applications",
-        "opt-3-desc": "Create a high-quality cover letter targeted to a specific job in seconds.",
-        "net-1-name": "Job Kanban",
-        "net-1-desc": "Keep your open applications, deadlines, and interviews organized on one platform.",
-        "net-2-name": "Active Search Profile",
-        "net-2-desc": "Set your criteria and let the system filter the most relevant opportunities for you.",
+        "target-1-name": "🌍 International Talents", "target-1-desc": "Conquer the job market effortlessly and overcome language barriers with AI support.",
+        "target-2-name": "🎓 Graduates", "target-2-desc": "Turn limited experience into a strength and land your first professional role.",
+        "opt-1-name": "CV Optimization", "opt-1-desc": "We analyze and format your resume into a professional, standout document.",
+        "opt-3-name": "Tailored Applications", "opt-3-desc": "Create a high-quality cover letter targeted to a specific job in seconds.",
+        "net-1-name": "Job Kanban", "net-1-desc": "Keep your open applications, deadlines, and interviews organized on one platform.",
+        "net-2-name": "Active Search Profile", "net-2-desc": "Set your criteria and let the system filter the most relevant opportunities for you.",
+        "testi-title": "Trusted by Job Seekers",
+        "testi-1-text": "\"I got my first interview invite in two months with the very first application Duuniharava wrote for me. The visual CV editor saved me hours.\"",
+        "testi-2-text": "\"I'm not good at writing about myself, so the AI-generated 'hook' for my profile was a lifesaver. The Kanban board also helps keep applications organized.\"",
+        "pricing-desc": "Scalable tools depending on whether you are actively seeking a new direction or just monitoring the market.",
+        "price-free-desc": "Try the service risk-free.",
+        "price-pro-desc": "Full AI support for effective job hunting.",
+        "price-coach-desc": "When you need personal coaching.",
         "popular": "Most Popular",
-        "btn-select": "Select"
+        "btn-start-free": "Start for Free", "btn-upgrade": "Upgrade to Pro", "btn-contact": "Contact Us",
+        "faq-title": "Frequently Asked Questions",
+        "faq-1-q": "Is the system safe to use?",
+        "faq-1-a": "Yes. All your data is stored on secure EU servers. We never sell your data to third parties, and you can delete your account and data at any time with one click.",
+        "faq-2-q": "How can I cancel the Pro subscription?",
+        "faq-2-a": "The subscription does not bind you to long contracts. You can cancel your subscription directly from the settings at any time, and it will end at the close of the current billing cycle.",
+        "faq-3-q": "Do employers read my CV directly from the platform?",
+        "faq-3-a": "No. Duuniharava is your personal workspace. You create your CVs and applications here, download them as PDFs to your device, and send them yourself to the jobs you want.",
+        "auth-title": "Go to Studio",
+        "auth-desc": "The Duuniharava workspace, where you optimize your CV and manage your application process, opens in its own view.",
+        "auth-btn": "LOGIN OR CREATE ACCOUNT ➔",
+        "footer-legal": "Legal",
+        "footer-privacy": "Privacy Policy",
+        "footer-terms": "Terms of Service",
+        "modal-privacy-title": "Privacy Policy",
+        "modal-privacy-text": "<h3>1. Data Controller</h3><p><strong>Name:</strong> Duuniharva<br><strong>Business ID:</strong> 3605255-8<br><strong>Address:</strong> Vaaralan talkootie 6a A, 01230 Vantaa, Finland<br><strong>Email:</strong> peetu.salminen1@gmail.com</p><h3>2. What data do we collect?</h3><p>We only collect data you input into the service: your name, contact info, work history, education, and other CV data. Saved jobs and applications are linked to your user account.</p><h3>3. How is the data used and stored?</h3><p>Your data is used solely to generate CVs and applications. We use Supabase database services. All user data is securely stored and processed on servers located in the EU in compliance with GDPR.</p><h3>4. Third Parties (AI Usage)</h3><p>Our core features are powered by OpenAI. When you use the AI features, your inputted data is temporarily transferred via API for processing. According to OpenAI's API terms, they do <strong>not</strong> save or use your personal data to train their AI models.</p><h3>5. Your Rights</h3><p>You have the right to view, correct, or completely delete your data and account at any time via the service settings.</p>",
+        "modal-terms-title": "Terms of Service",
+        "modal-terms-text": "<h3>1. Service Description</h3><p>Duuniharava is an AI-assisted SaaS platform that helps job seekers create resumes and applications. The service is provided by Duuniharva (\"Service Provider\").</p><h3>2. Disclaimer</h3><p>All text generated by the service is draft material. <strong>The user is always solely responsible for the truthfulness and quality of the sent CV or cover letter.</strong> The Service Provider does not guarantee job interviews or employment, and is not liable for any damages caused by text errors.</p><h3>3. Payments and Subscriptions</h3><p>Paid features are billed in advance according to the chosen billing cycle. You can cancel your subscription at any time. After cancellation, the service remains active until the end of the paid period. We do not offer partial refunds.</p><h3>4. Intellectual Property</h3><p>The service code and design are the property of the Service Provider. You own full rights to your own data, the CVs, and applications you create.</p><h3>5. Account Termination</h3><p>The Service Provider reserves the right to deny access to the service if the user violates these terms or overloads the service maliciously.</p>"
     }
 };
 
@@ -402,8 +598,6 @@ function changeLang(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[lang][key]) {
-            // Jos alkuperäisessä on HTML:ää (kuten <br/>), käytetään innerHTML:ää. 
-            // Turvallisempi tapa on korvata tekstit.
             el.innerHTML = translations[lang][key].replace('\n', '<br/>');
         }
     });
