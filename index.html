@@ -105,7 +105,6 @@
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
 
-        /* Modaalit */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -172,8 +171,6 @@
             list-style-type: disc;
             padding-left: 20px;
         }
-
-        /* Ominaisuuksien ikonit */
         .feature-icon-wrapper {
             width: 64px;
             height: 64px;
@@ -184,9 +181,21 @@
             font-size: 28px;
             margin-bottom: 24px;
         }
+        .tool-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 16px;
+        }
     </style>
 </head>
-<body class="pt-24 selection:bg-[#00BFA6]/30">
+<body class="pt-24 selection:bg-[#00BFA6]/30 custom-scrollbar">
 
     <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
@@ -195,10 +204,10 @@
                 <div><span class="turkoosi-text">DUUNI</span><span class="oranssi-text">HARAVA</span></div>
             </div>
             <div class="hidden lg:flex gap-12 text-sm font-bold text-gray-400">
-                <a href="#hero" class="hover:text-white transition" data-i18n="nav-home">Etusivu</a>
+                <a href="#target" class="hover:text-white transition" data-i18n="nav-who">Kenelle?</a>
                 <a href="#features" class="hover:text-white transition" data-i18n="nav-services">Ominaisuudet</a>
+                <a href="#tools" class="hover:text-white transition" data-i18n="nav-tools">Työkalut</a>
                 <a href="#pricing" class="hover:text-white transition" data-i18n="nav-pricing">Hinnasto</a>
-                <a href="#faq" class="hover:text-white transition" data-i18n="nav-faq">UKK</a>
             </div>
             <div class="flex items-center gap-5">
                 <div class="hidden sm:flex gap-2 border-r border-white/10 pr-5">
@@ -240,7 +249,7 @@
                 Aitoja työpaikkoja. <br/><span class="turkoosi-text">Täydellisiä hakemuksia.</span>
             </h1>
             <p class="text-gray-400 mb-12 text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed" data-i18n="hero-desc">
-                Unohda ChatGPT:n kanssa säätäminen ja Word-pohjat. Duuniharava hakee oikeat työpaikat markkinoilta ja luo sinulle näyttävän CV:n sekä räätälöidyt hakemukset sekunneissa.
+                Unohda ChatGPT:n kanssa säätäminen ja Word-pohjat. Duuniharava hakee oikeat työpaikat markkinoilta ja luo sinulle näyttävän CV:n, räätälöidyt hakemukset sekä työkaluarsenaalin uranhallintaan.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -254,49 +263,128 @@
         </div>
     </section>
 
+    <section id="target" class="py-24 px-6 relative reveal">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-black text-center mb-16 tracking-tight" data-i18n="target-main-title">Kenelle Duuniharava on suunniteltu?</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="glass p-8 md:p-10 rounded-3xl border-l-4 border-[#00BFA6]">
+                    <h3 class="text-2xl font-black text-white mb-3" data-i18n="target-1-title">🧭 Uravaihtajille</h3>
+                    <p class="text-gray-400 leading-relaxed text-lg" data-i18n="target-1-desc">Tuntuuko, että aloitat nollista? Tekoälymme osaa kaivaa vanhasta työkokemuksestasi piilevät taidot ja kääntää ne täysin uuden alan vaatimalle kielelle uskottavasti.</p>
+                </div>
+                <div class="glass p-8 md:p-10 rounded-3xl border-l-4 border-[#FF6F3C]">
+                    <h3 class="text-2xl font-black text-white mb-3" data-i18n="target-2-title">💼 Asiantuntijoille & Johtajille</h3>
+                    <p class="text-gray-400 leading-relaxed text-lg" data-i18n="target-2-desc">Aika on rahaa. Automatisoi rutiinit, generoi näyttävä CV ATS-lukijoita varten ja luo headhuntereille magneettisia myyntipuheita (pitchejä) yhdellä klikkauksella.</p>
+                </div>
+                <div class="glass p-8 md:p-10 rounded-3xl border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-black text-white mb-3" data-i18n="target-3-title">🎓 Vastavalmistuneille</h3>
+                    <p class="text-gray-400 leading-relaxed text-lg" data-i18n="target-3-desc">Työkokemusta on vähän, mutta potentiaalia paljon. Duuniharava auttaa muotoilemaan vähäisenkin kokemuksen ja harrastukset erottuvaksi ja myyväksi kokonaisuudeksi.</p>
+                </div>
+                <div class="glass p-8 md:p-10 rounded-3xl border-l-4 border-purple-500">
+                    <h3 class="text-2xl font-black text-white mb-3" data-i18n="target-4-title">🤫 "Inhoan itseni myymistä" -tyypeille</h3>
+                    <p class="text-gray-400 leading-relaxed text-lg" data-i18n="target-4-desc">Ahdistaako soitto rekrytoijalle tai kehumisen keksiminen hakemukseen? Anna tekoälyn kirjoittaa "koukku", puhelinkäsikirjoitus tai suosittelijapyyntö puolestasi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="features" class="py-32 px-6 max-w-7xl mx-auto reveal relative">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,191,166,0.05),transparent_70%)] pointer-events-none"></div>
         <h2 class="text-3xl md:text-5xl font-black text-center mb-6 tracking-tight relative z-10" data-i18n="features-main-title">Kaikki mitä tarvitset <br/>unelmatyön nappaamiseen</h2>
         <p class="text-gray-400 text-center text-lg max-w-2xl mx-auto mb-20 relative z-10" data-i18n="features-main-desc">Olemme rakentaneet täydellisen työkalupakin modernille työnhakijalle. Kaikki samassa älykkäässä työpöydässä.</p>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-            
             <div class="glass p-10 rounded-[2.5rem] hover-lift border-t-2 border-[#00BFA6]/40 flex flex-col">
                 <div class="feature-icon-wrapper bg-[#00BFA6]/10 text-[#00BFA6] border border-[#00BFA6]/20">🎨</div>
                 <h3 class="text-2xl font-black mb-4 text-white tracking-tight" data-i18n="feat-1-title">Visuaalinen CV-editori</h3>
-                <p class="text-gray-400 text-base leading-relaxed flex-1" data-i18n="feat-1-desc">Luo ammattimainen CV ilman tuskailua asettelun kanssa. Valitse 4 eri tyylistä, säädä värit, asettelut ja muodot oman brändisi mukaisiksi. Lataa lopuksi täydellinen, ATS-lukijaystävällinen PDF tai DOCX-tiedosto.</p>
+                <p class="text-gray-400 text-base leading-relaxed flex-1" data-i18n="feat-1-desc">Luo ammattimainen CV ilman tuskailua asettelun kanssa. Valitse 4 eri tyylistä, säädä värit ja muodot oman brändisi mukaisiksi. Lataa ATS-lukijaystävällinen PDF tai DOCX.</p>
             </div>
 
             <div class="glass p-10 rounded-[2.5rem] hover-lift border-t-2 border-[#FF6F3C]/40 flex flex-col">
                 <div class="feature-icon-wrapper bg-[#FF6F3C]/10 text-[#FF6F3C] border border-[#FF6F3C]/20">📡</div>
                 <h3 class="text-2xl font-black mb-4 text-white tracking-tight" data-i18n="feat-2-title">Live-haku & Hybriditekoäly</h3>
-                <p class="text-gray-400 text-base leading-relaxed flex-1" data-i18n="feat-2-desc">Palvelumme on kytketty suoraan viralliseen rajapintaan, josta saat aidosti auki olevat työpaikat. Jos sopivaa osumaa ei löydy, älykäs varajärjestelmämme simuloi sinulle testityöpaikkoja harjoittelua varten.</p>
+                <p class="text-gray-400 text-base leading-relaxed flex-1" data-i18n="feat-2-desc">Palvelumme on kytketty suoraan viralliseen rajapintaan. Jos sopivaa aitoa osumaa ei löydy, älykäs varajärjestelmämme simuloi sinulle testityöpaikkoja harjoittelua varten.</p>
             </div>
 
             <div class="glass p-10 rounded-[2.5rem] hover-lift border-t-2 border-[#00BFA6]/40 flex flex-col">
                 <div class="feature-icon-wrapper bg-[#00BFA6]/10 text-[#00BFA6] border border-[#00BFA6]/20">✍️</div>
                 <h3 class="text-2xl font-black mb-4 text-white tracking-tight" data-i18n="feat-3-title">Räätälöidyt hakemukset</h3>
-                <p class="text-gray-400 text-base leading-relaxed flex-1" data-i18n="feat-3-desc">Valitse vain listalta kiinnostava työpaikka, ja tekoäly kirjoittaa ilmoituksen ja CV:si pohjalta täydellisesti räätälöidyn työhakemuksen. Valitse sävyksi asiallinen, lämmin tai myyvä.</p>
+                <p class="text-gray-400 text-base leading-relaxed flex-1" data-i18n="feat-3-desc">Valitse vain listalta kiinnostava työpaikka, ja tekoäly kirjoittaa ilmoituksen ja CV:si pohjalta täydellisesti räätälöidyn työhakemuksen. Valitse asiallinen, lämmin tai myyvä sävy.</p>
             </div>
-
-            <div class="glass p-10 rounded-[2.5rem] hover-lift border-t-2 border-[#FF6F3C]/40 flex flex-col lg:col-span-2">
-                <div class="feature-icon-wrapper bg-[#FF6F3C]/10 text-[#FF6F3C] border border-[#FF6F3C]/20">🎤</div>
-                <h3 class="text-2xl font-black mb-4 text-white tracking-tight" data-i18n="feat-4-title">Älykäs Haastattelusimulaattori</h3>
-                <p class="text-gray-400 text-base leading-relaxed flex-1 max-w-2xl" data-i18n="feat-4-desc">Jännittääkö tuleva haastattelu? Duuniharavan tekoäly lukee hakemasi työpaikan tiedot ja toimii armottomana mutta reiluna rekrytoijana. Se kysyy juuri niitä kysymyksiä, joihin sinun odotetaan vastaavan kyseisessä roolissa. Treenaa chatin kautta ennen tositilannetta!</p>
-            </div>
-
-            <div class="glass p-10 rounded-[2.5rem] hover-lift border-t-2 border-white/20 flex flex-col">
+            
+            <div class="glass p-10 rounded-[2.5rem] hover-lift border-t-2 border-white/20 flex flex-col lg:col-span-3 items-center text-center">
                 <div class="feature-icon-wrapper bg-white/10 text-white border border-white/20">📊</div>
                 <h3 class="text-2xl font-black mb-4 text-white tracking-tight" data-i18n="feat-5-title">Oma Rekry-työpöytä</h3>
-                <p class="text-gray-400 text-base leading-relaxed flex-1" data-i18n="feat-5-desc">Kanban-tyylinen hallinta pitää haut järjestyksessä. Seuraa tallennettuja, haettuja ja haastatteluvaiheessa olevia paikkoja selkeästi. Et enää koskaan missaa tärkeitä deadlineja.</p>
+                <p class="text-gray-400 text-base leading-relaxed max-w-3xl" data-i18n="feat-5-desc">Kanban-tyylinen hallinta pitää haut järjestyksessä. Seuraa tallennettuja, haettuja ja haastatteluvaiheessa olevia paikkoja selkeästi. Et enää koskaan missaa tärkeitä deadlineja.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools" class="py-24 px-6 relative reveal bg-zinc-900/30 border-y border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-[#00BFA6] font-bold tracking-widest uppercase text-sm mb-3 block" data-i18n="tools-subtitle">Bonus: Automaatiot</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white mb-6" data-i18n="tools-main-title">Anna tekoälyn tehdä työt</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto" data-i18n="tools-main-desc">Älä keksi pyörää uudelleen. Duuniharavan "Työkalut"-välilehti sisältää 8 asiantuntijatason automaatiota, jotka hoitavat urasi pullonkaulat sekunneissa.</p>
             </div>
 
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                
+                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                    <div class="tool-icon">🚀</div>
+                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-1-t">LinkedIn-Magneetti</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-1-d">Luo asiantuntijatason 'About'-teksti ja vetäviä asiantuntijapostauksia verkostoitumiseen sekunneissa.</p>
+                </div>
+                
+                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                    <div class="tool-icon">💎</div>
+                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-2-t">Headhunter-Pitch</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-2-d">Tekoäly muotoilee arvoasi (ROI) korostavan viestin, jolla voit lähestyä suorahakukonsultteja ennakoivasti.</p>
+                </div>
+
+                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                    <div class="tool-icon">🕵️</div>
+                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-3-t">Piilotyökartoittaja</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-3-d">Anna tekoälyn laatia vakuuttava avoin hakemus suoraan yrityksen toimitusjohtajalle tai osastonvetäjälle.</p>
+                </div>
+
+                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                    <div class="tool-icon">🛟</div>
+                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-4-t">Haastattelun Pelastusrengas</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-4-d">Pelkäätkö hankalaa kysymystä? Tekoäly kääntää CV:si heikkouden tai työttömyysjakson vakuuttavaksi vahvuudeksi.</p>
+                </div>
+
+                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                    <div class="tool-icon">⭐</div>
+                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-5-t">Suosittelija-automaatti</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-5-d">Laatii kohteliaan, valmiin pyyntöviestin sähköpostiin tai LinkedIniin, jolla pyydät entistä pomoa suosittelijaksi.</p>
+                </div>
+
+                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                    <div class="tool-icon">📞</div>
+                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-6-t">Puhelun Teleprompteri</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-6-d">Jännittääkö soittaa rekrytoijalle? Saat askel-askeleelta etenevän käsikirjoituksen, jota voit lukea suoraan näytöltä.</p>
+                </div>
+
+                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                    <div class="tool-icon">🧭</div>
+                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-7-t">Uravaihtajan Kompassi</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-7-d">Etsii vanhasta työkokemuksestasi uuden alan vaatimat piilevät taidot ja luo suunnitelman siirtymään.</p>
+                </div>
+
+                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                    <div class="tool-icon">🤝</div>
+                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-8-t">Palkkaneuvottelija</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-8-d">Työnantajat odottavat sinun neuvottelevan. Muotoilemme sinulle täydellisen asiallisen, mutta jämäkän vastatarjouksen.</p>
+                </div>
+
+            </div>
         </div>
     </section>
 
     <section id="pricing" class="py-32 px-6 max-w-5xl mx-auto text-center reveal">
         <h2 class="text-4xl md:text-6xl font-black mb-8 tracking-tight" data-i18n="nav-pricing">Tilausvaihtoehdot</h2>
-        <p class="text-gray-400 mb-20 text-xl max-w-2xl mx-auto" data-i18n="pricing-desc">Kokeile ensin ilmaiseksi ja päivitä Pro-tasolle, kun haluat tehokkaamman ja rajattoman hakuprosessin.</p>
+        <p class="text-gray-400 mb-20 text-xl max-w-2xl mx-auto" data-i18n="pricing-desc">Kokeile ensin ilmaiseksi ja päivitä Pro-tasolle, kun haluat täyden tehon ja automaatiotyökalut käyttöösi.</p>
         
         <div class="grid md:grid-cols-2 gap-10">
             <div class="glass p-12 rounded-[3rem] hover-lift border border-white/5 text-left flex flex-col">
@@ -323,10 +411,10 @@
                 <ul class="text-white space-y-5 mb-12 flex-1 text-lg font-medium">
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Rajattomat kustomoidut CV-versiot</li>
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Rajattomat täsmähakemukset</li>
+                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> <strong>Kaikki 8 AI-automaatiotyökalua</strong></li>
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Haastattelusimulaattori rajatta</li>
-                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Kaikki CV-teemat ja värit vapaana</li>
                 </ul>
-                <button onclick="document.getElementById('auth-section').classList.remove('hidden'); document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" class="w-full gradient-bg py-5 rounded-2xl font-black text-black hover:scale-[1.03] active:scale-95 transition-all shadow-[0_10px_30px_rgba(0,191,166,0.3)] text-lg" data-i18n="btn-upgrade">Päivitä Pro-tasolle</button>
+                <button onclick="window.location.href='https://buy.stripe.com/test_...'" class="w-full gradient-bg py-5 rounded-2xl font-black text-black hover:scale-[1.03] active:scale-95 transition-all shadow-[0_10px_30px_rgba(0,191,166,0.3)] text-lg" data-i18n="btn-upgrade">Päivitä Pro-tasolle</button>
             </div>
         </div>
     </section>
@@ -479,31 +567,47 @@ function closeModalOutside(event, id) {
 
 const translations = {
     fi: {
-        "nav-home": "Etusivu", "nav-services": "Ominaisuudet", "nav-value": "Miksi me?", "nav-pricing": "Hinnasto", "nav-faq": "UKK", "nav-login": "KIRJAUDU SISÄÄN",
+        "nav-home": "Etusivu", "nav-who": "Kenelle?", "nav-services": "Ominaisuudet", "nav-tools": "Työkalut", "nav-pricing": "Hinnasto", "nav-faq": "UKK", "nav-login": "KIRJAUDU SISÄÄN",
         "hero-badge": "Uusi sukupolvi on täällä",
         "hero-title": "Aitoja työpaikkoja. \nTäydellisiä hakemuksia.", 
-        "hero-desc": "Unohda ChatGPT:n kanssa säätäminen ja Word-pohjat. Duuniharava hakee oikeat työpaikat markkinoilta ja luo sinulle näyttävän CV:n sekä räätälöidyt hakemukset sekunneissa.",
+        "hero-desc": "Unohda ChatGPT:n kanssa säätäminen ja Word-pohjat. Duuniharava hakee oikeat työpaikat markkinoilta ja luo sinulle näyttävän CV:n, räätälöidyt hakemukset sekä työkaluarsenaalin uranhallintaan.",
         "hero-cta": "ALOITA ILMAISEKSI", "btn-more": "KATSO OMINAISUUDET",
         
+        "target-main-title": "Kenelle Duuniharava on suunniteltu?",
+        "target-1-title": "🧭 Uravaihtajille", "target-1-desc": "Tuntuuko, että aloitat nollista? Tekoälymme osaa kaivaa vanhasta työkokemuksestasi piilevät taidot ja kääntää ne täysin uuden alan vaatimalle kielelle uskottavasti.",
+        "target-2-title": "💼 Asiantuntijoille & Johtajille", "target-2-desc": "Aika on rahaa. Automatisoi rutiinit, generoi näyttävä CV ATS-lukijoita varten ja luo headhuntereille magneettisia myyntipuheita (pitchejä) yhdellä klikkauksella.",
+        "target-3-title": "🎓 Vastavalmistuneille", "target-3-desc": "Työkokemusta on vähän, mutta potentiaalia paljon. Duuniharava auttaa muotoilemaan vähäisenkin kokemuksen ja harrastukset erottuvaksi ja myyväksi kokonaisuudeksi.",
+        "target-4-title": "🤫 \"Inhoan itseni myymistä\" -tyypeille", "target-4-desc": "Ahdistaako soitto rekrytoijalle tai kehumisen keksiminen hakemukseen? Anna tekoälyn kirjoittaa \"koukku\", puhelinkäsikirjoitus tai suosittelijapyyntö puolestasi.",
+
         "features-main-title": "Kaikki mitä tarvitset <br/>unelmatyön nappaamiseen",
         "features-main-desc": "Olemme rakentaneet täydellisen työkalupakin modernille työnhakijalle. Kaikki samassa älykkäässä työpöydässä.",
         
         "feat-1-title": "Visuaalinen CV-editori",
-        "feat-1-desc": "Luo ammattimainen CV ilman tuskailua asettelun kanssa. Valitse 4 eri tyylistä, säädä värit, asettelut ja muodot oman brändisi mukaisiksi. Lataa lopuksi täydellinen, ATS-lukijaystävällinen PDF tai DOCX-tiedosto.",
+        "feat-1-desc": "Luo ammattimainen CV ilman tuskailua asettelun kanssa. Valitse 4 eri tyylistä, säädä värit ja muodot oman brändisi mukaisiksi. Lataa ATS-lukijaystävällinen PDF tai DOCX.",
         
         "feat-2-title": "Live-haku & Hybriditekoäly",
-        "feat-2-desc": "Palvelumme on kytketty suoraan viralliseen rajapintaan, josta saat aidosti auki olevat työpaikat. Jos sopivaa osumaa ei löydy, älykäs varajärjestelmämme simuloi sinulle testityöpaikkoja harjoittelua varten.",
+        "feat-2-desc": "Palvelumme on kytketty suoraan viralliseen rajapintaan. Jos sopivaa aitoa osumaa ei löydy, älykäs varajärjestelmämme simuloi sinulle testityöpaikkoja harjoittelua varten.",
         
         "feat-3-title": "Räätälöidyt hakemukset",
-        "feat-3-desc": "Valitse vain listalta kiinnostava työpaikka, ja tekoäly kirjoittaa ilmoituksen ja CV:si pohjalta täydellisesti räätälöidyn työhakemuksen. Valitse sävyksi asiallinen, lämmin tai myyvä.",
-        
-        "feat-4-title": "Älykäs Haastattelusimulaattori",
-        "feat-4-desc": "Jännittääkö tuleva haastattelu? Duuniharavan tekoäly lukee hakemasi työpaikan tiedot ja toimii armottomana mutta reiluna rekrytoijana. Se kysyy juuri niitä kysymyksiä, joihin sinun odotetaan vastaavan kyseisessä roolissa. Treenaa chatin kautta ennen tositilannetta!",
+        "feat-3-desc": "Valitse vain listalta kiinnostava työpaikka, ja tekoäly kirjoittaa ilmoituksen ja CV:si pohjalta täydellisesti räätälöidyn työhakemuksen. Valitse asiallinen, lämmin tai myyvä sävy.",
         
         "feat-5-title": "Oma Rekry-työpöytä",
         "feat-5-desc": "Kanban-tyylinen hallinta pitää haut järjestyksessä. Seuraa tallennettuja, haettuja ja haastatteluvaiheessa olevia paikkoja selkeästi. Et enää koskaan missaa tärkeitä deadlineja.",
 
-        "pricing-desc": "Kokeile ensin ilmaiseksi ja päivitä Pro-tasolle, kun haluat tehokkaamman ja rajattoman hakuprosessin.",
+        "tools-subtitle": "Bonus: Automaatiot",
+        "tools-main-title": "Anna tekoälyn tehdä työt",
+        "tools-main-desc": "Älä keksi pyörää uudelleen. Duuniharavan \"Työkalut\"-välilehti sisältää 8 asiantuntijatason automaatiota, jotka hoitavat urasi pullonkaulat sekunneissa.",
+        
+        "tool-1-t": "LinkedIn-Magneetti", "tool-1-d": "Luo asiantuntijatason 'About'-teksti ja vetäviä asiantuntijapostauksia verkostoitumiseen sekunneissa.",
+        "tool-2-t": "Headhunter-Pitch", "tool-2-d": "Tekoäly muotoilee arvoasi (ROI) korostavan viestin, jolla voit lähestyä suorahakukonsultteja ennakoivasti.",
+        "tool-3-t": "Piilotyökartoittaja", "tool-3-d": "Anna tekoälyn laatia vakuuttava avoin hakemus suoraan yrityksen toimitusjohtajalle tai osastonvetäjälle.",
+        "tool-4-t": "Haastattelun Pelastusrengas", "tool-4-d": "Pelkäätkö hankalaa kysymystä? Tekoäly kääntää CV:si heikkouden tai työttömyysjakson vakuuttavaksi vahvuudeksi.",
+        "tool-5-t": "Suosittelija-automaatti", "tool-5-d": "Laatii kohteliaan, valmiin pyyntöviestin sähköpostiin tai LinkedIniin, jolla pyydät entistä pomoa suosittelijaksi.",
+        "tool-6-t": "Puhelun Teleprompteri", "tool-6-d": "Jännittääkö soittaa rekrytoijalle? Saat askel-askeleelta etenevän käsikirjoituksen, jota voit lukea suoraan näytöltä.",
+        "tool-7-t": "Uravaihtajan Kompassi", "tool-7-d": "Etsii vanhasta työkokemuksestasi uuden alan vaatimat piilevät taidot ja luo suunnitelman siirtymään.",
+        "tool-8-t": "Palkkaneuvottelija", "tool-8-d": "Työnantajat odottavat sinun neuvottelevan. Muotoilemme sinulle täydellisen asiallisen, mutta jämäkän vastatarjouksen.",
+
+        "pricing-desc": "Kokeile ensin ilmaiseksi ja päivitä Pro-tasolle, kun haluat täyden tehon ja automaatiotyökalut käyttöösi.",
         "price-free-desc": "Kokeile palvelua riskittä.",
         "price-pro-desc": "Täysi tekoälyn tuki tehokkaaseen työnhakuun.",
         "popular": "Suosituin",
@@ -529,31 +633,47 @@ const translations = {
         "modal-terms-text": "<h3>1. Palvelun kuvaus</h3><p>Duuniharava on tekoälyavusteinen ohjelmistopalvelu (SaaS), joka auttaa työnhakijoita luomaan ansioluetteloita ja työhakemuksia. Palvelun tarjoaa Duuniharva (\"Palveluntarjoaja\").</p><h3>2. Vastuunrajoitus (Disclaimer)</h3><p>Kaikki palvelun generoima teksti on ohjeellista. <strong>Käyttäjä on itse aina vastuussa lähetetyn CV:n tai työhakemuksen sisällön todenmukaisuudesta.</strong> Palveluntarjoaja ei takaa työpaikkaa tai haastatteluita, eikä vastaa vahingoista joita mahdolliset virheet tekstissä voivat aiheuttaa.</p><h3>3. Maksut ja Tilaukset</h3><p>Maksulliset ominaisuudet veloitetaan etukäteen valitun laskutuskauden mukaisesti. Voit peruuttaa tilauksesi milloin tahansa profiilisi asetuksista. Peruutuksen jälkeen palvelu pysyy käytössäsi maksetun kauden loppuun asti. Emme tarjoa palautuksia jo alkaneista jaksoista.</p><h3>4. Immateriaalioikeudet</h3><p>Palvelun koodi ja design ovat Palveluntarjoajan omaisuutta. Sinä omistat täydet oikeudet omaan dataasi, luomaasi CV:hen ja työhakemuksiin.</p><h3>5. Tilin sulkeminen</h3><p>Palveluntarjoajalla on oikeus evätä pääsy palveluun, mikäli käyttäjä rikkoo käyttöehtoja tai kuormittaa palvelua haitallisella tavalla.</p>"
     },
     en: {
-        "nav-home": "Home", "nav-services": "Features", "nav-value": "Why Us?", "nav-pricing": "Pricing", "nav-faq": "FAQ", "nav-login": "LOGIN",
+        "nav-home": "Home", "nav-who": "For Whom?", "nav-services": "Features", "nav-tools": "Tools", "nav-pricing": "Pricing", "nav-faq": "FAQ", "nav-login": "LOGIN",
         "hero-badge": "The next generation is here",
         "hero-title": "Real Jobs. \nPerfect Applications.", 
-        "hero-desc": "Forget tweaking ChatGPT and Word templates. Duuniharava fetches real jobs and generates a stunning CV and tailored applications in seconds.",
+        "hero-desc": "Forget tweaking ChatGPT and Word templates. Duuniharava fetches real jobs and generates a stunning CV, tailored applications, and career tools in seconds.",
         "hero-cta": "START FOR FREE", "btn-more": "SEE FEATURES",
         
+        "target-main-title": "Who is Duuniharava for?",
+        "target-1-title": "🧭 Career Changers", "target-1-desc": "Feel like you're starting from scratch? Our AI uncovers hidden skills from your past experience and translates them credibly into your new field.",
+        "target-2-title": "💼 Experts & Executives", "target-2-desc": "Time is money. Automate routines, generate an ATS-friendly CV, and create magnetic pitches for headhunters with a single click.",
+        "target-3-title": "🎓 Graduates", "target-3-desc": "Short on experience but high on potential. Duuniharava helps shape even limited experience and hobbies into a standout, selling package.",
+        "target-4-title": "🤫 Those Who Hate Self-Promotion", "target-4-desc": "Anxious about calling recruiters or bragging in your application? Let AI write the 'hook', phone script, or reference request for you.",
+
         "features-main-title": "Everything you need <br/>to land your dream job",
         "features-main-desc": "We built the perfect toolkit for the modern job seeker. All in one smart dashboard.",
         
         "feat-1-title": "Visual CV Editor",
-        "feat-1-desc": "Create a professional CV without the layout struggle. Choose from 4 styles, adjust colors, layouts, and shapes to fit your brand. Download a perfect, ATS-friendly PDF or DOCX file.",
+        "feat-1-desc": "Create a professional CV without the layout struggle. Choose from 4 styles, adjust colors, and shape your brand. Download an ATS-friendly PDF or DOCX.",
         
         "feat-2-title": "Live Search & Hybrid AI",
-        "feat-2-desc": "Our service is connected directly to official APIs, giving you genuinely open jobs. If no match is found, our smart fallback system simulates test jobs for you to practice with.",
+        "feat-2-desc": "Connected directly to official APIs for real open jobs. If no match is found, our smart fallback simulates test jobs for you to practice with.",
         
         "feat-3-title": "Tailored Applications",
-        "feat-3-desc": "Simply select an interesting job from the list, and the AI writes a perfectly tailored cover letter based on the job ad and your CV. Choose between professional, warm, or sales tone.",
-        
-        "feat-4-title": "Smart Interview Simulator",
-        "feat-4-desc": "Nervous about an upcoming interview? Duuniharava's AI acts as a tough but fair recruiter based on the specific job you applied for. Practice your answers via chat before the real deal!",
+        "feat-3-desc": "Select a job, and the AI writes a perfectly tailored cover letter based on the ad and your CV. Choose between professional, warm, or sales tone.",
         
         "feat-5-title": "Personal Career Dashboard",
         "feat-5-desc": "Kanban-style management keeps your job hunt organized. Clearly track saved, applied, and interviewing positions. Never miss an important deadline again.",
 
-        "pricing-desc": "Try the service risk-free and upgrade to Pro when you need a more powerful and unlimited job search process.",
+        "tools-subtitle": "Bonus: Automations",
+        "tools-main-title": "Let the AI do the work",
+        "tools-main-desc": "Don't reinvent the wheel. Duuniharava's 'Tools' tab includes 8 expert-level automations that handle your career bottlenecks in seconds.",
+        
+        "tool-1-t": "LinkedIn Magnet", "tool-1-d": "Create an expert-level 'About' section and engaging posts for networking in seconds.",
+        "tool-2-t": "Headhunter Pitch", "tool-2-d": "AI drafts an ROI-focused message you can use to proactively approach executive search consultants.",
+        "tool-3-t": "Hidden Job Scout", "tool-3-d": "Let AI draft a convincing open application directly to a company's CEO or department head.",
+        "tool-4-t": "Interview Lifesaver", "tool-4-d": "Afraid of a tough question? AI turns a CV weakness or unemployment gap into a convincing strength.",
+        "tool-5-t": "Recommendation Automator", "tool-5-d": "Drafts a polite, ready-to-send request via email or LinkedIn to ask a former boss to be a reference.",
+        "tool-6-t": "Call Teleprompter", "tool-6-d": "Nervous about calling a recruiter? Get a step-by-step script you can read straight from the screen.",
+        "tool-7-t": "Career Changer's Compass", "tool-7-d": "Finds hidden skills from your old jobs required in a new field and creates a transition plan.",
+        "tool-8-t": "Salary Negotiator", "tool-8-d": "Employers expect you to negotiate. We draft a perfectly professional yet firm counter-offer for you.",
+
+        "pricing-desc": "Try the service risk-free and upgrade to Pro when you need full power and all automation tools.",
         "price-free-desc": "Try the service risk-free.",
         "price-pro-desc": "Full AI support for effective job hunting.",
         "popular": "Most Popular",
