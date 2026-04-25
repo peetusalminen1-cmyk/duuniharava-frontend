@@ -193,6 +193,11 @@
             border: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 16px;
         }
+        /* Custom scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0A0A0A; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #00BFA6; }
     </style>
 </head>
 <body class="pt-24 selection:bg-[#00BFA6]/30 custom-scrollbar">
@@ -214,7 +219,7 @@
                     <button id="lang-fi" class="lang-btn active" onclick="changeLang('fi')">FI</button>
                     <button id="lang-en" class="lang-btn" onclick="changeLang('en')">EN</button>
                 </div>
-                <button onclick="const s = document.getElementById('auth-section'); s.classList.remove('hidden'); s.scrollIntoView({behavior:'smooth'})" 
+                <button onclick="redirectToProductLogin()" 
                         class="text-xs font-black py-3.5 px-7 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black transition-all shadow-lg" data-i18n="nav-login">
                     KIRJAUDU SISÄÄN
                 </button>
@@ -329,7 +334,6 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                
                 <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
                     <div class="tool-icon">🚀</div>
                     <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-1-t">LinkedIn-Magneetti</h4>
@@ -377,7 +381,6 @@
                     <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-8-t">Palkkaneuvottelija</h4>
                     <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-8-d">Työnantajat odottavat sinun neuvottelevan. Muotoilemme sinulle täydellisen asiallisen, mutta jämäkän vastatarjouksen.</p>
                 </div>
-
             </div>
         </div>
     </section>
@@ -398,7 +401,7 @@
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> 3 CV:n Räätälöintiä</li>
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Työpaikkojen live-seuranta</li>
                 </ul>
-                <button onclick="document.getElementById('auth-section').classList.remove('hidden'); document.getElementById('auth-section').scrollIntoView({behavior:'smooth'})" class="w-full glass border-white/20 py-5 rounded-2xl hover:bg-white hover:text-black transition-all text-lg font-black text-white" data-i18n="btn-start-free">Aloita ilmaiseksi</button>
+                <button onclick="redirectToProductLogin()" class="w-full glass border-white/20 py-5 rounded-2xl hover:bg-white hover:text-black transition-all text-lg font-black text-white" data-i18n="btn-start-free">Aloita ilmaiseksi</button>
             </div>
             
             <div class="glass p-12 rounded-[3rem] border-2 border-[#00BFA6]/50 scale-100 md:scale-105 shadow-[0_30px_60px_-15px_rgba(0,191,166,0.2)] relative text-left flex flex-col bg-gradient-to-b from-[#00BFA6]/10 to-transparent">
@@ -414,7 +417,8 @@
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> <strong>Kaikki 8 AI-automaatiotyökalua</strong></li>
                     <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Haastattelusimulaattori rajatta</li>
                 </ul>
-                <button onclick="window.location.href='https://buy.stripe.com/test_...'" class="w-full gradient-bg py-5 rounded-2xl font-black text-black hover:scale-[1.03] active:scale-95 transition-all shadow-[0_10px_30px_rgba(0,191,166,0.3)] text-lg" data-i18n="btn-upgrade">Päivitä Pro-tasolle</button>
+                
+                <button onclick="window.location.href='https://buy.stripe.com/TÄHÄN_OMA_LINKKISI'" class="w-full gradient-bg py-5 rounded-2xl font-black text-black hover:scale-[1.03] active:scale-95 transition-all shadow-[0_10px_30px_rgba(0,191,166,0.3)] text-lg" data-i18n="btn-upgrade">Päivitä Pro-tasolle</button>
             </div>
         </div>
     </section>
@@ -449,12 +453,12 @@
         </div>
     </section>
 
-    <section id="auth-section" class="py-20 flex justify-center px-6 reveal hidden">
+    <section id="auth-section" class="py-20 flex justify-center px-6 reveal">
         <div class="max-w-2xl w-full glass p-12 md:p-20 rounded-[3rem] border-t-4 border-[#00BFA6] shadow-2xl bg-zinc-900/80 text-center relative overflow-hidden">
             <div class="absolute top-0 right-0 p-8 text-[#00BFA6] opacity-5 text-9xl font-black pointer-events-none leading-none">🔐</div>
             <h2 class="text-4xl font-black mb-6 text-white relative z-10" data-i18n="auth-title">Siirry studioon</h2>
             <p class="text-lg text-gray-400 mb-12 leading-relaxed relative z-10" data-i18n="auth-desc">Duuniharavan työtila, jossa optimoit CV:si ja hallinnoit hakuprosessiasi, aukeaa omassa näkymässään.</p>
-            <button type="button" id="product-login-btn" class="w-full bg-white text-black font-black py-6 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_20px_40px_rgba(255,255,255,0.2)] text-xl relative z-10" data-i18n="auth-btn">
+            <button type="button" onclick="redirectToProductLogin()" class="w-full bg-white text-black font-black py-6 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_20px_40px_rgba(255,255,255,0.2)] text-xl relative z-10" data-i18n="auth-btn">
                 KIRJAUDU TAI LUO TILI ➔
             </button>
         </div>
@@ -490,22 +494,20 @@
             <h2 class="text-3xl font-black text-white mb-6" data-i18n="modal-privacy-title">Tietosuojaseloste</h2>
             <div class="legal-text" data-i18n="modal-privacy-text">
                 <h3>1. Rekisterinpitäjä</h3>
-                <p><strong>Nimi:</strong> Duuniharva<br>
+                <p><strong>Nimi:</strong> Duuniharava<br>
                 <strong>Y-tunnus:</strong> 3605255-8<br>
                 <strong>Osoite:</strong> Vaaralan talkootie 6a A, 01230 Vantaa<br>
                 <strong>Sähköposti:</strong> peetu.salminen1@gmail.com</p>
-
                 <h3>2. Mitä tietoja keräämme?</h3>
                 <p>Keräämme vain ne tiedot, jotka syötät itse palveluun: nimesi, yhteystietosi, työhistoriasi, koulutuksesi ja muut CV-tiedot. Tallennetut työpaikat ja luodut hakemukset kytketään käyttäjätiliisi.</p>
-
                 <h3>3. Mihin tietoja käytetään ja missä niitä säilytetään?</h3>
                 <p>Tietojasi käytetään yksinomaan CV:n ja työhakemusten luomiseen sekä alustan toiminnallisuuksien tarjoamiseen. Datan tallennukseen käytämme Supabase-tietokantapalvelua. Kaikki käyttäjätieto tallennetaan ja käsitellään turvallisesti EU-alueella sijaitsevilla palvelimilla GDPR-asetuksen mukaisesti.</p>
-
                 <h3>4. Kolmannet osapuolet (Tekoälyn käyttö)</h3>
                 <p>Palvelumme ydinominaisuudet on toteutettu yhteistyössä OpenAI:n kanssa. Kun käytät tekoälyä, tietosi siirretään hetkellisesti API-yhteyden kautta prosessoitavaksi. OpenAI ei API-ehtojensa mukaisesti tallenna tai käytä henkilötietojasi omien tekoälymalliensa kouluttamiseen.</p>
-
-                <h3>5. Oikeutesi</h3>
-                <p>Sinulla on oikeus nähdä omat tietosi, korjata niitä tai poistaa tilisi ja datasi kokonaan palvelusta asetuksien kautta.</p>
+                <h3>5. Evästeet (Cookies)</h3>
+                <p>Käytämme sivustolla ainoastaan palvelun toiminnan ja tietoturvan kannalta välttämättömiä evästeitä (esim. sisäänkirjautuminen ja maksujen prosessointi Stripe-palvelun kautta). Emme aseta kolmansien osapuolien markkinointievästeitä.</p>
+                <h3>6. Tietojen säilytysaika ja Oikeutesi</h3>
+                <p>Säilytämme tietojasi niin kauan kuin tilisi on aktiivinen. Sinulla on oikeus nähdä omat tietosi, korjata niitä tai poistaa tilisi ja datasi kokonaan palvelusta. Mikäli koet, että käsittelemme henkilötietojasi lainvastaisesti, sinulla on oikeus tehdä valitus tietosuojavaltuutetulle.</p>
             </div>
         </div>
     </div>
@@ -516,19 +518,17 @@
             <h2 class="text-3xl font-black text-white mb-6" data-i18n="modal-terms-title">Käyttöehdot (Terms of Service)</h2>
             <div class="legal-text" data-i18n="modal-terms-text">
                 <h3>1. Palvelun kuvaus</h3>
-                <p>Duuniharava on tekoälyavusteinen ohjelmistopalvelu (SaaS), joka auttaa työnhakijoita luomaan ansioluetteloita ja työhakemuksia. Palvelun tarjoaa Duuniharva ("Palveluntarjoaja").</p>
-
+                <p>Duuniharava on tekoälyavusteinen ohjelmistopalvelu (SaaS), joka auttaa työnhakijoita luomaan ansioluetteloita ja työhakemuksia. Palvelun tarjoaa Duuniharava ("Palveluntarjoaja").</p>
                 <h3>2. Vastuunrajoitus (Disclaimer)</h3>
-                <p>Kaikki palvelun generoima teksti on ohjeellista. <strong>Käyttäjä on itse aina vastuussa lähetetyn CV:n tai työhakemuksen sisällön todenmukaisuudesta.</strong> Palveluntarjoaja ei takaa työpaikkaa tai haastatteluita, eikä vastaa vahingoista joita mahdolliset virheet tekstissä voivat aiheuttaa.</p>
-
-                <h3>3. Maksut ja Tilaukset</h3>
-                <p>Maksulliset ominaisuudet veloitetaan etukäteen valitun laskutuskauden mukaisesti. Voit peruuttaa tilauksesi milloin tahansa profiilisi asetuksista. Peruutuksen jälkeen palvelu pysyy käytössäsi maksetun kauden loppuun asti. Emme tarjoa palautuksia jo alkaneista jaksoista.</p>
-
-                <h3>4. Immateriaalioikeudet</h3>
-                <p>Palvelun koodi ja design ovat Palveluntarjoajan omaisuutta. Sinä omistat täydet oikeudet omaan dataasi, luomaasi CV:hen ja työhakemuksiin.</p>
-
-                <h3>5. Tilin sulkeminen</h3>
-                <p>Palveluntarjoajalla on oikeus evätä pääsy palveluun, mikäli käyttäjä rikkoo käyttöehtoja tai kuormittaa palvelua haitallisella tavalla.</p>
+                <p>Kaikki palvelun generoima teksti on ohjeellista. <strong>Käyttäjä on itse aina vastuussa lähetetyn CV:n tai työhakemuksen sisällön todenmukaisuudesta.</strong> Palveluntarjoaja ei takaa työpaikkaa tai haastatteluita, eikä vastaa suorista tai välillisistä vahingoista, joita mahdolliset virheet tekstissä tai palvelun käytössä voivat aiheuttaa.</p>
+                <h3>3. Maksut, Tilaukset ja Peruuttamisoikeus</h3>
+                <p>Maksulliset ominaisuudet veloitetaan etukäteen valitun laskutuskauden mukaisesti. Voit peruuttaa tilauksesi milloin tahansa profiilisi asetuksista. Peruutuksen jälkeen palvelu pysyy käytössäsi maksetun kauden loppuun asti. Emme tarjoa palautuksia jo alkaneista jaksoista. <strong>Huom! Koska kyseessä on välittömästi käyttöön toimitettava digitaalinen palvelu, kuluttajansuojalain mukainen 14 päivän peruutusoikeus ei koske tehtyjä tilauksia.</strong> Hyväksyt tämän aloittamalla tilauksen.</p>
+                <h3>4. Palvelun saatavuus (Uptime)</h3>
+                <p>Palvelu ja sen tekoälyominaisuudet tarjotaan "sellaisena kuin se on" (as-is). Teemme parhaamme pitääksemme palvelun toiminnassa keskeytyksettä, mutta emme ota vastuuta palvelun ulkopuolisista teknisistä vioista, OpenAI:n rajapintakatkoksista tai muista ylivoimaisista esteistä (Force Majeure).</p>
+                <h3>5. Ikäraja</h3>
+                <p>Palvelun maksullisten osioiden käyttö edellyttää vähintään 18 vuoden ikää tai huoltajan nimenomaista suostumusta.</p>
+                <h3>6. Immateriaalioikeudet ja Tilin sulkeminen</h3>
+                <p>Palvelun koodi ja design ovat Palveluntarjoajan omaisuutta. Käyttäjä omistaa luomansa sisällön (CV:t ja hakemukset). Palveluntarjoajalla on oikeus evätä pääsy palveluun, mikäli käyttäjä rikkoo käyttöehtoja tai kuormittaa palvelua haitallisella tavalla.</p>
             </div>
         </div>
     </div>
@@ -546,8 +546,6 @@ function redirectToProductLogin() {
     const productBase = getProductAppBaseUrl();
     window.location.href = new URL('/login', productBase).toString();
 }
-
-document.getElementById('product-login-btn').addEventListener('click', redirectToProductLogin);
 
 function openModal(id) {
     document.getElementById(id).classList.add('active');
@@ -627,10 +625,12 @@ const translations = {
         "footer-legal": "Lakitiedot & Yhteys",
         "footer-privacy": "Tietosuojaseloste",
         "footer-terms": "Käyttöehdot",
+        
         "modal-privacy-title": "Tietosuojaseloste",
-        "modal-privacy-text": "<h3>1. Rekisterinpitäjä</h3><p><strong>Nimi:</strong> Duuniharva<br><strong>Y-tunnus:</strong> 3605255-8<br><strong>Osoite:</strong> Vaaralan talkootie 6a A, 01230 Vantaa<br><strong>Sähköposti:</strong> peetu.salminen1@gmail.com</p><h3>2. Mitä tietoja keräämme?</h3><p>Keräämme vain ne tiedot, jotka syötät itse palveluun: nimesi, yhteystietosi, työhistoriasi, koulutuksesi ja muut CV-tiedot. Tallennetut työpaikat ja luodut hakemukset kytketään käyttäjätiliisi.</p><h3>3. Mihin tietoja käytetään ja missä niitä säilytetään?</h3><p>Tietojasi käytetään yksinomaan CV:n ja työhakemusten luomiseen sekä alustan toiminnallisuuksien tarjoamiseen. Datan tallennukseen käytämme Supabase-tietokantapalvelua. Kaikki käyttäjätieto tallennetaan ja käsitellään turvallisesti EU-alueella sijaitsevilla palvelimilla GDPR-asetuksen mukaisesti.</p><h3>4. Kolmannet osapuolet (Tekoälyn käyttö)</h3><p>Palvelumme ydinominaisuudet on toteutettu yhteistyössä OpenAI:n kanssa. Kun käytät tekoälyä, tietosi siirretään hetkellisesti API-yhteyden kautta prosessoitavaksi. OpenAI ei API-ehtojensa mukaisesti tallenna tai käytä henkilötietojasi omien tekoälymalliensa kouluttamiseen.</p><h3>5. Oikeutesi</h3><p>Sinulla on oikeus nähdä omat tietosi, korjata niitä tai poistaa tilisi ja datasi kokonaan palvelusta asetuksien kautta.</p>",
+        "modal-privacy-text": "<h3>1. Rekisterinpitäjä</h3><p><strong>Nimi:</strong> Duuniharava<br><strong>Y-tunnus:</strong> 3605255-8<br><strong>Osoite:</strong> Vaaralan talkootie 6a A, 01230 Vantaa<br><strong>Sähköposti:</strong> peetu.salminen1@gmail.com</p><h3>2. Mitä tietoja keräämme?</h3><p>Keräämme vain ne tiedot, jotka syötät itse palveluun: nimesi, yhteystietosi, työhistoriasi, koulutuksesi ja muut CV-tiedot. Tallennetut työpaikat ja luodut hakemukset kytketään käyttäjätiliisi.</p><h3>3. Mihin tietoja käytetään ja missä niitä säilytetään?</h3><p>Tietojasi käytetään yksinomaan CV:n ja työhakemusten luomiseen sekä alustan toiminnallisuuksien tarjoamiseen. Datan tallennukseen käytämme Supabase-tietokantapalvelua. Kaikki käyttäjätieto tallennetaan ja käsitellään turvallisesti EU-alueella sijaitsevilla palvelimilla GDPR-asetuksen mukaisesti.</p><h3>4. Kolmannet osapuolet (Tekoälyn käyttö)</h3><p>Palvelumme ydinominaisuudet on toteutettu yhteistyössä OpenAI:n kanssa. Kun käytät tekoälyä, tietosi siirretään hetkellisesti API-yhteyden kautta prosessoitavaksi. OpenAI ei API-ehtojensa mukaisesti tallenna tai käytä henkilötietojasi omien tekoälymalliensa kouluttamiseen.</p><h3>5. Evästeet (Cookies)</h3><p>Käytämme sivustolla ainoastaan palvelun toiminnan ja tietoturvan kannalta välttämättömiä evästeitä (esim. sisäänkirjautuminen ja maksujen prosessointi Stripe-palvelun kautta). Emme aseta kolmansien osapuolien markkinointievästeitä.</p><h3>6. Tietojen säilytysaika ja Oikeutesi</h3><p>Säilytämme tietojasi niin kauan kuin tilisi on aktiivinen. Sinulla on oikeus nähdä omat tietosi, korjata niitä tai poistaa tilisi ja datasi kokonaan palvelusta. Mikäli koet, että käsittelemme henkilötietojasi lainvastaisesti, sinulla on oikeus tehdä valitus tietosuojavaltuutetulle.</p>",
+        
         "modal-terms-title": "Käyttöehdot",
-        "modal-terms-text": "<h3>1. Palvelun kuvaus</h3><p>Duuniharava on tekoälyavusteinen ohjelmistopalvelu (SaaS), joka auttaa työnhakijoita luomaan ansioluetteloita ja työhakemuksia. Palvelun tarjoaa Duuniharva (\"Palveluntarjoaja\").</p><h3>2. Vastuunrajoitus (Disclaimer)</h3><p>Kaikki palvelun generoima teksti on ohjeellista. <strong>Käyttäjä on itse aina vastuussa lähetetyn CV:n tai työhakemuksen sisällön todenmukaisuudesta.</strong> Palveluntarjoaja ei takaa työpaikkaa tai haastatteluita, eikä vastaa vahingoista joita mahdolliset virheet tekstissä voivat aiheuttaa.</p><h3>3. Maksut ja Tilaukset</h3><p>Maksulliset ominaisuudet veloitetaan etukäteen valitun laskutuskauden mukaisesti. Voit peruuttaa tilauksesi milloin tahansa profiilisi asetuksista. Peruutuksen jälkeen palvelu pysyy käytössäsi maksetun kauden loppuun asti. Emme tarjoa palautuksia jo alkaneista jaksoista.</p><h3>4. Immateriaalioikeudet</h3><p>Palvelun koodi ja design ovat Palveluntarjoajan omaisuutta. Sinä omistat täydet oikeudet omaan dataasi, luomaasi CV:hen ja työhakemuksiin.</p><h3>5. Tilin sulkeminen</h3><p>Palveluntarjoajalla on oikeus evätä pääsy palveluun, mikäli käyttäjä rikkoo käyttöehtoja tai kuormittaa palvelua haitallisella tavalla.</p>"
+        "modal-terms-text": "<h3>1. Palvelun kuvaus</h3><p>Duuniharava on tekoälyavusteinen ohjelmistopalvelu (SaaS), joka auttaa työnhakijoita luomaan ansioluetteloita ja työhakemuksia. Palvelun tarjoaa Duuniharava (\"Palveluntarjoaja\").</p><h3>2. Vastuunrajoitus (Disclaimer)</h3><p>Kaikki palvelun generoima teksti on ohjeellista. <strong>Käyttäjä on itse aina vastuussa lähetetyn CV:n tai työhakemuksen sisällön todenmukaisuudesta.</strong> Palveluntarjoaja ei takaa työpaikkaa tai haastatteluita, eikä vastaa suorista tai välillisistä vahingoista, joita mahdolliset virheet tekstissä tai palvelun käytössä voivat aiheuttaa.</p><h3>3. Maksut, Tilaukset ja Peruuttamisoikeus</h3><p>Maksulliset ominaisuudet veloitetaan etukäteen valitun laskutuskauden mukaisesti. Voit peruuttaa tilauksesi milloin tahansa profiilisi asetuksista. Peruutuksen jälkeen palvelu pysyy käytössäsi maksetun kauden loppuun asti. Emme tarjoa palautuksia jo alkaneista jaksoista. <strong>Huom! Koska kyseessä on välittömästi käyttöön toimitettava digitaalinen palvelu, kuluttajansuojalain mukainen 14 päivän peruutusoikeus ei koske tehtyjä tilauksia.</strong> Hyväksyt tämän aloittamalla tilauksen.</p><h3>4. Palvelun saatavuus (Uptime)</h3><p>Palvelu ja sen tekoälyominaisuudet tarjotaan \"sellaisena kuin se on\" (as-is). Teemme parhaamme pitääksemme palvelun toiminnassa keskeytyksettä, mutta emme ota vastuuta palvelun ulkopuolisista teknisistä vioista, OpenAI:n rajapintakatkoksista tai muista ylivoimaisista esteistä (Force Majeure).</p><h3>5. Ikäraja</h3><p>Palvelun maksullisten osioiden käyttö edellyttää vähintään 18 vuoden ikää tai huoltajan nimenomaista suostumusta.</p><h3>6. Immateriaalioikeudet ja Tilin sulkeminen</h3><p>Palvelun koodi ja design ovat Palveluntarjoajan omaisuutta. Käyttäjä omistaa luomansa sisällön (CV:t ja hakemukset). Palveluntarjoajalla on oikeus evätä pääsy palveluun, mikäli käyttäjä rikkoo käyttöehtoja tai kuormittaa palvelua haitallisella tavalla.</p>"
     },
     en: {
         "nav-home": "Home", "nav-who": "For Whom?", "nav-services": "Features", "nav-tools": "Tools", "nav-pricing": "Pricing", "nav-faq": "FAQ", "nav-login": "LOGIN",
@@ -693,10 +693,12 @@ const translations = {
         "footer-legal": "Legal & Contact",
         "footer-privacy": "Privacy Policy",
         "footer-terms": "Terms of Service",
+        
         "modal-privacy-title": "Privacy Policy",
-        "modal-privacy-text": "<h3>1. Data Controller</h3><p><strong>Name:</strong> Duuniharva<br><strong>Business ID:</strong> 3605255-8<br><strong>Address:</strong> Vaaralan talkootie 6a A, 01230 Vantaa, Finland<br><strong>Email:</strong> peetu.salminen1@gmail.com</p><h3>2. What data do we collect?</h3><p>We only collect data you input into the service: your name, contact info, work history, education, and other CV data. Saved jobs and applications are linked to your user account.</p><h3>3. How is the data used and stored?</h3><p>Your data is used solely to generate CVs and applications. We use Supabase database services. All user data is securely stored and processed on servers located in the EU in compliance with GDPR.</p><h3>4. Third Parties (AI Usage)</h3><p>Our core features are powered by OpenAI. When you use the AI features, your inputted data is temporarily transferred via API for processing. According to OpenAI's API terms, they do <strong>not</strong> save or use your personal data to train their AI models.</p><h3>5. Your Rights</h3><p>You have the right to view, correct, or completely delete your data and account at any time via the service settings.</p>",
+        "modal-privacy-text": "<h3>1. Data Controller</h3><p><strong>Name:</strong> Duuniharava<br><strong>Business ID:</strong> 3605255-8<br><strong>Address:</strong> Vaaralan talkootie 6a A, 01230 Vantaa, Finland<br><strong>Email:</strong> peetu.salminen1@gmail.com</p><h3>2. What data do we collect?</h3><p>We only collect data you input into the service: your name, contact info, work history, education, and other CV data. Saved jobs and applications are linked to your user account.</p><h3>3. How is the data used and stored?</h3><p>Your data is used solely to generate CVs and applications. We use Supabase database services. All user data is securely stored and processed on servers located in the EU in compliance with GDPR.</p><h3>4. Third Parties (AI Usage)</h3><p>Our core features are powered by OpenAI. When you use the AI features, your inputted data is temporarily transferred via API for processing. According to OpenAI's API terms, they do <strong>not</strong> save or use your personal data to train their AI models.</p><h3>5. Cookies</h3><p>We only use essential cookies strictly necessary for the operation and security of the service (e.g., authentication and payment processing via Stripe). We do not set any third-party marketing cookies without your consent.</p><h3>6. Data Retention and Your Rights</h3><p>We retain your data as long as your account is active. You have the right to view, correct, or completely delete your data and account at any time. If you believe we are processing your personal data unlawfully, you have the right to lodge a complaint with a supervisory authority.</p>",
+        
         "modal-terms-title": "Terms of Service",
-        "modal-terms-text": "<h3>1. Service Description</h3><p>Duuniharava is an AI-assisted SaaS platform that helps job seekers create resumes and applications. The service is provided by Duuniharva (\"Service Provider\").</p><h3>2. Disclaimer</h3><p>All text generated by the service is draft material. <strong>The user is always solely responsible for the truthfulness and quality of the sent CV or cover letter.</strong> The Service Provider does not guarantee job interviews or employment, and is not liable for any damages caused by text errors.</p><h3>3. Payments and Subscriptions</h3><p>Paid features are billed in advance according to the chosen billing cycle. You can cancel your subscription at any time. After cancellation, the service remains active until the end of the paid period. We do not offer partial refunds.</p><h3>4. Intellectual Property</h3><p>The service code and design are the property of the Service Provider. You own full rights to your own data, the CVs, and applications you create.</p><h3>5. Account Termination</h3><p>The Service Provider reserves the right to deny access to the service if the user violates these terms or overloads the service maliciously.</p>"
+        "modal-terms-text": "<h3>1. Service Description</h3><p>Duuniharava is an AI-assisted SaaS platform that helps job seekers create resumes and applications. The service is provided by Duuniharava (\"Service Provider\").</p><h3>2. Disclaimer</h3><p>All text generated by the service is draft material. <strong>The user is always solely responsible for the truthfulness and quality of the sent CV or cover letter.</strong> The Service Provider does not guarantee job interviews or employment, and is not liable for any direct or indirect damages caused by potential errors in the text or service usage.</p><h3>3. Payments, Subscriptions and Right of Withdrawal</h3><p>Paid features are billed in advance according to the chosen billing cycle. You can cancel your subscription at any time. After cancellation, the service remains active until the end of the paid period. We do not offer partial refunds. <strong>Note: As this is an immediately delivered digital service, the statutory 14-day right of withdrawal does not apply to completed subscriptions.</strong> You acknowledge and agree to this when starting a subscription.</p><h3>4. Service Uptime</h3><p>The service and its AI features are provided \"as-is\". We do our best to keep the service running without interruptions, but we assume no liability for downtime caused by external technical faults, OpenAI API outages, or other Force Majeure events.</p><h3>5. Age Limit</h3><p>Using the paid features of the service requires you to be at least 18 years old or have explicit parental consent.</p><h3>6. Intellectual Property and Account Termination</h3><p>The service code and design are the property of the Service Provider. You own full rights to your own data, the CVs, and applications you create. The Service Provider reserves the right to deny access to the service if the user violates these terms or overloads the service maliciously.</p>"
     }
 };
 
