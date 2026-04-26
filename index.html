@@ -172,26 +172,44 @@
             padding-left: 20px;
         }
         .feature-icon-wrapper {
-            width: 64px;
-            height: 64px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin-bottom: 24px;
-        }
-        .tool-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
+            margin-bottom: 20px;
+        }
+        @media (min-width: 768px) {
+            .feature-icon-wrapper {
+                width: 64px;
+                height: 64px;
+                border-radius: 20px;
+                font-size: 28px;
+                margin-bottom: 24px;
+            }
+        }
+        .tool-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+        }
+        @media (min-width: 768px) {
+            .tool-icon {
+                width: 48px;
+                height: 48px;
+                border-radius: 14px;
+                font-size: 24px;
+                margin-bottom: 16px;
+            }
         }
         /* Custom scrollbar */
         .custom-scrollbar::-webkit-scrollbar { width: 8px; }
@@ -200,27 +218,27 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #00BFA6; }
     </style>
 </head>
-<body class="pt-24 selection:bg-[#00BFA6]/30 custom-scrollbar">
+<body class="pt-20 lg:pt-24 selection:bg-[#00BFA6]/30 custom-scrollbar">
 
     <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <div class="font-black text-2xl tracking-tighter cursor-pointer flex items-center gap-3" onclick="window.scrollTo(0,0)">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00BFA6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11V20M12 11V20M19 11V20M5 11H19M12 4V11"/></svg>
+        <div class="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex justify-between items-center">
+            <div class="font-black text-xl md:text-2xl tracking-tighter cursor-pointer flex items-center gap-2 md:gap-3" onclick="window.scrollTo(0,0)">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00BFA6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="md:w-7 md:h-7"><path d="M5 11V20M12 11V20M19 11V20M5 11H19M12 4V11"/></svg>
                 <div><span class="turkoosi-text">DUUNI</span><span class="oranssi-text">HARAVA</span></div>
             </div>
-            <div class="hidden lg:flex gap-12 text-sm font-bold text-gray-400">
+            <div class="hidden lg:flex gap-10 text-sm font-bold text-gray-400">
                 <a href="#target" class="hover:text-white transition" data-i18n="nav-who">Kenelle?</a>
                 <a href="#features" class="hover:text-white transition" data-i18n="nav-services">Ominaisuudet</a>
                 <a href="#tools" class="hover:text-white transition" data-i18n="nav-tools">Työkalut</a>
                 <a href="#pricing" class="hover:text-white transition" data-i18n="nav-pricing">Hinnasto</a>
             </div>
-            <div class="flex items-center gap-5">
-                <div class="hidden sm:flex gap-2 border-r border-white/10 pr-5">
+            <div class="flex items-center gap-3 md:gap-5">
+                <div class="hidden sm:flex gap-2 border-r border-white/10 pr-4 md:pr-5">
                     <button id="lang-fi" class="lang-btn active" onclick="changeLang('fi')">FI</button>
                     <button id="lang-en" class="lang-btn" onclick="changeLang('en')">EN</button>
                 </div>
                 <button onclick="redirectToProductLogin()" 
-                        class="text-xs font-black py-3.5 px-7 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black transition-all shadow-lg" data-i18n="nav-login">
+                        class="text-xs font-black py-2.5 px-4 md:py-3.5 md:px-7 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black transition-all shadow-lg" data-i18n="nav-login">
                     KIRJAUDU SISÄÄN
                 </button>
             </div>
@@ -229,10 +247,10 @@
 
 <main class="overflow-hidden">
     
-    <section id="hero" class="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-4 py-20">
-        <div class="glow-blob bg-[#00BFA6] w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+    <section id="hero" class="relative min-h-[85vh] lg:min-h-[90vh] flex flex-col items-center justify-center text-center px-4 py-12 lg:py-20">
+        <div class="glow-blob bg-[#00BFA6] w-[300px] h-[300px] md:w-[600px] md:h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
         
-        <div class="logo-container mb-12 relative z-10">
+        <div class="logo-container mb-8 md:mb-12 relative z-10 scale-75 md:scale-100">
             <div class="particle bg-[#00BFA6]" style="left: -40px; animation-delay: 0s;"></div>
             <div class="particle bg-[#FF6F3C]" style="left: 60px; animation-delay: 0.6s;"></div>
             <div class="particle bg-white" style="left: 20px; animation-delay: 1.4s;"></div>
@@ -246,244 +264,244 @@
             </div>
         </div>
 
-        <div class="max-w-5xl relative z-10 reveal">
-            <div class="mb-6 inline-flex items-center rounded-full border border-[#00BFA6]/30 bg-[#00BFA6]/10 px-5 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#00BFA6] backdrop-blur-sm" data-i18n="hero-badge">
+        <div class="max-w-5xl relative z-10 reveal px-2">
+            <div class="mb-6 inline-flex items-center rounded-full border border-[#00BFA6]/30 bg-[#00BFA6]/10 px-4 py-1.5 md:px-5 md:py-2 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-[#00BFA6] backdrop-blur-sm" data-i18n="hero-badge">
                 Uusi sukupolvi on täällä
             </div>
-            <h1 class="text-5xl sm:text-7xl md:text-[80px] font-black mb-8 leading-[1.05] tracking-tighter" data-i18n="hero-title">
+            <h1 class="text-4xl sm:text-6xl lg:text-[80px] font-black mb-6 md:mb-8 leading-[1.1] md:leading-[1.05] tracking-tighter" data-i18n="hero-title">
                 Aitoja työpaikkoja. <br/><span class="turkoosi-text">Täydellisiä hakemuksia.</span>
             </h1>
-            <p class="text-gray-400 mb-12 text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed" data-i18n="hero-desc">
+            <p class="text-gray-400 mb-10 md:mb-12 text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed" data-i18n="hero-desc">
                 Unohda ChatGPT:n kanssa säätäminen ja Word-pohjat. Duuniharava hakee oikeat työpaikat markkinoilta ja luo sinulle näyttävän CV:n, räätälöidyt hakemukset sekä työkaluarsenaalin uranhallintaan.
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <button onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})" class="w-full sm:w-auto gradient-bg text-black font-black py-5 px-12 rounded-[20px] hover:scale-[1.03] active:scale-95 transition-all shadow-[0_15px_40px_-10px_rgba(0,191,166,0.6)] text-lg tracking-wide" data-i18n="hero-cta">
+            <div class="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center w-full max-w-md mx-auto sm:max-w-none">
+                <button onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})" class="w-full sm:w-auto gradient-bg text-black font-black py-4 px-8 md:py-5 md:px-12 rounded-[16px] md:rounded-[20px] hover:scale-[1.03] active:scale-95 transition-all shadow-[0_15px_40px_-10px_rgba(0,191,166,0.6)] text-base md:text-lg tracking-wide" data-i18n="hero-cta">
                     ALOITA ILMAISEKSI
                 </button>
-                <button onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})" class="w-full sm:w-auto glass py-5 px-10 rounded-[20px] hover:bg-white/10 transition-all text-white font-bold text-lg tracking-wide border-white/20" data-i18n="btn-more">
+                <button onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})" class="w-full sm:w-auto glass py-4 px-8 md:py-5 md:px-10 rounded-[16px] md:rounded-[20px] hover:bg-white/10 transition-all text-white font-bold text-base md:text-lg tracking-wide border-white/20" data-i18n="btn-more">
                     KATSO OMINAISUUDET
                 </button>
             </div>
         </div>
     </section>
 
-    <section id="target" class="py-24 px-6 relative reveal">
+    <section id="target" class="py-16 lg:py-24 px-4 md:px-6 relative reveal">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl md:text-5xl font-black text-center mb-16 tracking-tight" data-i18n="target-main-title">Kenelle Duuniharava on suunniteltu?</h2>
+            <h2 class="text-3xl md:text-5xl font-black text-center mb-10 md:mb-16 tracking-tight" data-i18n="target-main-title">Kenelle Duuniharava on suunniteltu?</h2>
             
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="glass p-8 md:p-10 rounded-3xl border-l-4 border-[#00BFA6]">
-                    <h3 class="text-2xl font-black text-white mb-3" data-i18n="target-1-title">🧭 Uravaihtajille</h3>
-                    <p class="text-gray-400 leading-relaxed text-lg" data-i18n="target-1-desc">Tuntuuko, että aloitat nollista? Tekoälymme osaa kaivaa vanhasta työkokemuksestasi piilevät taidot ja kääntää ne täysin uuden alan vaatimalle kielelle uskottavasti.</p>
+            <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+                <div class="glass p-6 md:p-10 rounded-2xl md:rounded-3xl border-l-4 border-[#00BFA6]">
+                    <h3 class="text-xl md:text-2xl font-black text-white mb-2 md:mb-3" data-i18n="target-1-title">🧭 Uravaihtajille</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm md:text-lg" data-i18n="target-1-desc">Tuntuuko, että aloitat nollista? Tekoälymme osaa kaivaa vanhasta työkokemuksestasi piilevät taidot ja kääntää ne täysin uuden alan vaatimalle kielelle uskottavasti.</p>
                 </div>
-                <div class="glass p-8 md:p-10 rounded-3xl border-l-4 border-[#FF6F3C]">
-                    <h3 class="text-2xl font-black text-white mb-3" data-i18n="target-2-title">💼 Asiantuntijoille & Johtajille</h3>
-                    <p class="text-gray-400 leading-relaxed text-lg" data-i18n="target-2-desc">Aika on rahaa. Automatisoi rutiinit, generoi näyttävä CV ATS-lukijoita varten ja luo headhuntereille magneettisia myyntipuheita (pitchejä) yhdellä klikkauksella.</p>
+                <div class="glass p-6 md:p-10 rounded-2xl md:rounded-3xl border-l-4 border-[#FF6F3C]">
+                    <h3 class="text-xl md:text-2xl font-black text-white mb-2 md:mb-3" data-i18n="target-2-title">💼 Asiantuntijoille & Johtajille</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm md:text-lg" data-i18n="target-2-desc">Aika on rahaa. Automatisoi rutiinit, generoi näyttävä CV ATS-lukijoita varten ja luo headhuntereille magneettisia myyntipuheita (pitchejä) yhdellä klikkauksella.</p>
                 </div>
-                <div class="glass p-8 md:p-10 rounded-3xl border-l-4 border-blue-500">
-                    <h3 class="text-2xl font-black text-white mb-3" data-i18n="target-3-title">🎓 Vastavalmistuneille</h3>
-                    <p class="text-gray-400 leading-relaxed text-lg" data-i18n="target-3-desc">Työkokemusta on vähän, mutta potentiaalia paljon. Duuniharava auttaa muotoilemaan vähäisenkin kokemuksen ja harrastukset erottuvaksi ja myyväksi kokonaisuudeksi.</p>
+                <div class="glass p-6 md:p-10 rounded-2xl md:rounded-3xl border-l-4 border-blue-500">
+                    <h3 class="text-xl md:text-2xl font-black text-white mb-2 md:mb-3" data-i18n="target-3-title">🎓 Vastavalmistuneille</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm md:text-lg" data-i18n="target-3-desc">Työkokemusta on vähän, mutta potentiaalia paljon. Duuniharava auttaa muotoilemaan vähäisenkin kokemuksen ja harrastukset erottuvaksi ja myyväksi kokonaisuudeksi.</p>
                 </div>
-                <div class="glass p-8 md:p-10 rounded-3xl border-l-4 border-purple-500">
-                    <h3 class="text-2xl font-black text-white mb-3" data-i18n="target-4-title">🤫 "Inhoan itseni myymistä" -tyypeille</h3>
-                    <p class="text-gray-400 leading-relaxed text-lg" data-i18n="target-4-desc">Ahdistaako soitto rekrytoijalle tai kehumisen keksiminen hakemukseen? Anna tekoälyn kirjoittaa "koukku", puhelinkäsikirjoitus tai suosittelijapyyntö puolestasi.</p>
+                <div class="glass p-6 md:p-10 rounded-2xl md:rounded-3xl border-l-4 border-purple-500">
+                    <h3 class="text-xl md:text-2xl font-black text-white mb-2 md:mb-3" data-i18n="target-4-title">🤫 "Inhoan itseni myymistä" -tyypeille</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm md:text-lg" data-i18n="target-4-desc">Ahdistaako soitto rekrytoijalle tai kehumisen keksiminen hakemukseen? Anna tekoälyn kirjoittaa "koukku", puhelinkäsikirjoitus tai suosittelijapyyntö puolestasi.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="features" class="py-32 px-6 max-w-7xl mx-auto reveal relative">
+    <section id="features" class="py-16 lg:py-32 px-4 md:px-6 max-w-7xl mx-auto reveal relative">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,191,166,0.05),transparent_70%)] pointer-events-none"></div>
-        <h2 class="text-3xl md:text-5xl font-black text-center mb-6 tracking-tight relative z-10" data-i18n="features-main-title">Kaikki mitä tarvitset <br/>unelmatyön nappaamiseen</h2>
-        <p class="text-gray-400 text-center text-lg max-w-2xl mx-auto mb-20 relative z-10" data-i18n="features-main-desc">Olemme rakentaneet täydellisen työkalupakin modernille työnhakijalle. Kaikki samassa älykkäässä työpöydässä.</p>
+        <h2 class="text-3xl md:text-5xl font-black text-center mb-4 md:mb-6 tracking-tight relative z-10" data-i18n="features-main-title">Kaikki mitä tarvitset <br/>unelmatyön nappaamiseen</h2>
+        <p class="text-gray-400 text-center text-sm md:text-lg max-w-2xl mx-auto mb-12 md:mb-20 relative z-10 px-2" data-i18n="features-main-desc">Olemme rakentaneet täydellisen työkalupakin modernille työnhakijalle. Kaikki samassa älykkäässä työpöydässä.</p>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-            <div class="glass p-10 rounded-[2.5rem] hover-lift border-t-2 border-[#00BFA6]/40 flex flex-col">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 relative z-10">
+            <div class="glass p-6 md:p-10 rounded-2xl md:rounded-[2.5rem] hover-lift border-t-2 border-[#00BFA6]/40 flex flex-col">
                 <div class="feature-icon-wrapper bg-[#00BFA6]/10 text-[#00BFA6] border border-[#00BFA6]/20">🎨</div>
-                <h3 class="text-2xl font-black mb-4 text-white tracking-tight" data-i18n="feat-1-title">Visuaalinen CV-editori</h3>
-                <p class="text-gray-400 text-base leading-relaxed flex-1" data-i18n="feat-1-desc">Luo ammattimainen CV ilman tuskailua asettelun kanssa. Valitse 4 eri tyylistä, säädä värit ja muodot oman brändisi mukaisiksi. Lataa ATS-lukijaystävällinen PDF tai DOCX.</p>
+                <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white tracking-tight" data-i18n="feat-1-title">Visuaalinen CV-editori</h3>
+                <p class="text-gray-400 text-sm md:text-base leading-relaxed flex-1" data-i18n="feat-1-desc">Luo ammattimainen CV ilman tuskailua asettelun kanssa. Valitse 4 eri tyylistä, säädä värit ja muodot oman brändisi mukaisiksi. Lataa ATS-lukijaystävällinen PDF tai DOCX.</p>
             </div>
 
-            <div class="glass p-10 rounded-[2.5rem] hover-lift border-t-2 border-[#FF6F3C]/40 flex flex-col">
+            <div class="glass p-6 md:p-10 rounded-2xl md:rounded-[2.5rem] hover-lift border-t-2 border-[#FF6F3C]/40 flex flex-col">
                 <div class="feature-icon-wrapper bg-[#FF6F3C]/10 text-[#FF6F3C] border border-[#FF6F3C]/20">📡</div>
-                <h3 class="text-2xl font-black mb-4 text-white tracking-tight" data-i18n="feat-2-title">Live-haku & Hybriditekoäly</h3>
-                <p class="text-gray-400 text-base leading-relaxed flex-1" data-i18n="feat-2-desc">Palvelumme on kytketty suoraan viralliseen rajapintaan. Jos sopivaa aitoa osumaa ei löydy, älykäs varajärjestelmämme simuloi sinulle testityöpaikkoja harjoittelua varten.</p>
+                <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white tracking-tight" data-i18n="feat-2-title">Live-haku & Hybriditekoäly</h3>
+                <p class="text-gray-400 text-sm md:text-base leading-relaxed flex-1" data-i18n="feat-2-desc">Palvelumme on kytketty suoraan viralliseen rajapintaan. Jos sopivaa aitoa osumaa ei löydy, älykäs varajärjestelmämme simuloi sinulle testityöpaikkoja harjoittelua varten.</p>
             </div>
 
-            <div class="glass p-10 rounded-[2.5rem] hover-lift border-t-2 border-[#00BFA6]/40 flex flex-col">
+            <div class="glass p-6 md:p-10 rounded-2xl md:rounded-[2.5rem] hover-lift border-t-2 border-[#00BFA6]/40 flex flex-col">
                 <div class="feature-icon-wrapper bg-[#00BFA6]/10 text-[#00BFA6] border border-[#00BFA6]/20">✍️</div>
-                <h3 class="text-2xl font-black mb-4 text-white tracking-tight" data-i18n="feat-3-title">Räätälöidyt hakemukset</h3>
-                <p class="text-gray-400 text-base leading-relaxed flex-1" data-i18n="feat-3-desc">Valitse vain listalta kiinnostava työpaikka, ja tekoäly kirjoittaa ilmoituksen ja CV:si pohjalta täydellisesti räätälöidyn työhakemuksen. Valitse asiallinen, lämmin tai myyvä sävy.</p>
+                <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white tracking-tight" data-i18n="feat-3-title">Räätälöidyt hakemukset</h3>
+                <p class="text-gray-400 text-sm md:text-base leading-relaxed flex-1" data-i18n="feat-3-desc">Valitse vain listalta kiinnostava työpaikka, ja tekoäly kirjoittaa ilmoituksen ja CV:si pohjalta täydellisesti räätälöidyn työhakemuksen. Valitse asiallinen, lämmin tai myyvä sävy.</p>
             </div>
             
-            <div class="glass p-10 rounded-[2.5rem] hover-lift border-t-2 border-white/20 flex flex-col lg:col-span-3 items-center text-center">
+            <div class="glass p-6 md:p-10 rounded-2xl md:rounded-[2.5rem] hover-lift border-t-2 border-white/20 flex flex-col lg:col-span-3 items-start md:items-center text-left md:text-center">
                 <div class="feature-icon-wrapper bg-white/10 text-white border border-white/20">📊</div>
-                <h3 class="text-2xl font-black mb-4 text-white tracking-tight" data-i18n="feat-5-title">Oma Rekry-työpöytä</h3>
-                <p class="text-gray-400 text-base leading-relaxed max-w-3xl" data-i18n="feat-5-desc">Kanban-tyylinen hallinta pitää haut järjestyksessä. Seuraa tallennettuja, haettuja ja haastatteluvaiheessa olevia paikkoja selkeästi. Et enää koskaan missaa tärkeitä deadlineja.</p>
+                <h3 class="text-xl md:text-2xl font-black mb-3 md:mb-4 text-white tracking-tight" data-i18n="feat-5-title">Oma Rekry-työpöytä</h3>
+                <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl" data-i18n="feat-5-desc">Kanban-tyylinen hallinta pitää haut järjestyksessä. Seuraa tallennettuja, haettuja ja haastatteluvaiheessa olevia paikkoja selkeästi. Et enää koskaan missaa tärkeitä deadlineja.</p>
             </div>
         </div>
     </section>
 
-    <section id="tools" class="py-24 px-6 relative reveal bg-zinc-900/30 border-y border-white/5">
+    <section id="tools" class="py-16 lg:py-24 px-4 md:px-6 relative reveal bg-zinc-900/30 border-y border-white/5">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <span class="text-[#00BFA6] font-bold tracking-widest uppercase text-sm mb-3 block" data-i18n="tools-subtitle">Bonus: Automaatiot</span>
-                <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white mb-6" data-i18n="tools-main-title">Anna tekoälyn tehdä työt</h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto" data-i18n="tools-main-desc">Älä keksi pyörää uudelleen. Duuniharavan "Työkalut"-välilehti sisältää 8 asiantuntijatason automaatiota, jotka hoitavat urasi pullonkaulat sekunneissa.</p>
+            <div class="text-center mb-10 md:mb-16">
+                <span class="text-[#00BFA6] font-bold tracking-widest uppercase text-xs md:text-sm mb-2 md:mb-3 block" data-i18n="tools-subtitle">Bonus: Automaatiot</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white mb-4 md:mb-6" data-i18n="tools-main-title">Anna tekoälyn tehdä työt</h2>
+                <p class="text-gray-400 text-sm md:text-lg max-w-2xl mx-auto px-2" data-i18n="tools-main-desc">Älä keksi pyörää uudelleen. Duuniharavan "Työkalut"-välilehti sisältää 8 asiantuntijatason automaatiota, jotka hoitavat urasi pullonkaulat sekunneissa.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+                <div class="glass p-5 md:p-6 rounded-2xl md:rounded-3xl hover:bg-white/5 transition-colors border-white/10">
                     <div class="tool-icon">🚀</div>
-                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-1-t">LinkedIn-Magneetti</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-1-d">Luo asiantuntijatason 'About'-teksti ja vetäviä asiantuntijapostauksia verkostoitumiseen sekunneissa.</p>
+                    <h4 class="font-black text-base md:text-lg text-white mb-1.5 md:mb-2" data-i18n="tool-1-t">LinkedIn-Magneetti</h4>
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed" data-i18n="tool-1-d">Luo asiantuntijatason 'About'-teksti ja vetäviä asiantuntijapostauksia verkostoitumiseen sekunneissa.</p>
                 </div>
                 
-                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                <div class="glass p-5 md:p-6 rounded-2xl md:rounded-3xl hover:bg-white/5 transition-colors border-white/10">
                     <div class="tool-icon">💎</div>
-                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-2-t">Headhunter-Pitch</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-2-d">Tekoäly muotoilee arvoasi (ROI) korostavan viestin, jolla voit lähestyä suorahakukonsultteja ennakoivasti.</p>
+                    <h4 class="font-black text-base md:text-lg text-white mb-1.5 md:mb-2" data-i18n="tool-2-t">Headhunter-Pitch</h4>
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed" data-i18n="tool-2-d">Tekoäly muotoilee arvoasi (ROI) korostavan viestin, jolla voit lähestyä suorahakukonsultteja ennakoivasti.</p>
                 </div>
 
-                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                <div class="glass p-5 md:p-6 rounded-2xl md:rounded-3xl hover:bg-white/5 transition-colors border-white/10">
                     <div class="tool-icon">🕵️</div>
-                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-3-t">Piilotyökartoittaja</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-3-d">Anna tekoälyn laatia vakuuttava avoin hakemus suoraan yrityksen toimitusjohtajalle tai osastonvetäjälle.</p>
+                    <h4 class="font-black text-base md:text-lg text-white mb-1.5 md:mb-2" data-i18n="tool-3-t">Piilotyökartoittaja</h4>
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed" data-i18n="tool-3-d">Anna tekoälyn laatia vakuuttava avoin hakemus suoraan yrityksen toimitusjohtajalle tai osastonvetäjälle.</p>
                 </div>
 
-                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                <div class="glass p-5 md:p-6 rounded-2xl md:rounded-3xl hover:bg-white/5 transition-colors border-white/10">
                     <div class="tool-icon">🛟</div>
-                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-4-t">Haastattelun Pelastusrengas</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-4-d">Pelkäätkö hankalaa kysymystä? Tekoäly kääntää CV:si heikkouden tai työttömyysjakson vakuuttavaksi vahvuudeksi.</p>
+                    <h4 class="font-black text-base md:text-lg text-white mb-1.5 md:mb-2" data-i18n="tool-4-t">Haastattelun Pelastusrengas</h4>
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed" data-i18n="tool-4-d">Pelkäätkö hankalaa kysymystä? Tekoäly kääntää CV:si heikkouden tai työttömyysjakson vakuuttavaksi vahvuudeksi.</p>
                 </div>
 
-                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                <div class="glass p-5 md:p-6 rounded-2xl md:rounded-3xl hover:bg-white/5 transition-colors border-white/10">
                     <div class="tool-icon">⭐</div>
-                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-5-t">Suosittelija-automaatti</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-5-d">Laatii kohteliaan, valmiin pyyntöviestin sähköpostiin tai LinkedIniin, jolla pyydät entistä pomoa suosittelijaksi.</p>
+                    <h4 class="font-black text-base md:text-lg text-white mb-1.5 md:mb-2" data-i18n="tool-5-t">Suosittelija-automaatti</h4>
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed" data-i18n="tool-5-d">Laatii kohteliaan, valmiin pyyntöviestin sähköpostiin tai LinkedIniin, jolla pyydät entistä pomoa suosittelijaksi.</p>
                 </div>
 
-                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                <div class="glass p-5 md:p-6 rounded-2xl md:rounded-3xl hover:bg-white/5 transition-colors border-white/10">
                     <div class="tool-icon">📞</div>
-                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-6-t">Puhelun Teleprompteri</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-6-d">Jännittääkö soittaa rekrytoijalle? Saat askel-askeleelta etenevän käsikirjoituksen, jota voit lukea suoraan näytöltä.</p>
+                    <h4 class="font-black text-base md:text-lg text-white mb-1.5 md:mb-2" data-i18n="tool-6-t">Puhelun Teleprompteri</h4>
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed" data-i18n="tool-6-d">Jännittääkö soittaa rekrytoijalle? Saat askel-askeleelta etenevän käsikirjoituksen, jota voit lukea suoraan näytöltä.</p>
                 </div>
 
-                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                <div class="glass p-5 md:p-6 rounded-2xl md:rounded-3xl hover:bg-white/5 transition-colors border-white/10">
                     <div class="tool-icon">🧭</div>
-                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-7-t">Uravaihtajan Kompassi</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-7-d">Etsii vanhasta työkokemuksestasi uuden alan vaatimat piilevät taidot ja luo suunnitelman siirtymään.</p>
+                    <h4 class="font-black text-base md:text-lg text-white mb-1.5 md:mb-2" data-i18n="tool-7-t">Uravaihtajan Kompassi</h4>
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed" data-i18n="tool-7-d">Etsii vanhasta työkokemuksestasi uuden alan vaatimat piilevät taidot ja luo suunnitelman siirtymään.</p>
                 </div>
 
-                <div class="glass p-6 rounded-3xl hover:bg-white/5 transition-colors border-white/10">
+                <div class="glass p-5 md:p-6 rounded-2xl md:rounded-3xl hover:bg-white/5 transition-colors border-white/10">
                     <div class="tool-icon">🤝</div>
-                    <h4 class="font-black text-lg text-white mb-2" data-i18n="tool-8-t">Palkkaneuvottelija</h4>
-                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="tool-8-d">Työnantajat odottavat sinun neuvottelevan. Muotoilemme sinulle täydellisen asiallisen, mutta jämäkän vastatarjouksen.</p>
+                    <h4 class="font-black text-base md:text-lg text-white mb-1.5 md:mb-2" data-i18n="tool-8-t">Palkkaneuvottelija</h4>
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed" data-i18n="tool-8-d">Työnantajat odottavat sinun neuvottelevan. Muotoilemme sinulle täydellisen asiallisen, mutta jämäkän vastatarjouksen.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="pricing" class="py-32 px-6 max-w-5xl mx-auto text-center reveal">
-        <h2 class="text-4xl md:text-6xl font-black mb-8 tracking-tight" data-i18n="nav-pricing">Tilausvaihtoehdot</h2>
-        <p class="text-gray-400 mb-20 text-xl max-w-2xl mx-auto" data-i18n="pricing-desc">Kokeile ensin ilmaiseksi ja päivitä Pro-tasolle, kun haluat täyden tehon ja automaatiotyökalut käyttöösi.</p>
+    <section id="pricing" class="py-16 lg:py-32 px-4 md:px-6 max-w-5xl mx-auto text-center reveal">
+        <h2 class="text-3xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-8 tracking-tight" data-i18n="nav-pricing">Tilausvaihtoehdot</h2>
+        <p class="text-gray-400 mb-12 md:mb-20 text-sm md:text-xl max-w-2xl mx-auto px-2" data-i18n="pricing-desc">Kokeile ensin ilmaiseksi ja päivitä Pro-tasolle, kun haluat täyden tehon ja automaatiotyökalut käyttöösi.</p>
         
-        <div class="grid md:grid-cols-2 gap-10">
-            <div class="glass p-12 rounded-[3rem] hover-lift border border-white/5 text-left flex flex-col">
-                <h3 class="text-2xl font-black mb-2 text-white">Starter</h3>
-                <p class="text-base text-gray-500 mb-10 border-b border-white/10 pb-8" data-i18n="price-free-desc">Kokeile palvelua riskittä.</p>
-                <div class="mb-10">
-                    <span class="text-5xl font-black text-white">0 €</span>
+        <div class="grid md:grid-cols-2 gap-6 md:gap-10">
+            <div class="glass p-8 md:p-12 rounded-3xl md:rounded-[3rem] hover-lift border border-white/5 text-left flex flex-col">
+                <h3 class="text-xl md:text-2xl font-black mb-1 md:mb-2 text-white">Starter</h3>
+                <p class="text-sm md:text-base text-gray-500 mb-6 md:mb-10 border-b border-white/10 pb-6 md:pb-8" data-i18n="price-free-desc">Kokeile palvelua riskittä.</p>
+                <div class="mb-8 md:mb-10">
+                    <span class="text-4xl md:text-5xl font-black text-white">0 €</span>
                 </div>
-                <ul class="text-gray-300 space-y-5 mb-12 flex-1 text-lg">
-                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> 3 Tekoälyhakemusta</li>
-                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> 3 CV:n Räätälöintiä</li>
-                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Työpaikkojen live-seuranta</li>
+                <ul class="text-gray-300 space-y-4 md:space-y-5 mb-10 md:mb-12 flex-1 text-sm md:text-lg">
+                    <li class="flex items-center gap-3 md:gap-4"><span class="text-[#00BFA6] font-black text-lg md:text-xl">✓</span> 3 Tekoälyhakemusta</li>
+                    <li class="flex items-center gap-3 md:gap-4"><span class="text-[#00BFA6] font-black text-lg md:text-xl">✓</span> 3 CV:n Räätälöintiä</li>
+                    <li class="flex items-center gap-3 md:gap-4"><span class="text-[#00BFA6] font-black text-lg md:text-xl">✓</span> Työpaikkojen live-seuranta</li>
                 </ul>
-                <button onclick="redirectToProductLogin()" class="w-full glass border-white/20 py-5 rounded-2xl hover:bg-white hover:text-black transition-all text-lg font-black text-white" data-i18n="btn-start-free">Aloita ilmaiseksi</button>
+                <button onclick="redirectToProductLogin()" class="w-full glass border-white/20 py-4 md:py-5 rounded-xl md:rounded-2xl hover:bg-white hover:text-black transition-all text-base md:text-lg font-black text-white" data-i18n="btn-start-free">Aloita ilmaiseksi</button>
             </div>
             
-            <div class="glass p-12 rounded-[3rem] border-2 border-[#00BFA6]/50 scale-100 md:scale-105 shadow-[0_30px_60px_-15px_rgba(0,191,166,0.2)] relative text-left flex flex-col bg-gradient-to-b from-[#00BFA6]/10 to-transparent">
-                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#00BFA6] text-black text-sm font-black px-8 py-2.5 rounded-full tracking-widest uppercase shadow-lg" data-i18n="popular">Suosituin</div>
-                <h3 class="text-2xl font-black mb-2 turkoosi-text">Pro Hakija</h3>
-                <p class="text-base text-gray-400 mb-10 border-b border-white/10 pb-8" data-i18n="price-pro-desc">Täysi tekoälyn tuki tehokkaaseen työnhakuun.</p>
-                <div class="mb-10">
-                    <span class="text-5xl font-black text-white">9,90 €</span><span class="text-gray-500 text-lg"> / kk</span>
+            <div class="glass p-8 md:p-12 rounded-3xl md:rounded-[3rem] border-2 border-[#00BFA6]/50 md:scale-105 shadow-[0_20px_50px_-15px_rgba(0,191,166,0.2)] md:shadow-[0_30px_60px_-15px_rgba(0,191,166,0.2)] relative text-left flex flex-col bg-gradient-to-b from-[#00BFA6]/10 to-transparent">
+                <div class="absolute -top-4 md:-top-5 left-1/2 -translate-x-1/2 bg-[#00BFA6] text-black text-xs md:text-sm font-black px-6 md:px-8 py-2 md:py-2.5 rounded-full tracking-widest uppercase shadow-lg whitespace-nowrap" data-i18n="popular">Suosituin</div>
+                <h3 class="text-xl md:text-2xl font-black mb-1 md:mb-2 turkoosi-text">Pro Hakija</h3>
+                <p class="text-sm md:text-base text-gray-400 mb-6 md:mb-10 border-b border-white/10 pb-6 md:pb-8" data-i18n="price-pro-desc">Täysi tekoälyn tuki tehokkaaseen työnhakuun.</p>
+                <div class="mb-8 md:mb-10">
+                    <span class="text-4xl md:text-5xl font-black text-white">9,90 €</span><span class="text-gray-500 text-base md:text-lg"> / kk</span>
                 </div>
-                <ul class="text-white space-y-5 mb-12 flex-1 text-lg font-medium">
-                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Rajattomat kustomoidut CV-versiot</li>
-                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Rajattomat täsmähakemukset</li>
-                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> <strong>Kaikki 8 AI-automaatiotyökalua</strong></li>
-                    <li class="flex items-center gap-4"><span class="text-[#00BFA6] font-black text-xl">✓</span> Haastattelusimulaattori rajatta</li>
+                <ul class="text-white space-y-4 md:space-y-5 mb-10 md:mb-12 flex-1 text-sm md:text-lg font-medium">
+                    <li class="flex items-center gap-3 md:gap-4"><span class="text-[#00BFA6] font-black text-lg md:text-xl">✓</span> Rajattomat kustomoidut CV-versiot</li>
+                    <li class="flex items-center gap-3 md:gap-4"><span class="text-[#00BFA6] font-black text-lg md:text-xl">✓</span> Rajattomat täsmähakemukset</li>
+                    <li class="flex items-center gap-3 md:gap-4"><span class="text-[#00BFA6] font-black text-lg md:text-xl">✓</span> <strong>Kaikki 8 AI-automaatiotyökalua</strong></li>
+                    <li class="flex items-center gap-3 md:gap-4"><span class="text-[#00BFA6] font-black text-lg md:text-xl">✓</span> Haastattelusimulaattori rajatta</li>
                 </ul>
                 
-                <button onclick="window.location.href='https://buy.stripe.com/TÄHÄN_OMA_LINKKISI'" class="w-full gradient-bg py-5 rounded-2xl font-black text-black hover:scale-[1.03] active:scale-95 transition-all shadow-[0_10px_30px_rgba(0,191,166,0.3)] text-lg" data-i18n="btn-upgrade">Päivitä Pro-tasolle</button>
+                <button onclick="redirectToProductLogin()" class="w-full gradient-bg py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-black hover:scale-[1.03] active:scale-95 transition-all shadow-[0_10px_30px_rgba(0,191,166,0.3)] text-base md:text-lg" data-i18n="btn-upgrade">Päivitä Pro-tasolle</button>
             </div>
         </div>
     </section>
 
-    <section id="faq" class="py-20 px-6 max-w-4xl mx-auto reveal">
-        <h2 class="text-3xl md:text-5xl font-black text-center mb-16 tracking-tight" data-i18n="faq-title">Usein Kysytyt Kysymykset</h2>
+    <section id="faq" class="py-16 lg:py-20 px-4 md:px-6 max-w-4xl mx-auto reveal">
+        <h2 class="text-3xl md:text-5xl font-black text-center mb-10 md:mb-16 tracking-tight" data-i18n="faq-title">Usein Kysytyt Kysymykset</h2>
         
-        <div class="space-y-4">
-            <details class="glass p-6 rounded-2xl cursor-pointer group">
-                <summary class="font-bold text-xl text-white outline-none flex justify-between items-center" data-i18n="faq-1-q">
+        <div class="space-y-3 md:space-y-4">
+            <details class="glass p-5 md:p-6 rounded-2xl cursor-pointer group">
+                <summary class="font-bold text-lg md:text-xl text-white outline-none flex justify-between items-center" data-i18n="faq-1-q">
                     Onko järjestelmä turvallinen käyttää?
-                    <span class="text-[#00BFA6] group-open:rotate-45 transition-transform text-2xl">+</span>
+                    <span class="text-[#00BFA6] group-open:rotate-45 transition-transform text-xl md:text-2xl">+</span>
                 </summary>
-                <p class="mt-4 text-gray-400 leading-relaxed" data-i18n="faq-1-a">Kyllä. Kaikki tietosi tallennetaan suojatuille EU-alueen palvelimille (Supabase). Emme koskaan myy tietojasi kolmansille osapuolille, ja voit poistaa tilisi ja tietosi milloin tahansa yhdellä napin painalluksella.</p>
+                <p class="mt-3 md:mt-4 text-sm md:text-base text-gray-400 leading-relaxed" data-i18n="faq-1-a">Kyllä. Kaikki tietosi tallennetaan suojatuille EU-alueen palvelimille (Supabase). Emme koskaan myy tietojasi kolmansille osapuolille, ja voit poistaa tilisi ja tietosi milloin tahansa yhdellä napin painalluksella.</p>
             </details>
 
-            <details class="glass p-6 rounded-2xl cursor-pointer group">
-                <summary class="font-bold text-xl text-white outline-none flex justify-between items-center" data-i18n="faq-2-q">
+            <details class="glass p-5 md:p-6 rounded-2xl cursor-pointer group">
+                <summary class="font-bold text-lg md:text-xl text-white outline-none flex justify-between items-center" data-i18n="faq-2-q">
                     Miten voin perua Pro-tilauksen?
-                    <span class="text-[#00BFA6] group-open:rotate-45 transition-transform text-2xl">+</span>
+                    <span class="text-[#00BFA6] group-open:rotate-45 transition-transform text-xl md:text-2xl">+</span>
                 </summary>
-                <p class="mt-4 text-gray-400 leading-relaxed" data-i18n="faq-2-a">Tilaus ei sido sinua pitkiin sopimuksiin. Voit peruuttaa tilauksesi suoraan asetuksista milloin tahansa, ja tilauksesi päättyy kuluvan laskutuskauden loppuun.</p>
+                <p class="mt-3 md:mt-4 text-sm md:text-base text-gray-400 leading-relaxed" data-i18n="faq-2-a">Tilaus ei sido sinua pitkiin sopimuksiin. Voit peruuttaa tilauksesi suoraan asetuksista milloin tahansa, ja tilauksesi päättyy kuluvan laskutuskauden loppuun.</p>
             </details>
 
-            <details class="glass p-6 rounded-2xl cursor-pointer group">
-                <summary class="font-bold text-xl text-white outline-none flex justify-between items-center" data-i18n="faq-3-q">
+            <details class="glass p-5 md:p-6 rounded-2xl cursor-pointer group">
+                <summary class="font-bold text-lg md:text-xl text-white outline-none flex justify-between items-center" data-i18n="faq-3-q">
                     Lukaisevatko työnantajat CV:ni suoraan alustalta?
-                    <span class="text-[#00BFA6] group-open:rotate-45 transition-transform text-2xl">+</span>
+                    <span class="text-[#00BFA6] group-open:rotate-45 transition-transform text-xl md:text-2xl">+</span>
                 </summary>
-                <p class="mt-4 text-gray-400 leading-relaxed" data-i18n="faq-3-a">Ei. Duuniharava on sinun henkilökohtainen työpöytäsi. Luot täällä CV:t ja hakemukset, lataat ne laitteellesi ja lähetät ne itse haluamiisi työpaikkoihin täysin yksityisesti.</p>
+                <p class="mt-3 md:mt-4 text-sm md:text-base text-gray-400 leading-relaxed" data-i18n="faq-3-a">Ei. Duuniharava on sinun henkilökohtainen työpöytäsi. Luot täällä CV:t ja hakemukset, lataat ne laitteellesi ja lähetät ne itse haluamiisi työpaikkoihin täysin yksityisesti.</p>
             </details>
         </div>
     </section>
 
-    <section id="auth-section" class="py-20 flex justify-center px-6 reveal">
-        <div class="max-w-2xl w-full glass p-12 md:p-20 rounded-[3rem] border-t-4 border-[#00BFA6] shadow-2xl bg-zinc-900/80 text-center relative overflow-hidden">
-            <div class="absolute top-0 right-0 p-8 text-[#00BFA6] opacity-5 text-9xl font-black pointer-events-none leading-none">🔐</div>
-            <h2 class="text-4xl font-black mb-6 text-white relative z-10" data-i18n="auth-title">Siirry studioon</h2>
-            <p class="text-lg text-gray-400 mb-12 leading-relaxed relative z-10" data-i18n="auth-desc">Duuniharavan työtila, jossa optimoit CV:si ja hallinnoit hakuprosessiasi, aukeaa omassa näkymässään.</p>
-            <button type="button" onclick="redirectToProductLogin()" class="w-full bg-white text-black font-black py-6 rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_20px_40px_rgba(255,255,255,0.2)] text-xl relative z-10" data-i18n="auth-btn">
+    <section id="auth-section" class="py-16 lg:py-20 flex justify-center px-4 md:px-6 reveal">
+        <div class="max-w-2xl w-full glass p-8 md:p-20 rounded-[2rem] md:rounded-[3rem] border-t-4 border-[#00BFA6] shadow-2xl bg-zinc-900/80 text-center relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-4 md:p-8 text-[#00BFA6] opacity-5 text-7xl md:text-9xl font-black pointer-events-none leading-none">🔐</div>
+            <h2 class="text-3xl md:text-4xl font-black mb-4 md:mb-6 text-white relative z-10" data-i18n="auth-title">Siirry studioon</h2>
+            <p class="text-sm md:text-lg text-gray-400 mb-8 md:mb-12 leading-relaxed relative z-10" data-i18n="auth-desc">Duuniharavan työtila, jossa optimoit CV:si ja hallinnoit hakuprosessiasi, aukeaa omassa näkymässään.</p>
+            <button type="button" onclick="redirectToProductLogin()" class="w-full bg-white text-black font-black py-4 md:py-6 rounded-xl md:rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_20px_40px_rgba(255,255,255,0.2)] text-base md:text-xl relative z-10" data-i18n="auth-btn">
                 KIRJAUDU TAI LUO TILI ➔
             </button>
         </div>
     </section>
 
-    <footer class="mt-20 border-t border-white/10 bg-black pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+    <footer class="mt-12 md:mt-20 border-t border-white/10 bg-black pt-10 md:pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 mb-10 md:mb-12">
             <div>
-                <div class="font-black text-2xl tracking-tighter flex items-center gap-2 mb-6">
+                <div class="font-black text-xl md:text-2xl tracking-tighter flex items-center gap-2 mb-4 md:mb-6">
                     <span class="turkoosi-text">DUUNI</span><span class="oranssi-text">HARAVA</span>
                 </div>
-                <p class="text-gray-400 text-sm leading-relaxed max-w-xs">Tekoälyavusteinen ura- ja työnhakualusta, joka tekee erottumisesta helppoa ja stressitöntä.</p>
+                <p class="text-gray-400 text-xs md:text-sm leading-relaxed max-w-xs">Tekoälyavusteinen ura- ja työnhakualusta, joka tekee erottumisesta helppoa ja stressitöntä.</p>
             </div>
             
             <div class="md:justify-self-end">
-                <h4 class="text-white font-bold mb-6 tracking-widest uppercase text-sm" data-i18n="footer-legal">Lakitiedot & Yhteys</h4>
-                <ul class="space-y-4 text-sm text-gray-400">
+                <h4 class="text-white font-bold mb-4 md:mb-6 tracking-widest uppercase text-xs md:text-sm" data-i18n="footer-legal">Lakitiedot & Yhteys</h4>
+                <ul class="space-y-3 md:space-y-4 text-xs md:text-sm text-gray-400">
                     <li><button onclick="openModal('privacy-modal')" class="hover:text-[#00BFA6] transition" data-i18n="footer-privacy">Tietosuojaseloste</button></li>
                     <li><button onclick="openModal('terms-modal')" class="hover:text-[#00BFA6] transition" data-i18n="footer-terms">Käyttöehdot</button></li>
-                    <li><a href="mailto:peetu.salminen1@gmail.com" class="hover:text-[#00BFA6] transition text-lg mt-2 inline-block">peetu.salminen1@gmail.com</a></li>
+                    <li><a href="mailto:peetu.salminen1@gmail.com" class="hover:text-[#00BFA6] transition text-base md:text-lg mt-2 inline-block">peetu.salminen1@gmail.com</a></li>
                 </ul>
             </div>
         </div>
         
-        <div class="border-t border-white/5 pt-8 text-center text-gray-600 text-xs font-bold tracking-widest uppercase">
+        <div class="border-t border-white/5 pt-6 md:pt-8 text-center text-gray-600 text-[10px] md:text-xs font-bold tracking-widest uppercase">
             <p>© 2026 Duuniharava. Kaikki oikeudet pidätetään.</p>
         </div>
     </footer>
@@ -491,8 +509,8 @@
     <div id="privacy-modal" class="modal-overlay" onclick="closeModalOutside(event, 'privacy-modal')">
         <div class="modal-content custom-scrollbar">
             <button onclick="closeModal('privacy-modal')" class="modal-close">✕</button>
-            <h2 class="text-3xl font-black text-white mb-6" data-i18n="modal-privacy-title">Tietosuojaseloste</h2>
-            <div class="legal-text" data-i18n="modal-privacy-text">
+            <h2 class="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6" data-i18n="modal-privacy-title">Tietosuojaseloste</h2>
+            <div class="legal-text text-sm md:text-base" data-i18n="modal-privacy-text">
                 <h3>1. Rekisterinpitäjä</h3>
                 <p><strong>Nimi:</strong> Duuniharava<br>
                 <strong>Y-tunnus:</strong> 3605255-8<br>
@@ -515,8 +533,8 @@
     <div id="terms-modal" class="modal-overlay" onclick="closeModalOutside(event, 'terms-modal')">
         <div class="modal-content custom-scrollbar">
             <button onclick="closeModal('terms-modal')" class="modal-close">✕</button>
-            <h2 class="text-3xl font-black text-white mb-6" data-i18n="modal-terms-title">Käyttöehdot (Terms of Service)</h2>
-            <div class="legal-text" data-i18n="modal-terms-text">
+            <h2 class="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6" data-i18n="modal-terms-title">Käyttöehdot (Terms of Service)</h2>
+            <div class="legal-text text-sm md:text-base" data-i18n="modal-terms-text">
                 <h3>1. Palvelun kuvaus</h3>
                 <p>Duuniharava on tekoälyavusteinen ohjelmistopalvelu (SaaS), joka auttaa työnhakijoita luomaan ansioluetteloita ja työhakemuksia. Palvelun tarjoaa Duuniharava ("Palveluntarjoaja").</p>
                 <h3>2. Vastuunrajoitus (Disclaimer)</h3>
